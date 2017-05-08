@@ -6,6 +6,12 @@
 //  Copyright © 2017 Jairo Eli de León. All rights reserved.
 //
 
-protocol ServiceProviderType: class {}
+protocol ServiceProviderType: class {
+  var userDefaultsService: UserDefaultsServiceType { get }
+  var taskService: TaskServiceType { get }
+}
 
-final class ServiceProvider: ServiceProviderType {}
+final class ServiceProvider: ServiceProviderType {
+  lazy var userDefaultsService: UserDefaultsServiceType = UserDefaultsService(provider: self)
+  lazy var taskService: TaskServiceType = TaskService(provider: self)
+}
