@@ -41,7 +41,7 @@ struct Task: ModelType, Identifiable {
     if let memo = self.memo {
       dictionary["memo"] = memo
     }
-    
+
     return dictionary
   }
 
