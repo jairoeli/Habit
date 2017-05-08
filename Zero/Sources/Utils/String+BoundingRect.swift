@@ -30,7 +30,7 @@ extension String {
     return self.size(thatFits: size, font: font, maximumNumberOfLines: maximumNumberOfLines).width
   }
 
-  func height(thatFitsWidth width: CGFloat, font: UIFont, maximumNumberOfLines: Int = 0) -> CGFloat {
+  func height(fits width: CGFloat, font: UIFont, maximumNumberOfLines: Int = 0) -> CGFloat {
     let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
     return self.size(thatFits: size, font: font, maximumNumberOfLines: maximumNumberOfLines).height
   }
