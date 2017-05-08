@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 infix operator <==
 
@@ -24,5 +25,17 @@ extension Dao where Self: Any {
     var copy = self
     block(&copy)
     return copy
+  }
+}
+
+extension IntegerLiteralType {
+  var f: CGFloat {
+    return CGFloat(self)
+  }
+}
+
+extension FloatLiteralType {
+  var f: CGFloat {
+    return CGFloat(self)
   }
 }
