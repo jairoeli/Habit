@@ -7,15 +7,12 @@
 //
 import UIKit
 
-protocol Air {}
-extension NSObject: Air {}
-
 protocol Identifiable {
   associatedtype Identifier: Equatable
   var id: Identifier { get }
 }
 
-protocol ModelType: Air {}
+protocol ModelType: Dao {}
 
 extension Collection where Self.Iterator.Element: Identifiable {
 
