@@ -24,6 +24,10 @@
 		9CEA33C01EC0C89500816DAA /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33BF1EC0C89500816DAA /* TaskService.swift */; };
 		9CEA33C21EC0CA5500816DAA /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33C11EC0CA5500816DAA /* UserDefaultsKey.swift */; };
 		9CEA33C41EC0CAA900816DAA /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33C31EC0CAA900816DAA /* UserDefaultsService.swift */; };
+		9CEA33C71EC0D6C100816DAA /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33C61EC0D6C100816DAA /* BaseCollectionViewCell.swift */; };
+		9CEA33C91EC0D70A00816DAA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */; };
+		9CEA33CD1EC0D79E00816DAA /* TaskCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33CC1EC0D79E00816DAA /* TaskCellReactor.swift */; };
+		9CEA33CF1EC0D81800816DAA /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33CE1EC0D81800816DAA /* TaskCell.swift */; };
 		A3B31B4484EAF1F321C7314E /* Pods_Zero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0AB463062A49A9C184ED46C /* Pods_Zero.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,11 +47,15 @@
 		9CEA33B31EC0C1AA00816DAA /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseService.swift; path = Sources/Services/BaseService.swift; sourceTree = "<group>"; };
 		9CEA33B51EC0C1C900816DAA /* ServiceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceProvider.swift; path = Sources/Services/ServiceProvider.swift; sourceTree = "<group>"; };
 		9CEA33B81EC0C29500816DAA /* Array+SectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+SectionModel.swift"; path = "Sources/Utils/Array+SectionModel.swift"; sourceTree = "<group>"; };
-		9CEA33BB1EC0C48900816DAA /* ModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelType.swift; path = "Sources/iOS Zero/ModelType.swift"; sourceTree = "<group>"; };
-		9CEA33BD1EC0C6C100816DAA /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = "Sources/iOS Zero/Task.swift"; sourceTree = "<group>"; };
+		9CEA33BB1EC0C48900816DAA /* ModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelType.swift; path = Sources/Models/ModelType.swift; sourceTree = "<group>"; };
+		9CEA33BD1EC0C6C100816DAA /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = Sources/Models/Task.swift; sourceTree = "<group>"; };
 		9CEA33BF1EC0C89500816DAA /* TaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskService.swift; path = Sources/Services/TaskService.swift; sourceTree = "<group>"; };
 		9CEA33C11EC0CA5500816DAA /* UserDefaultsKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsKey.swift; path = Sources/Utils/UserDefaultsKey.swift; sourceTree = "<group>"; };
 		9CEA33C31EC0CAA900816DAA /* UserDefaultsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsService.swift; path = Sources/Services/UserDefaultsService.swift; sourceTree = "<group>"; };
+		9CEA33C61EC0D6C100816DAA /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseCollectionViewCell.swift; path = "Sources/iOS Zero/Views/BaseCollectionViewCell.swift"; sourceTree = "<group>"; };
+		9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = "Sources/iOS Zero/Views/BaseViewController.swift"; sourceTree = "<group>"; };
+		9CEA33CC1EC0D79E00816DAA /* TaskCellReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCellReactor.swift; path = "Sources/iOS Zero/Reactors/TaskCellReactor.swift"; sourceTree = "<group>"; };
+		9CEA33CE1EC0D81800816DAA /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCell.swift; path = "Sources/iOS Zero/Views/TaskList/TaskCell.swift"; sourceTree = "<group>"; };
 		C0AB463062A49A9C184ED46C /* Pods_Zero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1D02119F779935D4847E96 /* Pods-Zero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */,
+				9CEA33BA1EC0C47100816DAA /* Models */,
 				9CEA33B71EC0C24900816DAA /* iOS Zero */,
 				9CEA33B21EC0C19900816DAA /* Services */,
 				9CEA33A91EC0C0A500816DAA /* Utils */,
@@ -166,7 +175,8 @@
 		9CEA33B71EC0C24900816DAA /* iOS Zero */ = {
 			isa = PBXGroup;
 			children = (
-				9CEA33BA1EC0C47100816DAA /* Models */,
+				9CEA33CB1EC0D76F00816DAA /* Reactors */,
+				9CEA33C51EC0D58F00816DAA /* Views */,
 			);
 			name = "iOS Zero";
 			sourceTree = "<group>";
@@ -178,6 +188,32 @@
 				9CEA33BD1EC0C6C100816DAA /* Task.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		9CEA33C51EC0D58F00816DAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9CEA33C61EC0D6C100816DAA /* BaseCollectionViewCell.swift */,
+				9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */,
+				9CEA33CA1EC0D72E00816DAA /* TaskList */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		9CEA33CA1EC0D72E00816DAA /* TaskList */ = {
+			isa = PBXGroup;
+			children = (
+				9CEA33CE1EC0D81800816DAA /* TaskCell.swift */,
+			);
+			name = TaskList;
+			sourceTree = "<group>";
+		};
+		9CEA33CB1EC0D76F00816DAA /* Reactors */ = {
+			isa = PBXGroup;
+			children = (
+				9CEA33CC1EC0D79E00816DAA /* TaskCellReactor.swift */,
+			);
+			name = Reactors;
 			sourceTree = "<group>";
 		};
 		F8E473225A0F407E3C72CFBB /* Frameworks */ = {
@@ -327,14 +363,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CEA33B41EC0C1AA00816DAA /* BaseService.swift in Sources */,
+				9CEA33CD1EC0D79E00816DAA /* TaskCellReactor.swift in Sources */,
+				9CEA33CF1EC0D81800816DAA /* TaskCell.swift in Sources */,
 				9CEA33A51EC0C03800816DAA /* UICollectionView+Rx.swift in Sources */,
 				9CEA33AD1EC0C0ED00816DAA /* Snap.swift in Sources */,
 				9CEA33B61EC0C1C900816DAA /* ServiceProvider.swift in Sources */,
 				9CEA33BE1EC0C6C100816DAA /* Task.swift in Sources */,
 				9CEA33B11EC0C14200816DAA /* UICollectionView+CellWidth.swift in Sources */,
 				9CEA33C01EC0C89500816DAA /* TaskService.swift in Sources */,
+				9CEA33C91EC0D70A00816DAA /* BaseViewController.swift in Sources */,
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
 				9CEA33BC1EC0C48900816DAA /* ModelType.swift in Sources */,
+				9CEA33C71EC0D6C100816DAA /* BaseCollectionViewCell.swift in Sources */,
 				9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */,
 				9CEA33C21EC0CA5500816DAA /* UserDefaultsKey.swift in Sources */,
 				9CEA33AF1EC0C10F00816DAA /* String+BoundingRect.swift in Sources */,
