@@ -111,6 +111,7 @@
 				9CEA33891EC0BBDA00816DAA /* Resources */,
 				89F09732546E6E3E63A5E47E /* [CP] Embed Pods Frameworks */,
 				A54EFDE2A441B62C9ECE7491 /* [CP] Copy Pods Resources */,
+				9CEA33A21EC0BE9800816DAA /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -183,6 +184,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Zero/Pods-Zero-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		9CEA33A21EC0BE9800816DAA /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		A54EFDE2A441B62C9ECE7491 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
