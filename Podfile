@@ -14,7 +14,7 @@ target 'Zero' do
   pod 'RxReusable'
 
   # UI
-  pod "EasyPeasy"
+  pod 'SnapKit'
   pod "ManualLayout"
 
   # Misc.
