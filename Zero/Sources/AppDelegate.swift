@@ -10,7 +10,7 @@ import UIKit
 import ManualLayout
 import RxOptional
 import RxReusable
-import EasyPeasy
+import SnapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,11 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-    window = UIWindow(frame: UIScreen.main.bounds)
-    window?.backgroundColor = .red
-    window?.makeKeyAndVisible()
-    window?.rootViewController = UIViewController()
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    window.backgroundColor = .white
+    window.makeKeyAndVisible()
 
+    let serviceProvider = ServiceProvider()
+    let reactor = TaskListViewReactor(provider: serviceProvider)
+    let viewController = TaskListViewController(reactor: reactor)
+    let navigationController = UINavigationController(rootViewController: viewController)
+    window.rootViewController = navigationController
+
+    self.window = window
     return true
   }
 

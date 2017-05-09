@@ -41,7 +41,9 @@ final class TaskCell: BaseCollectionViewCell, View {
 
   // MARK: - Initializing
 
-  override func initialize() {
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    self.backgroundColor = .white
     self.contentView.addSubview(titleLabel)
   }
 
@@ -52,16 +54,13 @@ final class TaskCell: BaseCollectionViewCell, View {
     // TODO: add done
   }
 
-  // MARK: - Cell Height
+  // MARK: - Size
 
-  class func height(fits width: CGFloat, reactor: Reactor) -> CGFloat {
-    let height = reactor.currentState.title.height(
-      fits: width - Metric.cellPadding * 2,
-      font: Font.titleLabel,
-      maximumNumberOfLines: Constant.titleLabelNumberOfLines
-    )
+  class func size(width: CGFloat, reactor: Reactor) -> CGSize {
+    let titleLabelWidth = width - Metric.cellPadding * 2
+    let titleLabelHeight = reactor.currentState.title.height(fits: titleLabelWidth, font: Font.titleLabel, maximumNumberOfLines: Constant.titleLabelNumberOfLines)
 
-    return height + Metric.cellPadding * 2
+    return CGSize(width: width, height: Metric.cellPadding * 2 + titleLabelHeight)
   }
 
   // MARK: - Layout

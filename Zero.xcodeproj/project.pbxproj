@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9CDF098E1EC21EAB00A2A25C /* TaskListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */; };
+		9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */; };
 		9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */; };
 		9CEA33961EC0BBDA00816DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CEA33951EC0BBDA00816DAA /* Assets.xcassets */; };
 		9CEA33991EC0BBDA00816DAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CEA33971EC0BBDA00816DAA /* LaunchScreen.storyboard */; };
@@ -33,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.release.xcconfig"; sourceTree = "<group>"; };
+		9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskListViewReactor.swift"; sourceTree = "<group>"; };
+		9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskListViewController.swift"; sourceTree = "<group>"; };
 		9CEA338B1EC0BBDA00816DAA /* Zero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		9CEA33951EC0BBDA00816DAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				9CEA33CE1EC0D81800816DAA /* TaskCell.swift */,
+				9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */,
 			);
 			name = TaskList;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				9CEA33CC1EC0D79E00816DAA /* TaskCellReactor.swift */,
+				9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */,
 			);
 			name = Reactors;
 			sourceTree = "<group>";
@@ -368,6 +374,7 @@
 				9CEA33A51EC0C03800816DAA /* UICollectionView+Rx.swift in Sources */,
 				9CEA33AD1EC0C0ED00816DAA /* Snap.swift in Sources */,
 				9CEA33B61EC0C1C900816DAA /* ServiceProvider.swift in Sources */,
+				9CDF098E1EC21EAB00A2A25C /* TaskListViewReactor.swift in Sources */,
 				9CEA33BE1EC0C6C100816DAA /* Task.swift in Sources */,
 				9CEA33B11EC0C14200816DAA /* UICollectionView+CellWidth.swift in Sources */,
 				9CEA33C01EC0C89500816DAA /* TaskService.swift in Sources */,
@@ -375,6 +382,7 @@
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
 				9CEA33BC1EC0C48900816DAA /* ModelType.swift in Sources */,
 				9CEA33C71EC0D6C100816DAA /* BaseCollectionViewCell.swift in Sources */,
+				9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */,
 				9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */,
 				9CEA33C21EC0CA5500816DAA /* UserDefaultsKey.swift in Sources */,
 				9CEA33AF1EC0C10F00816DAA /* String+BoundingRect.swift in Sources */,
