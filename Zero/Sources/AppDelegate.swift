@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SnapKit
 import ManualLayout
 import RxOptional
 import RxReusable
-import SnapKit
+import RxGesture
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

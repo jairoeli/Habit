@@ -12,6 +12,7 @@ target 'Zero' do
   pod 'RxDataSources'
   pod 'RxOptional'
   pod 'RxReusable'
+  pod "RxGesture"
 
   # UI
   pod 'SnapKit'
