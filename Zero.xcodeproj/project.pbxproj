@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCC9A41EC399C100F6DD96 /* Animation.swift */; };
 		9CDF098E1EC21EAB00A2A25C /* TaskListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */; };
 		9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */; };
 		9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.release.xcconfig"; sourceTree = "<group>"; };
+		9CDCC9A41EC399C100F6DD96 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = Sources/Utils/Animation.swift; sourceTree = "<group>"; };
 		9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskListViewReactor.swift"; sourceTree = "<group>"; };
 		9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskListViewController.swift"; sourceTree = "<group>"; };
 		9CEA338B1EC0BBDA00816DAA /* Zero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 				9CEA33B01EC0C14200816DAA /* UICollectionView+CellWidth.swift */,
 				9CEA33B81EC0C29500816DAA /* Array+SectionModel.swift */,
 				9CEA33C11EC0CA5500816DAA /* UserDefaultsKey.swift */,
+				9CDCC9A41EC399C100F6DD96 /* Animation.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				9CEA33CD1EC0D79E00816DAA /* TaskCellReactor.swift in Sources */,
 				9CEA33CF1EC0D81800816DAA /* TaskCell.swift in Sources */,
 				9CEA33A51EC0C03800816DAA /* UICollectionView+Rx.swift in Sources */,
+				9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */,
 				9CEA33AD1EC0C0ED00816DAA /* Snap.swift in Sources */,
 				9CEA33B61EC0C1C900816DAA /* ServiceProvider.swift in Sources */,
 				9CDF098E1EC21EAB00A2A25C /* TaskListViewReactor.swift in Sources */,

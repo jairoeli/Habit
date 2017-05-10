@@ -12,7 +12,6 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 import ReusableKit
-import SnapKit
 
 final class TaskListViewController: BaseViewController, View {
 
@@ -26,7 +25,9 @@ final class TaskListViewController: BaseViewController, View {
 
   let dataSource = RxCollectionViewSectionedReloadDataSource<TaskListSection>()
 
-  // TODO: Add Button Item
+  lazy var addButtonItem = UIButton(type: .system) <== {
+    $0.setImage(#imageLiteral(resourceName: "add_icon").withRenderingMode(.alwaysOriginal), for: .normal)
+  }
 
   fileprivate let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()) <== {
     $0.alwaysBounceVertical = true
@@ -50,11 +51,36 @@ final class TaskListViewController: BaseViewController, View {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.addSubview(self.collectionView)
+    self.view.addSubview(self.addButtonItem)
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    self.showPlusButton()
   }
 
   override func setupConstraints() {
     self.collectionView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
+    }
+
+    self.addButtonItem.snp.makeConstraints { make in
+      make.bottom.equalTo(100)
+      make.centerX.equalToSuperview()
+      make.width.equalTo(64)
+      make.height.equalTo(64)
+    }
+  }
+
+  fileprivate func showPlusButton() {
+    animate(0.5, completion: nil) {
+      self.addButtonItem.snp.updateConstraints { make in make.bottom.equalToSuperview().offset(-20) }
+      self.addButtonItem.superview?.layoutIfNeeded()
     }
   }
 
@@ -69,12 +95,20 @@ final class TaskListViewController: BaseViewController, View {
       cell.reactor = reactor
       return cell
     }
+    self.dataSource.canMoveItemAtIndexPath = { _ in true }
 
     // ACTION
     self.rx.viewDidLoad
       .map { Reactor.Action.refresh }
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
+
+//    self.collectionView.rx.swipeGesture(.left)
+//      .when(.recognized)
+//      .subscribe(onNext: { _ in
+//        self.view.backgroundColor = .red
+//      })
+//      .disposed(by: self.disposeBag)
 
     // STATE
     reactor.state.map { $0.sections }
