@@ -20,5 +20,8 @@ target 'Zero' do
 
   # Misc.
   pod 'ReusableKit'
+  pod 'URLNavigator'
+  pod 'UITextView+Placeholder'
+
 
 end

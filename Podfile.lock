@@ -19,6 +19,8 @@ PODS:
     - RxSwift (>= 3.0)
   - RxSwift (3.4.1)
   - SnapKit (3.2.0)
+  - UITextView+Placeholder (1.2.0)
+  - URLNavigator (1.2.0)
 
 DEPENDENCIES:
   - ManualLayout
@@ -31,6 +33,8 @@ DEPENDENCIES:
   - RxReusable
   - RxSwift
   - SnapKit
+  - UITextView+Placeholder
+  - URLNavigator
 
 SPEC CHECKSUMS:
   ManualLayout: 68ac8cfa6b5f656f7a9fadec3730208b95986880
@@ -43,7 +47,9 @@ SPEC CHECKSUMS:
   RxReusable: c18e8e3b5f12a3292b76cc552dd946500f8d2c32
   RxSwift: 656f8fbeca5bc372121a72d9ebdd3cd3bc0ffade
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
+  URLNavigator: 3ff788c985a0aae654e7de4959c4b0ea8a45f022
 
-PODFILE CHECKSUM: bc6682aaa8e53f76db95564a9e5461c9a37304cf
+PODFILE CHECKSUM: c2bde7e7521e35392f4962850313ecfbebf727fc
 
 COCOAPODS: 1.2.1
