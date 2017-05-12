@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C121E901EC6599600A5077E /* MessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C121E8F1EC6599600A5077E /* MessageInputBar.swift */; };
+		9C3E2D771EC60C6C00EE5276 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D761EC60C6C00EE5276 /* Color.swift */; };
+		9C3E2D791EC6182700EE5276 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D781EC6182700EE5276 /* AlertService.swift */; };
+		9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */; };
+		9C3E2D801EC623F300EE5276 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */; };
 		9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCC9A41EC399C100F6DD96 /* Animation.swift */; };
 		9CDF098E1EC21EAB00A2A25C /* TaskListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */; };
 		9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */; };
@@ -36,6 +41,11 @@
 
 /* Begin PBXFileReference section */
 		5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.release.xcconfig"; sourceTree = "<group>"; };
+		9C121E8F1EC6599600A5077E /* MessageInputBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageInputBar.swift; path = "Sources/iOS Zero/Views/Message/MessageInputBar.swift"; sourceTree = "<group>"; };
+		9C3E2D761EC60C6C00EE5276 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = Sources/Utils/Color.swift; sourceTree = "<group>"; };
+		9C3E2D781EC6182700EE5276 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = Sources/Services/AlertService.swift; sourceTree = "<group>"; };
+		9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskEditViewReactor.swift"; sourceTree = "<group>"; };
+		9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskEditViewController.swift"; sourceTree = "<group>"; };
 		9CDCC9A41EC399C100F6DD96 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = Sources/Utils/Animation.swift; sourceTree = "<group>"; };
 		9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskListViewReactor.swift"; sourceTree = "<group>"; };
 		9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskListViewController.swift"; sourceTree = "<group>"; };
@@ -85,6 +95,14 @@
 				5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9C121E8E1EC6596000A5077E /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				9C121E8F1EC6599600A5077E /* MessageInputBar.swift */,
+			);
+			name = Message;
 			sourceTree = "<group>";
 		};
 		9CEA33821EC0BBDA00816DAA = {
@@ -164,6 +182,7 @@
 				9CEA33B81EC0C29500816DAA /* Array+SectionModel.swift */,
 				9CEA33C11EC0CA5500816DAA /* UserDefaultsKey.swift */,
 				9CDCC9A41EC399C100F6DD96 /* Animation.swift */,
+				9C3E2D761EC60C6C00EE5276 /* Color.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -174,6 +193,7 @@
 				9CEA33B31EC0C1AA00816DAA /* BaseService.swift */,
 				9CEA33B51EC0C1C900816DAA /* ServiceProvider.swift */,
 				9CEA33BF1EC0C89500816DAA /* TaskService.swift */,
+				9C3E2D781EC6182700EE5276 /* AlertService.swift */,
 				9CEA33C31EC0CAA900816DAA /* UserDefaultsService.swift */,
 			);
 			name = Services;
@@ -202,18 +222,20 @@
 			children = (
 				9CEA33C61EC0D6C100816DAA /* BaseCollectionViewCell.swift */,
 				9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */,
-				9CEA33CA1EC0D72E00816DAA /* TaskList */,
+				9CEA33CA1EC0D72E00816DAA /* Task */,
+				9C121E8E1EC6596000A5077E /* Message */,
 			);
 			name = Views;
 			sourceTree = "<group>";
 		};
-		9CEA33CA1EC0D72E00816DAA /* TaskList */ = {
+		9CEA33CA1EC0D72E00816DAA /* Task */ = {
 			isa = PBXGroup;
 			children = (
 				9CEA33CE1EC0D81800816DAA /* TaskCell.swift */,
 				9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */,
+				9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */,
 			);
-			name = TaskList;
+			name = Task;
 			sourceTree = "<group>";
 		};
 		9CEA33CB1EC0D76F00816DAA /* Reactors */ = {
@@ -221,6 +243,7 @@
 			children = (
 				9CEA33CC1EC0D79E00816DAA /* TaskCellReactor.swift */,
 				9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */,
+				9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */,
 			);
 			name = Reactors;
 			sourceTree = "<group>";
@@ -373,6 +396,7 @@
 			files = (
 				9CEA33B41EC0C1AA00816DAA /* BaseService.swift in Sources */,
 				9CEA33CD1EC0D79E00816DAA /* TaskCellReactor.swift in Sources */,
+				9C3E2D771EC60C6C00EE5276 /* Color.swift in Sources */,
 				9CEA33CF1EC0D81800816DAA /* TaskCell.swift in Sources */,
 				9CEA33A51EC0C03800816DAA /* UICollectionView+Rx.swift in Sources */,
 				9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */,
@@ -386,12 +410,16 @@
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
 				9CEA33BC1EC0C48900816DAA /* ModelType.swift in Sources */,
 				9CEA33C71EC0D6C100816DAA /* BaseCollectionViewCell.swift in Sources */,
+				9C121E901EC6599600A5077E /* MessageInputBar.swift in Sources */,
 				9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */,
+				9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */,
 				9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */,
 				9CEA33C21EC0CA5500816DAA /* UserDefaultsKey.swift in Sources */,
 				9CEA33AF1EC0C10F00816DAA /* String+BoundingRect.swift in Sources */,
 				9CEA33C41EC0CAA900816DAA /* UserDefaultsService.swift in Sources */,
 				9CEA33AB1EC0C0C100816DAA /* MutateOperator.swift in Sources */,
+				9C3E2D801EC623F300EE5276 /* TaskEditViewController.swift in Sources */,
+				9C3E2D791EC6182700EE5276 /* AlertService.swift in Sources */,
 				9CEA33B91EC0C29500816DAA /* Array+SectionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

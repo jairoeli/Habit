@@ -138,4 +138,15 @@ final class TaskListViewReactor: Reactor {
     }
   }
 
+  // MARK: - Creating Task
+
+  func reactorForCreatingTask() -> TaskEditViewReactor {
+    return TaskEditViewReactor(provider: self.provider, mode: .new)
+  }
+
+  func reactorForEditingTask(_ taskCellReactor: TaskCellReactor) -> TaskEditViewReactor {
+    let task = taskCellReactor.currentState
+    return TaskEditViewReactor(provider: self.provider, mode: .edit(task))
+  }
+
 }

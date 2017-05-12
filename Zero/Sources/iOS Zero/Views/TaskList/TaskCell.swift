@@ -24,18 +24,14 @@ final class TaskCell: BaseCollectionViewCell, View {
   }
 
   struct Font {
-    static let titleLabel = UIFont.boldSystemFont(ofSize: 24)
-  }
-
-  struct Color {
-    static let titleLabelText = UIColor.black
+    static let titleLabel = UIFont.bold(size: 24)
   }
 
   // MARK: - UI
 
   let titleLabel = UILabel() <== {
     $0.font = Font.titleLabel
-    $0.textColor = Color.titleLabelText
+    $0.textColor = .charcoal
     $0.numberOfLines = Constant.titleLabelNumberOfLines
   }
 
@@ -43,7 +39,8 @@ final class TaskCell: BaseCollectionViewCell, View {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    self.backgroundColor = .white
+    self.backgroundColor = .slate
+    self.layer.cornerRadius = 4
     self.contentView.addSubview(titleLabel)
   }
 

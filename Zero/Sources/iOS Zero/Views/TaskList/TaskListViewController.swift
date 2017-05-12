@@ -17,8 +17,14 @@ final class TaskListViewController: BaseViewController, View {
 
   // MARK: - Constants
 
-  struct Reusable {
+  fileprivate struct Reusable {
     static let taskCell = ReusableCell<TaskCell>()
+  }
+
+  fileprivate struct Metric {
+    static let buttonSize = 64.f
+    static let buttonBottom = 100.f
+    static let sectionInsetLeftRight = 20.f
   }
 
   // MARK: - Properties
@@ -70,10 +76,10 @@ final class TaskListViewController: BaseViewController, View {
     }
 
     self.addButtonItem.snp.makeConstraints { make in
-      make.bottom.equalTo(100)
+      make.bottom.equalTo(Metric.buttonBottom)
       make.centerX.equalToSuperview()
-      make.width.equalTo(64)
-      make.height.equalTo(64)
+      make.width.equalTo(Metric.buttonSize)
+      make.height.equalTo(Metric.buttonSize)
     }
   }
 
@@ -103,6 +109,16 @@ final class TaskListViewController: BaseViewController, View {
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
+    self.addButtonItem.rx.tap
+      .map(reactor.reactorForCreatingTask)
+      .subscribe(onNext: { [weak self] reactor in
+        guard let `self` = self else { return }
+        let viewController = TaskEditViewController(reactor: reactor)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        self.present(navigationController, animated: true, completion: nil)
+      })
+      .disposed(by: self.disposeBag)
+
 //    self.collectionView.rx.swipeGesture(.left)
 //      .when(.recognized)
 //      .subscribe(onNext: { _ in
@@ -126,8 +142,8 @@ extension TaskListViewController: UICollectionViewDelegateFlowLayout {
     return TaskCell.size(width: sectionWidth, reactor: reactor)
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 0, left: Metric.sectionInsetLeftRight, bottom: 0, right: Metric.sectionInsetLeftRight)
   }
 
 }
