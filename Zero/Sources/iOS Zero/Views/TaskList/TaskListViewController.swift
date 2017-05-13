@@ -12,6 +12,7 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 import ReusableKit
+import Presentr
 
 final class TaskListViewController: BaseViewController, View {
 
@@ -40,6 +41,21 @@ final class TaskListViewController: BaseViewController, View {
     $0.backgroundColor = .white
     $0.register(Reusable.taskCell)
   }
+
+  fileprivate let presenter: Presentr = {
+    let width = ModalSize.full
+    let height = ModalSize.half
+    let center = ModalCenterPosition.bottomCenter
+    let customType = PresentationType.custom(width: width, height: height, center: center)
+
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = TransitionType.coverHorizontalFromRight
+    customPresenter.dismissOnSwipe = true
+    customPresenter.transitionType = nil
+    customPresenter.dismissTransitionType = nil
+    customPresenter.keyboardTranslationType = .moveUp
+    return customPresenter
+  }()
 
   // MARK: - Initializing
 
@@ -114,17 +130,9 @@ final class TaskListViewController: BaseViewController, View {
       .subscribe(onNext: { [weak self] reactor in
         guard let `self` = self else { return }
         let viewController = TaskEditViewController(reactor: reactor)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        self.present(navigationController, animated: true, completion: nil)
+        self.customPresentViewController(self.presenter, viewController: viewController, animated: true, completion: nil)
       })
       .disposed(by: self.disposeBag)
-
-//    self.collectionView.rx.swipeGesture(.left)
-//      .when(.recognized)
-//      .subscribe(onNext: { _ in
-//        self.view.backgroundColor = .red
-//      })
-//      .disposed(by: self.disposeBag)
 
     // STATE
     reactor.state.map { $0.sections }

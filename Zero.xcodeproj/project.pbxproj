@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C121E901EC6599600A5077E /* MessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C121E8F1EC6599600A5077E /* MessageInputBar.swift */; };
 		9C3E2D771EC60C6C00EE5276 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D761EC60C6C00EE5276 /* Color.swift */; };
 		9C3E2D791EC6182700EE5276 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D781EC6182700EE5276 /* AlertService.swift */; };
 		9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */; };
@@ -41,7 +40,6 @@
 
 /* Begin PBXFileReference section */
 		5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.release.xcconfig"; sourceTree = "<group>"; };
-		9C121E8F1EC6599600A5077E /* MessageInputBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageInputBar.swift; path = "Sources/iOS Zero/Views/Message/MessageInputBar.swift"; sourceTree = "<group>"; };
 		9C3E2D761EC60C6C00EE5276 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = Sources/Utils/Color.swift; sourceTree = "<group>"; };
 		9C3E2D781EC6182700EE5276 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = Sources/Services/AlertService.swift; sourceTree = "<group>"; };
 		9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskEditViewReactor.swift"; sourceTree = "<group>"; };
@@ -95,14 +93,6 @@
 				5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		9C121E8E1EC6596000A5077E /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				9C121E8F1EC6599600A5077E /* MessageInputBar.swift */,
-			);
-			name = Message;
 			sourceTree = "<group>";
 		};
 		9CEA33821EC0BBDA00816DAA = {
@@ -223,7 +213,6 @@
 				9CEA33C61EC0D6C100816DAA /* BaseCollectionViewCell.swift */,
 				9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */,
 				9CEA33CA1EC0D72E00816DAA /* Task */,
-				9C121E8E1EC6596000A5077E /* Message */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -410,7 +399,6 @@
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
 				9CEA33BC1EC0C48900816DAA /* ModelType.swift in Sources */,
 				9CEA33C71EC0D6C100816DAA /* BaseCollectionViewCell.swift in Sources */,
-				9C121E901EC6599600A5077E /* MessageInputBar.swift in Sources */,
 				9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */,
 				9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */,
 				9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */,

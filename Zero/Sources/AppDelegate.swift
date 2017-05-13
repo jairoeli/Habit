@@ -11,8 +11,6 @@ import SnapKit
 import ManualLayout
 import RxOptional
 import RxReusable
-import RxGesture
-import UITextView_Placeholder
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
