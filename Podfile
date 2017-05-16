@@ -12,6 +12,7 @@ target 'Zero' do
   pod 'RxDataSources'
   pod 'RxOptional'
   pod 'RxReusable'
+  pod 'RxKeyboard'
 
   # UI
   pod 'SnapKit'
@@ -20,7 +21,5 @@ target 'Zero' do
   # Misc.
   pod 'ReusableKit'
   pod 'URLNavigator'
-  pod 'Presentr'
-
 
 end
