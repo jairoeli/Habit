@@ -8,11 +8,10 @@
 
 import UIKit
 import ReactorKit
+import RxSwift
 import RxCocoa
 import RxDataSources
-import RxSwift
 import ReusableKit
-import Presentr
 
 final class TaskListViewController: BaseViewController, View {
 
@@ -30,38 +29,24 @@ final class TaskListViewController: BaseViewController, View {
 
   // MARK: - Properties
 
-  let dataSource = RxCollectionViewSectionedReloadDataSource<TaskListSection>()
+  let dataSource = RxTableViewSectionedReloadDataSource<TaskListSection>()
 
   lazy var addButtonItem = UIButton(type: .system) <== {
     $0.setImage(#imageLiteral(resourceName: "add_icon").withRenderingMode(.alwaysOriginal), for: .normal)
   }
 
-  fileprivate let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()) <== {
+  fileprivate let tableView = UITableView() <== {
     $0.alwaysBounceVertical = true
     $0.backgroundColor = .white
+    $0.separatorStyle = .none
     $0.register(Reusable.taskCell)
   }
-
-  fileprivate let presenter: Presentr = {
-    let width = ModalSize.full
-    let height = ModalSize.half
-    let center = ModalCenterPosition.bottomCenter
-    let customType = PresentationType.custom(width: width, height: height, center: center)
-
-    let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = TransitionType.coverHorizontalFromRight
-    customPresenter.dismissOnSwipe = true
-    customPresenter.transitionType = nil
-    customPresenter.dismissTransitionType = nil
-    customPresenter.keyboardTranslationType = .moveUp
-    return customPresenter
-  }()
 
   // MARK: - Initializing
 
   init(reactor: TaskListViewReactor) {
+    defer { self.reactor = reactor }
     super.init()
-    self.reactor = reactor
   }
 
   required convenience init?(coder aDecoder: NSCoder) {
@@ -72,7 +57,7 @@ final class TaskListViewController: BaseViewController, View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.addSubview(self.collectionView)
+    self.view.addSubview(self.tableView)
     self.view.addSubview(self.addButtonItem)
   }
 
@@ -87,7 +72,7 @@ final class TaskListViewController: BaseViewController, View {
   }
 
   override func setupConstraints() {
-    self.collectionView.snp.makeConstraints { make in
+    self.tableView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
 
@@ -110,14 +95,14 @@ final class TaskListViewController: BaseViewController, View {
 
   func bind(reactor: TaskListViewReactor) {
     // Datasource
-    self.collectionView.rx.setDelegate(self).disposed(by: self.disposeBag)
+    self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
 
-    self.dataSource.configureCell = { dataSource, collectionView, indexPath, reactor in
-      let cell = collectionView.dequeue(Reusable.taskCell, for: indexPath)
+    self.dataSource.configureCell = { _, tableView, indexPath, reactor in
+      let cell = tableView.dequeue(Reusable.taskCell, for: indexPath)
+      cell.selectionStyle = .none
       cell.reactor = reactor
       return cell
     }
-    self.dataSource.canMoveItemAtIndexPath = { _ in true }
 
     // ACTION
     self.rx.viewDidLoad
@@ -130,28 +115,23 @@ final class TaskListViewController: BaseViewController, View {
       .subscribe(onNext: { [weak self] reactor in
         guard let `self` = self else { return }
         let viewController = TaskEditViewController(reactor: reactor)
-        self.customPresentViewController(self.presenter, viewController: viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
       })
       .disposed(by: self.disposeBag)
 
     // STATE
     reactor.state.map { $0.sections }
-      .bind(to: self.collectionView.rx.items(dataSource: self.dataSource))
+      .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
       .disposed(by: self.disposeBag)
   }
 
 }
 
-extension TaskListViewController: UICollectionViewDelegateFlowLayout {
+extension TaskListViewController: UITableViewDelegate {
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let sectionWidth = collectionView.sectionWidth(at: indexPath.section)
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let reactor = self.dataSource[indexPath]
-    return TaskCell.size(width: sectionWidth, reactor: reactor)
-  }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: Metric.sectionInsetLeftRight, bottom: 0, right: Metric.sectionInsetLeftRight)
+    return TaskCell.height(fits: tableView.width, reactor: reactor)
   }
 
 }

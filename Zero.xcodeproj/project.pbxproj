@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C0A775C1ECA1D4300A11F77 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A775B1ECA1D4300A11F77 /* BaseCollectionViewCell.swift */; };
+		9C2945A11EC9238B00A04CE9 /* MessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */; };
 		9C3E2D771EC60C6C00EE5276 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D761EC60C6C00EE5276 /* Color.swift */; };
 		9C3E2D791EC6182700EE5276 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D781EC6182700EE5276 /* AlertService.swift */; };
 		9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */; };
@@ -17,7 +19,6 @@
 		9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */; };
 		9CEA33961EC0BBDA00816DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CEA33951EC0BBDA00816DAA /* Assets.xcassets */; };
 		9CEA33991EC0BBDA00816DAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CEA33971EC0BBDA00816DAA /* LaunchScreen.storyboard */; };
-		9CEA33A51EC0C03800816DAA /* UICollectionView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33A41EC0C03800816DAA /* UICollectionView+Rx.swift */; };
 		9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33A71EC0C07200816DAA /* UIViewController+Rx.swift */; };
 		9CEA33AB1EC0C0C100816DAA /* MutateOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33AA1EC0C0C100816DAA /* MutateOperator.swift */; };
 		9CEA33AD1EC0C0ED00816DAA /* Snap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33AC1EC0C0ED00816DAA /* Snap.swift */; };
@@ -31,15 +32,19 @@
 		9CEA33C01EC0C89500816DAA /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33BF1EC0C89500816DAA /* TaskService.swift */; };
 		9CEA33C21EC0CA5500816DAA /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33C11EC0CA5500816DAA /* UserDefaultsKey.swift */; };
 		9CEA33C41EC0CAA900816DAA /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33C31EC0CAA900816DAA /* UserDefaultsService.swift */; };
-		9CEA33C71EC0D6C100816DAA /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33C61EC0D6C100816DAA /* BaseCollectionViewCell.swift */; };
 		9CEA33C91EC0D70A00816DAA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */; };
 		9CEA33CD1EC0D79E00816DAA /* TaskCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33CC1EC0D79E00816DAA /* TaskCellReactor.swift */; };
 		9CEA33CF1EC0D81800816DAA /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33CE1EC0D81800816DAA /* TaskCell.swift */; };
+		9CF0F6F11ECB9BCE00E40437 /* HabitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF0F6F01ECB9BCE00E40437 /* HabitCell.swift */; };
+		9CF0F6F31ECB9C5D00E40437 /* HabitCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF0F6F21ECB9C5D00E40437 /* HabitCellReactor.swift */; };
+		9CF0F6F81ECBB63900E40437 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF0F6F71ECBB63900E40437 /* BaseTableViewCell.swift */; };
 		A3B31B4484EAF1F321C7314E /* Pods_Zero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0AB463062A49A9C184ED46C /* Pods_Zero.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.release.xcconfig"; sourceTree = "<group>"; };
+		9C0A775B1ECA1D4300A11F77 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseCollectionViewCell.swift; path = "Sources/iOS Zero/Views/BaseCollectionViewCell.swift"; sourceTree = "<group>"; };
+		9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageInputBar.swift; path = "Sources/iOS Zero/Views/TaskList/MessageInputBar.swift"; sourceTree = "<group>"; };
 		9C3E2D761EC60C6C00EE5276 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = Sources/Utils/Color.swift; sourceTree = "<group>"; };
 		9C3E2D781EC6182700EE5276 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = Sources/Services/AlertService.swift; sourceTree = "<group>"; };
 		9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskEditViewReactor.swift"; sourceTree = "<group>"; };
@@ -52,7 +57,6 @@
 		9CEA33951EC0BBDA00816DAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		9CEA33981EC0BBDA00816DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CEA339A1EC0BBDA00816DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Support Files/Info.plist"; sourceTree = "<group>"; };
-		9CEA33A41EC0C03800816DAA /* UICollectionView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Rx.swift"; path = "Sources/Rx/UICollectionView+Rx.swift"; sourceTree = "<group>"; };
 		9CEA33A71EC0C07200816DAA /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Rx.swift"; path = "Sources/Rx/UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		9CEA33AA1EC0C0C100816DAA /* MutateOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MutateOperator.swift; path = Sources/Utils/MutateOperator.swift; sourceTree = "<group>"; };
 		9CEA33AC1EC0C0ED00816DAA /* Snap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Snap.swift; path = Sources/Utils/Snap.swift; sourceTree = "<group>"; };
@@ -66,10 +70,12 @@
 		9CEA33BF1EC0C89500816DAA /* TaskService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskService.swift; path = Sources/Services/TaskService.swift; sourceTree = "<group>"; };
 		9CEA33C11EC0CA5500816DAA /* UserDefaultsKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsKey.swift; path = Sources/Utils/UserDefaultsKey.swift; sourceTree = "<group>"; };
 		9CEA33C31EC0CAA900816DAA /* UserDefaultsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsService.swift; path = Sources/Services/UserDefaultsService.swift; sourceTree = "<group>"; };
-		9CEA33C61EC0D6C100816DAA /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseCollectionViewCell.swift; path = "Sources/iOS Zero/Views/BaseCollectionViewCell.swift"; sourceTree = "<group>"; };
 		9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = "Sources/iOS Zero/Views/BaseViewController.swift"; sourceTree = "<group>"; };
 		9CEA33CC1EC0D79E00816DAA /* TaskCellReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCellReactor.swift; path = "Sources/iOS Zero/Reactors/TaskCellReactor.swift"; sourceTree = "<group>"; };
 		9CEA33CE1EC0D81800816DAA /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCell.swift; path = "Sources/iOS Zero/Views/TaskList/TaskCell.swift"; sourceTree = "<group>"; };
+		9CF0F6F01ECB9BCE00E40437 /* HabitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HabitCell.swift; path = "Sources/iOS Zero/Views/TaskList/HabitCell.swift"; sourceTree = "<group>"; };
+		9CF0F6F21ECB9C5D00E40437 /* HabitCellReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HabitCellReactor.swift; path = "Sources/iOS Zero/Reactors/HabitCellReactor.swift"; sourceTree = "<group>"; };
+		9CF0F6F71ECBB63900E40437 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseTableViewCell.swift; path = "Sources/iOS Zero/Views/BaseTableViewCell.swift"; sourceTree = "<group>"; };
 		C0AB463062A49A9C184ED46C /* Pods_Zero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1D02119F779935D4847E96 /* Pods-Zero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,7 +162,6 @@
 		9CEA33A61EC0C06300816DAA /* Rx */ = {
 			isa = PBXGroup;
 			children = (
-				9CEA33A41EC0C03800816DAA /* UICollectionView+Rx.swift */,
 				9CEA33A71EC0C07200816DAA /* UIViewController+Rx.swift */,
 			);
 			name = Rx;
@@ -210,7 +215,8 @@
 		9CEA33C51EC0D58F00816DAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9CEA33C61EC0D6C100816DAA /* BaseCollectionViewCell.swift */,
+				9C0A775B1ECA1D4300A11F77 /* BaseCollectionViewCell.swift */,
+				9CF0F6F71ECBB63900E40437 /* BaseTableViewCell.swift */,
 				9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */,
 				9CEA33CA1EC0D72E00816DAA /* Task */,
 			);
@@ -221,8 +227,10 @@
 			isa = PBXGroup;
 			children = (
 				9CEA33CE1EC0D81800816DAA /* TaskCell.swift */,
+				9CF0F6F01ECB9BCE00E40437 /* HabitCell.swift */,
 				9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */,
 				9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */,
+				9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -231,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				9CEA33CC1EC0D79E00816DAA /* TaskCellReactor.swift */,
+				9CF0F6F21ECB9C5D00E40437 /* HabitCellReactor.swift */,
 				9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */,
 				9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */,
 			);
@@ -386,8 +395,11 @@
 				9CEA33B41EC0C1AA00816DAA /* BaseService.swift in Sources */,
 				9CEA33CD1EC0D79E00816DAA /* TaskCellReactor.swift in Sources */,
 				9C3E2D771EC60C6C00EE5276 /* Color.swift in Sources */,
+				9CF0F6F11ECB9BCE00E40437 /* HabitCell.swift in Sources */,
 				9CEA33CF1EC0D81800816DAA /* TaskCell.swift in Sources */,
-				9CEA33A51EC0C03800816DAA /* UICollectionView+Rx.swift in Sources */,
+				9CF0F6F81ECBB63900E40437 /* BaseTableViewCell.swift in Sources */,
+				9C2945A11EC9238B00A04CE9 /* MessageInputBar.swift in Sources */,
+				9C0A775C1ECA1D4300A11F77 /* BaseCollectionViewCell.swift in Sources */,
 				9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */,
 				9CEA33AD1EC0C0ED00816DAA /* Snap.swift in Sources */,
 				9CEA33B61EC0C1C900816DAA /* ServiceProvider.swift in Sources */,
@@ -398,7 +410,6 @@
 				9CEA33C91EC0D70A00816DAA /* BaseViewController.swift in Sources */,
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
 				9CEA33BC1EC0C48900816DAA /* ModelType.swift in Sources */,
-				9CEA33C71EC0D6C100816DAA /* BaseCollectionViewCell.swift in Sources */,
 				9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */,
 				9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */,
 				9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */,
@@ -407,6 +418,7 @@
 				9CEA33C41EC0CAA900816DAA /* UserDefaultsService.swift in Sources */,
 				9CEA33AB1EC0C0C100816DAA /* MutateOperator.swift in Sources */,
 				9C3E2D801EC623F300EE5276 /* TaskEditViewController.swift in Sources */,
+				9CF0F6F31ECB9C5D00E40437 /* HabitCellReactor.swift in Sources */,
 				9C3E2D791EC6182700EE5276 /* AlertService.swift in Sources */,
 				9CEA33B91EC0C29500816DAA /* Array+SectionModel.swift in Sources */,
 			);

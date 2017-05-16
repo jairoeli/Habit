@@ -10,7 +10,7 @@ import UIKit
 import ReactorKit
 import RxSwift
 
-final class TaskCell: BaseCollectionViewCell, View {
+final class TaskCell: BaseTableViewCell, View {
   typealias Reactor = TaskCellReactor
 
   // MARK: - Constants
@@ -37,10 +37,7 @@ final class TaskCell: BaseCollectionViewCell, View {
 
   // MARK: - Initializing
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    self.backgroundColor = .slate
-    self.layer.cornerRadius = 4
+  override func initialize() {
     self.contentView.addSubview(titleLabel)
   }
 
@@ -48,16 +45,17 @@ final class TaskCell: BaseCollectionViewCell, View {
 
   func bind(reactor: TaskCellReactor) {
     self.titleLabel.text = reactor.currentState.title
-    // TODO: add done
   }
 
-  // MARK: - Size
+  // MARK: - Cell Height
 
-  class func size(width: CGFloat, reactor: Reactor) -> CGSize {
-    let titleLabelWidth = width - Metric.cellPadding * 2
-    let titleLabelHeight = reactor.currentState.title.height(fits: titleLabelWidth, font: Font.titleLabel, maximumNumberOfLines: Constant.titleLabelNumberOfLines)
-
-    return CGSize(width: width, height: Metric.cellPadding * 2 + titleLabelHeight)
+  class func height(fits width: CGFloat, reactor: Reactor) -> CGFloat {
+    let height =  reactor.currentState.title.height(
+      fits: width - Metric.cellPadding * 2,
+      font: Font.titleLabel,
+      maximumNumberOfLines: Constant.titleLabelNumberOfLines
+    )
+    return height + Metric.cellPadding * 2
   }
 
   // MARK: - Layout

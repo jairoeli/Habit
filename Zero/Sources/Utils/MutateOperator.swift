@@ -26,6 +26,10 @@ extension Dao where Self: Any {
     block(&copy)
     return copy
   }
+
+  func `do`(_ block: (Self) -> Void) {
+    block(self)
+  }
 }
 
 extension IntegerLiteralType {
