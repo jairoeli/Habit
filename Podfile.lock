@@ -1,5 +1,6 @@
 PODS:
   - ManualLayout (1.3.0)
+  - Presentr (1.2.3)
   - ReactorKit (0.4.2):
     - RxSwift (>= 3.0.0)
   - ReusableKit (1.1.0)
@@ -8,9 +9,6 @@ PODS:
   - RxDataSources (1.0.3):
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
-  - RxKeyboard (0.5.0):
-    - RxCocoa (>= 3.4)
-    - RxSwift (>= 3.4)
   - RxOptional (3.1.3):
     - RxCocoa
     - RxSwift
@@ -23,11 +21,11 @@ PODS:
 
 DEPENDENCIES:
   - ManualLayout
+  - Presentr
   - ReactorKit
   - ReusableKit
   - RxCocoa
   - RxDataSources
-  - RxKeyboard
   - RxOptional
   - RxReusable
   - RxSwift
@@ -36,17 +34,17 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   ManualLayout: 68ac8cfa6b5f656f7a9fadec3730208b95986880
+  Presentr: a21c7bbb3532c8ff60320e235c0a4869e72f8885
   ReactorKit: 2e0e2fe66b9e7033cdf4296a3fda17f66b05c51f
   ReusableKit: 89e743a120bab0d95848bff27e481833c2768905
   RxCocoa: a8a5f1d061d0043e28f56976829f31ce63e8eb09
   RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
-  RxKeyboard: a0a681f3efa0c265e42ced07537f7a464e867e74
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxReusable: c18e8e3b5f12a3292b76cc552dd946500f8d2c32
   RxSwift: 656f8fbeca5bc372121a72d9ebdd3cd3bc0ffade
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   URLNavigator: 3ff788c985a0aae654e7de4959c4b0ea8a45f022
 
-PODFILE CHECKSUM: 8c8c111362e6431a47149762656e07cdca43829f
+PODFILE CHECKSUM: e56dd1bbffcbb92e0afdb12275b29fb560999602
 
 COCOAPODS: 1.2.1
