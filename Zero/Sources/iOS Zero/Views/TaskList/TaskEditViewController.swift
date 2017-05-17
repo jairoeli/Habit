@@ -30,14 +30,14 @@ final class TaskEditViewController: BaseViewController, View {
   }
   fileprivate let messageInputBar = MessageInputBar()
 
-  lazy var titleInput = UITextField() <== {
+  fileprivate lazy var titleInput = UITextField() <== {
     $0.autocorrectionType = .no
     $0.font = .bold(size: 18)
     $0.textColor = .charcoal
     $0.placeholder = "Add your goal"
   }
 
-  lazy var doneButtonTap = UIButton(type: .system) <== {
+   fileprivate lazy var doneButtonTap = UIButton(type: .system) <== {
     $0.setTitle("Done", for: .normal)
     $0.setTitleColor(.charcoal, for: .normal)
     $0.titleLabel?.font = .bold(size: 18)

@@ -28,6 +28,7 @@ final class TaskListViewReactor: Reactor {
   }
 
   struct State {
+    var isEditing: Bool
     var sections: [TaskListSection]
   }
 
@@ -36,7 +37,7 @@ final class TaskListViewReactor: Reactor {
 
   init(provider: ServiceProviderType) {
     self.provider = provider
-    self.initialState = State(sections: [TaskListSection(model: Void(), items: [])])
+    self.initialState = State(isEditing: false, sections: [TaskListSection(model: Void(), items: [])])
   }
 
   // MARK: - Mutate

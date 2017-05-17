@@ -99,6 +99,7 @@ final class TaskListViewController: BaseViewController, View {
       make.width.equalTo(Metric.buttonSize)
       make.height.equalTo(Metric.buttonSize)
     }
+
   }
 
   fileprivate func showPlusButton() {
@@ -120,10 +121,16 @@ final class TaskListViewController: BaseViewController, View {
       cell.reactor = reactor
       return cell
     }
+    self.dataSource.canEditRowAtIndexPath = { _ in true }
 
     // ACTION
     self.rx.viewDidLoad
       .map { Reactor.Action.refresh }
+      .bind(to: reactor.action)
+      .disposed(by: self.disposeBag)
+
+    self.tableView.rx.itemDeleted
+      .map(Reactor.Action.deleteTask)
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
@@ -132,7 +139,6 @@ final class TaskListViewController: BaseViewController, View {
       .subscribe(onNext: { [weak self] reactor in
         guard let `self` = self else { return }
         let viewController = TaskEditViewController(reactor: reactor)
-//        self.present(viewController, animated: true, completion: nil)
         self.customPresentViewController(self.presenter, viewController: viewController, animated: true, completion: nil)
       })
       .disposed(by: self.disposeBag)
