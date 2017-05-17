@@ -35,10 +35,15 @@ final class TaskCell: BaseTableViewCell, View {
     $0.numberOfLines = Constant.titleLabelNumberOfLines
   }
 
+  override class var layerClass: AnyClass {
+    return BorderedLayer.self
+  }
+
   // MARK: - Initializing
 
   override func initialize() {
     self.contentView.addSubview(titleLabel)
+    self.borderedLayer?.borders = .bottom
   }
 
   // MARK: - Binding
