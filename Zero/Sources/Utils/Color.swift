@@ -18,9 +18,28 @@ extension Int {
   }
 }
 
+precedencegroup AlphaPrecedence {
+  associativity: left
+  higherThan: RangeFormationPrecedence
+  lowerThan: AdditionPrecedence
+}
+
+infix operator ~ : AlphaPrecedence
+
+func ~ (color: DynamicColor, alpha: Int) -> DynamicColor {
+  return color ~ CGFloat(alpha)
+}
+func ~ (color: DynamicColor, alpha: Float) -> DynamicColor {
+  return color ~ CGFloat(alpha)
+}
+func ~ (color: DynamicColor, alpha: CGFloat) -> DynamicColor {
+  return color.withAlphaComponent(alpha)
+}
+
 extension UIColor {
   class var slate: UIColor { return 0xD5D5D5.color }
   class var charcoal: UIColor { return 0x333333.color }
+  class var platinumBorder: UIColor { return 0xE5E5E5.color }
 }
 
 extension UIFont {
