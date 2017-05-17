@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import ReusableKit
+import Presentr
 
 final class TaskListViewController: BaseViewController, View {
 
@@ -41,6 +42,22 @@ final class TaskListViewController: BaseViewController, View {
     $0.separatorStyle = .none
     $0.register(Reusable.taskCell)
   }
+
+  fileprivate lazy var presenter: Presentr = {
+    let width = ModalSize.full
+    let height = ModalSize.custom(size: 65)
+    let originY = self.tableView.frame.height - 65
+    let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: originY))
+    let customType = PresentationType.custom(width: width, height: height, center: center)
+
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = TransitionType.coverHorizontalFromRight
+    customPresenter.dismissOnSwipe = true
+    customPresenter.transitionType = nil
+    customPresenter.dismissTransitionType = nil
+    customPresenter.keyboardTranslationType = .moveUp
+    return customPresenter
+  }()
 
   // MARK: - Initializing
 
@@ -115,7 +132,8 @@ final class TaskListViewController: BaseViewController, View {
       .subscribe(onNext: { [weak self] reactor in
         guard let `self` = self else { return }
         let viewController = TaskEditViewController(reactor: reactor)
-        self.present(viewController, animated: true, completion: nil)
+//        self.present(viewController, animated: true, completion: nil)
+        self.customPresentViewController(self.presenter, viewController: viewController, animated: true, completion: nil)
       })
       .disposed(by: self.disposeBag)
 

@@ -10,16 +10,11 @@ import UIKit
 import ReactorKit
 import RxSwift
 import RxCocoa
-import RxKeyboard
-import ReusableKit
+import Presentr
 
 final class TaskEditViewController: BaseViewController, View {
 
   // MARK: - Constants
-
-  fileprivate struct Reusable {
-    static let habitItemCell = ReusableCell<HabitItemCell>()
-  }
 
   fileprivate struct Metric {
     static let padding = 15.f
@@ -32,27 +27,14 @@ final class TaskEditViewController: BaseViewController, View {
     $0.backgroundColor = .clear
     $0.alwaysBounceVertical = true
     $0.keyboardDismissMode = .interactive
-    $0.register(Reusable.habitItemCell)
-    $0.rx.setDataSource(self).disposed(by: self.disposeBag)
-    $0.rx.setDelegate(self).disposed(by: self.disposeBag)
-    ($0.collectionViewLayout as? UICollectionViewFlowLayout)?.do {
-      $0.minimumLineSpacing = 0
-    }
   }
   fileprivate let messageInputBar = MessageInputBar()
-
-  fileprivate var messages: [HabitCellReactor] = [
-    HabitCellReactor(text: "Test"),
-    HabitCellReactor(text: "Do Yoga"),
-    HabitCellReactor(text: "Push ups"),
-    HabitCellReactor(text: "Walk 20 mintues")
-  ]
 
   lazy var titleInput = UITextField() <== {
     $0.autocorrectionType = .no
     $0.font = .bold(size: 18)
     $0.textColor = .charcoal
-    $0.placeholder = "Write your own"
+    $0.placeholder = "Add your goal"
   }
 
   lazy var doneButtonTap = UIButton(type: .system) <== {
@@ -87,6 +69,11 @@ final class TaskEditViewController: BaseViewController, View {
     self.view.addSubview(self.doneButtonTap)
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    self.titleInput.becomeFirstResponder()
+  }
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     self.view.endEditing(true)
@@ -118,6 +105,7 @@ final class TaskEditViewController: BaseViewController, View {
   // MARK: - Binding
 
   func bind(reactor: TaskEditViewReactor) {
+
     // ACTION
     self.titleInput.rx.text
       .filterNil()
@@ -149,58 +137,27 @@ final class TaskEditViewController: BaseViewController, View {
       })
       .disposed(by: self.disposeBag)
 
-    keyboardVisibleHeight()
-  }
-
-  // MARK: - Keyboard
-
-  fileprivate func keyboardVisibleHeight() {
-    // Keyboard
-    RxKeyboard.instance.visibleHeight
-      .drive(onNext: { [weak self] keyboardVisibleHeight in
-        guard let `self` = self, self.didSetupConstraints else { return }
-        self.messageInputBar.snp.updateConstraints { make in
-          make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-keyboardVisibleHeight)
-        }
-        self.view.setNeedsLayout()
-        UIView.animate(withDuration: 0) {
-          self.collectionView.contentInset.bottom = keyboardVisibleHeight + self.messageInputBar.height
-          self.collectionView.scrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom
-          self.view.layoutIfNeeded()
-        }
-      })
-      .disposed(by: self.disposeBag)
-
-//    RxKeyboard.instance.willShowVisibleHeight
-//      .drive(onNext: { [weak self] keyboardVisibleHeight in
-//        self?.collectionView.contentOffset.y += keyboardVisibleHeight
-//      })
-//      .disposed(by: self.disposeBag)
   }
 
 }
 
-// MARK: - UICollectionViewDataSource
-extension TaskEditViewController: UICollectionViewDataSource {
+// MARK: - Presentr Delegate
+extension TaskEditViewController: PresentrDelegate {
 
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return self.messages.count
-  }
-
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeue(Reusable.habitItemCell, for: indexPath)
-    cell.bind(reactor: self.messages[indexPath.item])
-    return cell
+  func presentrShouldDismiss(keyboardShowing: Bool) -> Bool {
+    return keyboardShowing
   }
 
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-extension TaskEditViewController: UICollectionViewDelegateFlowLayout {
+// MARK: - UITextField Delegate
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let message = self.messages[indexPath.item]
-    return HabitItemCell.size(width: collectionView.width, reactor: message)
+extension TaskEditViewController: UITextFieldDelegate {
+
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    textField.isEnabled = false
+    return true
   }
 
 }
