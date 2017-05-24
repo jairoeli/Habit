@@ -13,7 +13,7 @@ import RxSwift
 
 typealias TaskListSection = SectionModel<Void, TaskCellReactor>
 
-final class TaskListViewReactor: Reactor {
+final class TaskListViewReactor: BaseReactor {
 
   enum Action {
     case refresh

@@ -35,7 +35,7 @@ enum TaskEditViewCancelAlertAction: AlertActionType {
 
 }
 
-final class TaskEditViewReactor: Reactor {
+final class TaskEditViewReactor: BaseReactor {
 
   enum Action {
     case updateTaskTitle(String)
