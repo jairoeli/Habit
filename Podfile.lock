@@ -1,7 +1,7 @@
 PODS:
   - ManualLayout (1.3.0)
   - Presentr (1.2.3)
-  - ReactorKit (0.4.2):
+  - ReactorKit (0.4.3):
     - RxSwift (>= 3.0.0)
   - ReusableKit (1.1.0)
   - RxCocoa (3.4.1):
@@ -35,7 +35,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ManualLayout: 68ac8cfa6b5f656f7a9fadec3730208b95986880
   Presentr: a21c7bbb3532c8ff60320e235c0a4869e72f8885
-  ReactorKit: 2e0e2fe66b9e7033cdf4296a3fda17f66b05c51f
+  ReactorKit: d14097db56d7f473fb0544f671d1bfbecbaec1aa
   ReusableKit: 89e743a120bab0d95848bff27e481833c2768905
   RxCocoa: a8a5f1d061d0043e28f56976829f31ce63e8eb09
   RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
