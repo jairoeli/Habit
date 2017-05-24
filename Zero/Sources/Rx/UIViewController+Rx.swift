@@ -11,30 +11,53 @@ import RxCocoa
 import RxSwift
 
 extension Reactive where Base: UIViewController {
-
-  var viewDidLoad: Observable<Void> {
-    return self.sentMessage(#selector(Base.viewDidLoad)).map { _ in Void() }
+  var viewDidLoad: ControlEvent<Void> {
+    let source = self.sentMessage(#selector(Base.viewDidLoad)).map { _ in }
+    return ControlEvent(events: source)
   }
 
-  var viewWillAppear: Observable<Bool> {
-    return self.sentMessage(#selector(Base.viewWillAppear)).map { $0.first as? Bool ?? false }
-  }
-  var viewDidAppear: Observable<Bool> {
-    return self.sentMessage(#selector(Base.viewDidAppear)).map { $0.first as? Bool ?? false }
+  var viewWillAppear: ControlEvent<Bool> {
+    let source = self.sentMessage(#selector(Base.viewWillAppear)).map { $0.first as? Bool ?? false }
+    return ControlEvent(events: source)
   }
 
-  var viewWillDisappear: Observable<Bool> {
-    return self.sentMessage(#selector(Base.viewWillDisappear)).map { $0.first as? Bool ?? false }
-  }
-  var viewDidDisappear: Observable<Bool> {
-    return self.sentMessage(#selector(Base.viewDidDisappear)).map { $0.first as? Bool ?? false }
+  var viewDidAppear: ControlEvent<Bool> {
+    let source = self.sentMessage(#selector(Base.viewDidAppear)).map { $0.first as? Bool ?? false }
+    return ControlEvent(events: source)
   }
 
-  var viewWillLayoutSubviews: Observable<Void> {
-    return self.sentMessage(#selector(Base.viewWillLayoutSubviews)).map { _ in Void() }
-  }
-  var viewDidLayoutSubviews: Observable<Void> {
-    return self.sentMessage(#selector(Base.viewDidLayoutSubviews)).map { _ in Void() }
+  var viewWillDisappear: ControlEvent<Bool> {
+    let source = self.sentMessage(#selector(Base.viewWillDisappear)).map { $0.first as? Bool ?? false }
+    return ControlEvent(events: source)
   }
 
+  var viewDidDisappear: ControlEvent<Bool> {
+    let source = self.sentMessage(#selector(Base.viewDidDisappear)).map { $0.first as? Bool ?? false }
+    return ControlEvent(events: source)
+  }
+
+  var viewWillLayoutSubviews: ControlEvent<Void> {
+    let source = self.sentMessage(#selector(Base.viewWillLayoutSubviews)).map { _ in }
+    return ControlEvent(events: source)
+  }
+
+  var viewDidLayoutSubviews: ControlEvent<Void> {
+    let source = self.sentMessage(#selector(Base.viewDidLayoutSubviews)).map { _ in }
+    return ControlEvent(events: source)
+  }
+
+  var willMoveToParentViewController: ControlEvent<UIViewController?> {
+    let source = self.sentMessage(#selector(Base.willMove)).map { $0.first as? UIViewController }
+    return ControlEvent(events: source)
+  }
+
+  var didMoveToParentViewController: ControlEvent<UIViewController?> {
+    let source = self.sentMessage(#selector(Base.didMove)).map { $0.first as? UIViewController }
+    return ControlEvent(events: source)
+  }
+
+  var didReceiveMemoryWarning: ControlEvent<Void> {
+    let source = self.sentMessage(#selector(Base.didReceiveMemoryWarning)).map { _ in }
+    return ControlEvent(events: source)
+  }
 }
