@@ -14,6 +14,7 @@
 		9C3E2D791EC6182700EE5276 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D781EC6182700EE5276 /* AlertService.swift */; };
 		9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */; };
 		9C3E2D801EC623F300EE5276 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */; };
+		9C4835B51ED7926500AE67D7 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */; };
 		9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCC9A41EC399C100F6DD96 /* Animation.swift */; };
 		9CDF098E1EC21EAB00A2A25C /* TaskListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */; };
 		9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */; };
@@ -49,6 +50,7 @@
 		9C3E2D781EC6182700EE5276 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = Sources/Services/AlertService.swift; sourceTree = "<group>"; };
 		9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskEditViewReactor.swift"; sourceTree = "<group>"; };
 		9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskEditViewController.swift"; sourceTree = "<group>"; };
+		9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionHeaderView.swift; path = "Sources/iOS Zero/Views/TaskList/SectionHeaderView.swift"; sourceTree = "<group>"; };
 		9CDCC9A41EC399C100F6DD96 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = Sources/Utils/Animation.swift; sourceTree = "<group>"; };
 		9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskListViewReactor.swift"; sourceTree = "<group>"; };
 		9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskListViewController.swift"; sourceTree = "<group>"; };
@@ -149,8 +151,8 @@
 			children = (
 				9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */,
 				9CEA33BA1EC0C47100816DAA /* Models */,
-				9CEA33B71EC0C24900816DAA /* iOS Zero */,
 				9CEA33B21EC0C19900816DAA /* Services */,
+				9CEA33B71EC0C24900816DAA /* iOS Zero */,
 				9CEA33A91EC0C0A500816DAA /* Utils */,
 				9CEA33A61EC0C06300816DAA /* Rx */,
 			);
@@ -227,6 +229,7 @@
 				9CEA33CE1EC0D81800816DAA /* TaskCell.swift */,
 				9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */,
 				9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */,
+				9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */,
 				9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */,
 			);
 			name = Task;
@@ -404,6 +407,7 @@
 				9CEA33C01EC0C89500816DAA /* TaskService.swift in Sources */,
 				9C2014081ECCB65100BB9AB9 /* BorderedLayer.swift in Sources */,
 				9CEA33C91EC0D70A00816DAA /* BaseViewController.swift in Sources */,
+				9C4835B51ED7926500AE67D7 /* SectionHeaderView.swift in Sources */,
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
 				9CEA33BC1EC0C48900816DAA /* ModelType.swift in Sources */,
 				9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */,
