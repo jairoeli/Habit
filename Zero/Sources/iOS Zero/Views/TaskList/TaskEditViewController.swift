@@ -113,6 +113,11 @@ final class TaskEditViewController: BaseViewController, View {
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
+    self.titleInput.rx.text
+      .map { text in text?.isEmpty == false }
+      .bind(to: self.doneButtonTap.rx.isEnabled)
+      .disposed(by: self.disposeBag)
+
     self.doneButtonTap.rx.tap
       .map { Reactor.Action.submit }
       .bind(to: reactor.action)
@@ -133,7 +138,8 @@ final class TaskEditViewController: BaseViewController, View {
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
-        self?.dismiss(animated: true, completion: nil)
+        guard let `self` = self else { return }
+        self.dismiss(animated: true, completion: nil)
       })
       .disposed(by: self.disposeBag)
 
