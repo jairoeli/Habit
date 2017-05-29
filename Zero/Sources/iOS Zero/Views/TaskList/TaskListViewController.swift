@@ -25,6 +25,7 @@ final class TaskListViewController: BaseViewController, View {
   fileprivate struct Metric {
     static let buttonSize = 64.f
     static let buttonBottom = 100.f
+    static let buttonRight = 20.f
     static let sectionInsetLeftRight = 20.f
   }
 
@@ -46,7 +47,7 @@ final class TaskListViewController: BaseViewController, View {
   fileprivate lazy var presenter: Presentr = {
     let width = ModalSize.full
     let height = ModalSize.custom(size: 65)
-    let originY = self.tableView.frame.height - 65
+    let originY = self.tableView.frame.height + 45
     let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: originY))
     let customType = PresentationType.custom(width: width, height: height, center: center)
 
@@ -58,6 +59,8 @@ final class TaskListViewController: BaseViewController, View {
     customPresenter.keyboardTranslationType = .moveUp
     return customPresenter
   }()
+
+  fileprivate let headerView = SectionHeaderView()
 
   // MARK: - Initializing
 
@@ -74,6 +77,7 @@ final class TaskListViewController: BaseViewController, View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.view.addSubview(self.headerView)
     self.view.addSubview(self.tableView)
     self.view.addSubview(self.addButtonItem)
   }
@@ -89,17 +93,26 @@ final class TaskListViewController: BaseViewController, View {
   }
 
   override func setupConstraints() {
+    self.headerView.snp.makeConstraints { make in
+      make.top.equalToSuperview()
+      make.left.equalToSuperview()
+      make.right.equalToSuperview()
+    }
+
     self.tableView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
+      make.top.equalTo(self.headerView.snp.bottom)
+      make.left.equalToSuperview()
+      make.right.equalToSuperview()
+      make.bottom.equalToSuperview()
+
     }
 
     self.addButtonItem.snp.makeConstraints { make in
       make.bottom.equalTo(Metric.buttonBottom)
-      make.centerX.equalToSuperview()
+      make.right.equalToSuperview().offset(-Metric.buttonRight)
       make.width.equalTo(Metric.buttonSize)
       make.height.equalTo(Metric.buttonSize)
     }
-
   }
 
   fileprivate func showPlusButton() {
