@@ -18,7 +18,9 @@ final class TaskEditViewController: BaseViewController, View {
 
   fileprivate struct Metric {
     static let padding = 15.f
-    static let buttonWidth = 75.f
+    static let buttonWidth = 65.f
+    static let buttonHeight = 35.f
+    static let buttonRight = 4.f
   }
 
   // MARK: - UI
@@ -39,7 +41,7 @@ final class TaskEditViewController: BaseViewController, View {
 
    fileprivate lazy var doneButtonTap = UIButton(type: .system) <== {
     $0.setTitle("Done", for: .normal)
-    $0.setTitleColor(.charcoal, for: .normal)
+    $0.setTitleColor(.charcoal ~ 50%, for: .normal)
     $0.titleLabel?.font = .bold(size: 18)
   }
 
@@ -90,14 +92,14 @@ final class TaskEditViewController: BaseViewController, View {
     self.titleInput.snp.makeConstraints { make in
       make.centerY.equalTo(self.messageInputBar.snp.centerY).offset(-0.5)
       make.left.equalTo(Metric.padding)
-      make.right.equalTo(self.doneButtonTap.snp.left).offset(-4)
+      make.right.equalTo(self.doneButtonTap.snp.left).offset(-Metric.buttonRight)
     }
 
     self.doneButtonTap.snp.makeConstraints { make in
       make.centerY.equalTo(self.messageInputBar.snp.centerY)
       make.right.equalTo(-Metric.padding)
-      make.width.equalTo(65)
-      make.height.equalTo(35)
+      make.width.equalTo(Metric.buttonWidth)
+      make.height.equalTo(Metric.buttonHeight)
     }
 
   }
@@ -114,8 +116,18 @@ final class TaskEditViewController: BaseViewController, View {
       .disposed(by: self.disposeBag)
 
     self.titleInput.rx.text
-      .map { text in text?.isEmpty == false }
-      .bind(to: self.doneButtonTap.rx.isEnabled)
+      .subscribe(onNext: { [weak self] _ in
+        guard let `self` = self else { return }
+        let isFormValid = self.titleInput.text?.characters.count ?? 0 > 0
+
+        if isFormValid {
+          self.doneButtonTap.isEnabled = true
+          self.doneButtonTap.titleLabel?.textColor = .charcoal
+        } else {
+          self.doneButtonTap.isEnabled = false
+          self.doneButtonTap.titleLabel?.textColor = .charcoal ~ 50%
+        }
+      })
       .disposed(by: self.disposeBag)
 
     self.doneButtonTap.rx.tap
