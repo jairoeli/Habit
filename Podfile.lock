@@ -17,6 +17,7 @@ PODS:
     - RxSwift (>= 3.0)
   - RxSwift (3.4.1)
   - SnapKit (3.2.0)
+  - SwiftDate (4.1.2)
   - URLNavigator (1.2.0)
 
 DEPENDENCIES:
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - RxReusable
   - RxSwift
   - SnapKit
+  - SwiftDate
   - URLNavigator
 
 SPEC CHECKSUMS:
@@ -43,8 +45,9 @@ SPEC CHECKSUMS:
   RxReusable: c18e8e3b5f12a3292b76cc552dd946500f8d2c32
   RxSwift: 656f8fbeca5bc372121a72d9ebdd3cd3bc0ffade
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  SwiftDate: 2dfdebd4f67ae71c9c3e2413ee3c56947f302858
   URLNavigator: 3ff788c985a0aae654e7de4959c4b0ea8a45f022
 
-PODFILE CHECKSUM: e56dd1bbffcbb92e0afdb12275b29fb560999602
+PODFILE CHECKSUM: bafba097edb76e6156fbd47ba64f5342d6791a57
 
 COCOAPODS: 1.2.1
