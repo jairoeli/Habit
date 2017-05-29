@@ -36,6 +36,18 @@ func ~ (color: DynamicColor, alpha: CGFloat) -> DynamicColor {
   return color.withAlphaComponent(alpha)
 }
 
+postfix operator %
+
+postfix func % (percent: Int) -> CGFloat {
+  return CGFloat(percent)%
+}
+postfix func % (percent: Float) -> CGFloat {
+  return CGFloat(percent)%
+}
+postfix func % (percent: CGFloat) -> CGFloat {
+  return percent / 100
+}
+
 extension UIColor {
   class var slate: UIColor { return 0xD5D5D5.color }
   class var charcoal: UIColor { return 0x333333.color }
