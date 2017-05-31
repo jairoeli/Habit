@@ -36,7 +36,7 @@ final class TaskEditViewController: BaseViewController, View {
     $0.autocorrectionType = .no
     $0.font = .bold(size: 18)
     $0.textColor = .charcoal
-    $0.placeholder = "Add your goal"
+    $0.placeholder = "Add a new task"
   }
 
    fileprivate lazy var doneButtonTap = UIButton(type: .system) <== {
@@ -71,16 +71,6 @@ final class TaskEditViewController: BaseViewController, View {
     self.view.addSubview(self.doneButtonTap)
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    self.titleInput.becomeFirstResponder()
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    self.view.endEditing(true)
-  }
-
   override func setupConstraints() {
     self.collectionView.snp.makeConstraints { make in make.edges.equalToSuperview() }
 
@@ -109,6 +99,8 @@ final class TaskEditViewController: BaseViewController, View {
   func bind(reactor: TaskEditViewReactor) {
 
     // ACTION
+    self.rxViewController()
+
     self.titleInput.rx.text
       .filterNil()
       .map(Reactor.Action.updateTaskTitle)
@@ -155,6 +147,16 @@ final class TaskEditViewController: BaseViewController, View {
       })
       .disposed(by: self.disposeBag)
 
+  }
+
+  fileprivate func rxViewController() {
+    self.rx.viewDidAppear
+      .subscribe(onNext: { [weak self] _ in self?.titleInput.becomeFirstResponder() })
+      .disposed(by: self.disposeBag)
+
+    self.rx.viewWillDisappear
+      .subscribe(onNext: { [weak self] _ in self?.view.endEditing(true) })
+      .disposed(by: self.disposeBag)
   }
 
 }

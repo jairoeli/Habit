@@ -15,6 +15,7 @@
 		9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */; };
 		9C3E2D801EC623F300EE5276 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */; };
 		9C4835B51ED7926500AE67D7 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */; };
+		9C62E98E1EDF31E10055AF10 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62E98D1EDF31E10055AF10 /* EmptyView.swift */; };
 		9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCC9A41EC399C100F6DD96 /* Animation.swift */; };
 		9CDF098E1EC21EAB00A2A25C /* TaskListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */; };
 		9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */; };
@@ -51,6 +52,7 @@
 		9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskEditViewReactor.swift"; sourceTree = "<group>"; };
 		9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskEditViewController.swift"; sourceTree = "<group>"; };
 		9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionHeaderView.swift; path = "Sources/iOS Zero/Views/TaskList/SectionHeaderView.swift"; sourceTree = "<group>"; };
+		9C62E98D1EDF31E10055AF10 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyView.swift; path = "Sources/iOS Zero/Views/EmptyView.swift"; sourceTree = "<group>"; };
 		9CDCC9A41EC399C100F6DD96 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = Sources/Utils/Animation.swift; sourceTree = "<group>"; };
 		9CDF098D1EC21EAB00A2A25C /* TaskListViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskListViewReactor.swift"; sourceTree = "<group>"; };
 		9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskListViewController.swift"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				9CF0F6F71ECBB63900E40437 /* BaseTableViewCell.swift */,
+				9C62E98D1EDF31E10055AF10 /* EmptyView.swift */,
 				9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */,
 				9CEA33CA1EC0D72E00816DAA /* Task */,
 			);
@@ -408,6 +411,7 @@
 				9C2014081ECCB65100BB9AB9 /* BorderedLayer.swift in Sources */,
 				9CEA33C91EC0D70A00816DAA /* BaseViewController.swift in Sources */,
 				9C4835B51ED7926500AE67D7 /* SectionHeaderView.swift in Sources */,
+				9C62E98E1EDF31E10055AF10 /* EmptyView.swift in Sources */,
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
 				9CEA33BC1EC0C48900816DAA /* ModelType.swift in Sources */,
 				9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */,

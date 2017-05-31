@@ -62,6 +62,13 @@ final class TaskListViewController: BaseViewController, View {
 
   fileprivate let headerView = SectionHeaderView()
 
+  private lazy var emptyView: EmptyView = {
+    let view = EmptyView(frame: .zero)
+    view.backgroundColor = UIColor.white
+    view.textLabel.text = "Looks like you don't have any drafts."
+    return view
+  }()
+
   // MARK: - Initializing
 
   init(reactor: TaskListViewReactor) {
@@ -79,17 +86,8 @@ final class TaskListViewController: BaseViewController, View {
     super.viewDidLoad()
     self.view.addSubview(self.headerView)
     self.view.addSubview(self.tableView)
+    setupEmptyView()
     self.view.addSubview(self.addButtonItem)
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    self.navigationController?.setNavigationBarHidden(true, animated: animated)
-  }
-
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    self.showPlusButton()
   }
 
   override func setupConstraints() {
@@ -104,7 +102,6 @@ final class TaskListViewController: BaseViewController, View {
       make.left.equalToSuperview()
       make.right.equalToSuperview()
       make.bottom.equalToSuperview()
-
     }
 
     self.addButtonItem.snp.makeConstraints { make in
@@ -120,6 +117,10 @@ final class TaskListViewController: BaseViewController, View {
       self.addButtonItem.snp.updateConstraints { make in make.bottom.equalToSuperview().offset(-20) }
       self.addButtonItem.superview?.layoutIfNeeded()
     }
+  }
+
+  fileprivate func setupEmptyView() {
+    emptyView.addTo(view)
   }
 
   // MARK: - Binding
@@ -142,6 +143,8 @@ final class TaskListViewController: BaseViewController, View {
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
+    self.rxViewController()
+
     self.tableView.rx.itemDeleted
       .map(Reactor.Action.deleteTask)
       .bind(to: reactor.action)
@@ -156,14 +159,41 @@ final class TaskListViewController: BaseViewController, View {
       })
       .disposed(by: self.disposeBag)
 
+    self.tableView.rx
+      .modelSelected(type(of: self.dataSource).Section.Item.self)
+      .map(reactor.reactorForEditingTask)
+      .subscribe(onNext: { [weak self] reactor in
+        guard let `self` = self else { return }
+        let viewController = TaskEditViewController(reactor: reactor)
+        self.customPresentViewController(self.presenter, viewController: viewController, animated: true, completion: nil)
+      })
+      .disposed(by: self.disposeBag)
+
     // STATE
     reactor.state.map { $0.sections }
       .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
+      .disposed(by: self.disposeBag)
+
+    reactor.state.map { !$0.sections.isEmpty }
+      .bind(to: self.emptyView.rx.isHidden)
+      .disposed(by: self.disposeBag)
+  }
+
+  // MARK: - RxSwift wrapper
+
+  fileprivate func rxViewController() {
+    self.rx.viewWillAppear
+      .subscribe(onNext: { [weak self] animated in self?.navigationController?.setNavigationBarHidden(true, animated: animated) })
+      .disposed(by: self.disposeBag)
+
+    self.rx.viewDidAppear
+      .subscribe(onNext: { [weak self] _ in self?.showPlusButton() })
       .disposed(by: self.disposeBag)
   }
 
 }
 
+// MARK: - Table View Delegate
 extension TaskListViewController: UITableViewDelegate {
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
