@@ -28,7 +28,7 @@ final class TaskListViewReactor: BaseReactor {
   }
 
   struct State {
-    var isEditing: Bool
+//    var isEmpty: Bool
     var sections: [TaskListSection]
   }
 
@@ -37,7 +37,7 @@ final class TaskListViewReactor: BaseReactor {
 
   init(provider: ServiceProviderType) {
     self.provider = provider
-    self.initialState = State(isEditing: false, sections: [TaskListSection(model: Void(), items: [])])
+    self.initialState = State(sections: [TaskListSection(model: Void(), items: [])])
   }
 
   // MARK: - Mutate
@@ -56,6 +56,7 @@ final class TaskListViewReactor: BaseReactor {
       let task = self.currentState.sections[indexPath].currentState
       return self.provider.taskService.delete(taskID: task.id).flatMap { _ in Observable.empty() }
     }
+
   }
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
@@ -109,6 +110,7 @@ final class TaskListViewReactor: BaseReactor {
     switch mutation {
     case let .setSections(sections):
       state.sections = sections
+//      state.isEmpty = !sections.isEmpty
       return state
 
     case let .insertSectionItem(indexPath, sectionItem):
