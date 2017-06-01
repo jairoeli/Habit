@@ -11,6 +11,7 @@ import SnapKit
 import ManualLayout
 import RxOptional
 import RxReusable
+import SwiftyImage
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
