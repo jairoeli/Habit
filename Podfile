@@ -22,5 +22,6 @@ target 'Zero' do
   pod 'URLNavigator'
   pod 'Presentr'
   pod 'SwiftDate'
+  pod 'SwiftyImage'
 
 end
