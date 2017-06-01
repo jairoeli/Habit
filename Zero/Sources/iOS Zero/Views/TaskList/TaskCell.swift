@@ -24,10 +24,28 @@ final class TaskCell: BaseTableViewCell, View {
   }
 
   struct Font {
-    static let titleLabel = UIFont.bold(size: 24)
+    static let titleLabel = UIFont.black(size: 24)
   }
 
   // MARK: - UI
+
+  fileprivate let cardView = UIImageView() <== {
+    $0.image = UIImage.resizable()
+      .border(color: .platinumBorder)
+      .border(width: 2 / UIScreen.main.scale)
+      .corner(radius: 2)
+      .color(.white)
+      .image
+  }
+
+  fileprivate let tagView = UIImageView() <== {
+    $0.image = UIImage.resizable()
+      .color(.red)
+      .corner(topLeft: 2)
+      .corner(bottomLeft: 2)
+      .image
+    $0.layer.masksToBounds = true
+  }
 
   let titleLabel = UILabel() <== {
     $0.font = Font.titleLabel
@@ -35,15 +53,12 @@ final class TaskCell: BaseTableViewCell, View {
     $0.numberOfLines = Constant.titleLabelNumberOfLines
   }
 
-  override class var layerClass: AnyClass {
-    return BorderedLayer.self
-  }
-
   // MARK: - Initializing
 
   override func initialize() {
-    self.contentView.addSubview(titleLabel)
-    self.borderedLayer?.borders = .bottom
+    self.contentView.addSubview(self.cardView)
+    self.cardView.addSubview(self.titleLabel)
+    self.cardView.addSubview(self.tagView)
   }
 
   // MARK: - Binding
@@ -66,10 +81,17 @@ final class TaskCell: BaseTableViewCell, View {
   // MARK: - Layout
   override func layoutSubviews() {
     super.layoutSubviews()
+    self.cardView.frame = self.contentView.bounds
+    self.cardView.left = Metric.cellPadding
+    self.cardView.width = self.contentView.width - Metric.cellPadding * 2
+
+    self.tagView.left = 0
+    self.tagView.width = 4
+    self.tagView.height = self.cardView.height
 
     self.titleLabel.top = Metric.cellPadding
     self.titleLabel.left = Metric.cellPadding
-    self.titleLabel.width = self.contentView.width - Metric.cellPadding * 2
+    self.titleLabel.width = self.cardView.width - Metric.cellPadding * 2
     self.titleLabel.sizeToFit()
   }
 

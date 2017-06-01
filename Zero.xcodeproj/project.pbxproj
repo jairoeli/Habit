@@ -26,7 +26,6 @@
 		9CEA33AB1EC0C0C100816DAA /* MutateOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33AA1EC0C0C100816DAA /* MutateOperator.swift */; };
 		9CEA33AD1EC0C0ED00816DAA /* Snap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33AC1EC0C0ED00816DAA /* Snap.swift */; };
 		9CEA33AF1EC0C10F00816DAA /* String+BoundingRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33AE1EC0C10F00816DAA /* String+BoundingRect.swift */; };
-		9CEA33B11EC0C14200816DAA /* UICollectionView+CellWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33B01EC0C14200816DAA /* UICollectionView+CellWidth.swift */; };
 		9CEA33B41EC0C1AA00816DAA /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33B31EC0C1AA00816DAA /* BaseService.swift */; };
 		9CEA33B61EC0C1C900816DAA /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33B51EC0C1C900816DAA /* ServiceProvider.swift */; };
 		9CEA33B91EC0C29500816DAA /* Array+SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33B81EC0C29500816DAA /* Array+SectionModel.swift */; };
@@ -65,7 +64,6 @@
 		9CEA33AA1EC0C0C100816DAA /* MutateOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MutateOperator.swift; path = Sources/Utils/MutateOperator.swift; sourceTree = "<group>"; };
 		9CEA33AC1EC0C0ED00816DAA /* Snap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Snap.swift; path = Sources/Utils/Snap.swift; sourceTree = "<group>"; };
 		9CEA33AE1EC0C10F00816DAA /* String+BoundingRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+BoundingRect.swift"; path = "Sources/Utils/String+BoundingRect.swift"; sourceTree = "<group>"; };
-		9CEA33B01EC0C14200816DAA /* UICollectionView+CellWidth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UICollectionView+CellWidth.swift"; path = "Sources/Utils/UICollectionView+CellWidth.swift"; sourceTree = "<group>"; };
 		9CEA33B31EC0C1AA00816DAA /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseService.swift; path = Sources/Services/BaseService.swift; sourceTree = "<group>"; };
 		9CEA33B51EC0C1C900816DAA /* ServiceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceProvider.swift; path = Sources/Services/ServiceProvider.swift; sourceTree = "<group>"; };
 		9CEA33B81EC0C29500816DAA /* Array+SectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+SectionModel.swift"; path = "Sources/Utils/Array+SectionModel.swift"; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				9CEA33AC1EC0C0ED00816DAA /* Snap.swift */,
 				9C2014071ECCB65100BB9AB9 /* BorderedLayer.swift */,
 				9CEA33AE1EC0C10F00816DAA /* String+BoundingRect.swift */,
-				9CEA33B01EC0C14200816DAA /* UICollectionView+CellWidth.swift */,
 				9CEA33B81EC0C29500816DAA /* Array+SectionModel.swift */,
 				9CEA33C11EC0CA5500816DAA /* UserDefaultsKey.swift */,
 				9CDCC9A41EC399C100F6DD96 /* Animation.swift */,
@@ -406,7 +403,6 @@
 				9CEA33B61EC0C1C900816DAA /* ServiceProvider.swift in Sources */,
 				9CDF098E1EC21EAB00A2A25C /* TaskListViewReactor.swift in Sources */,
 				9CEA33BE1EC0C6C100816DAA /* Task.swift in Sources */,
-				9CEA33B11EC0C14200816DAA /* UICollectionView+CellWidth.swift in Sources */,
 				9CEA33C01EC0C89500816DAA /* TaskService.swift in Sources */,
 				9C2014081ECCB65100BB9AB9 /* BorderedLayer.swift in Sources */,
 				9CEA33C91EC0D70A00816DAA /* BaseViewController.swift in Sources */,
