@@ -21,30 +21,16 @@ final class SectionHeaderView: UIView {
   // MARK: - UI
 
   let titleLabel = UILabel() <== {
-    $0.font = .black(size: 34)
+    $0.text = TimeOfTheDay.getGreetingFromTheCurrentOfTheDay()
     $0.textColor = .charcoal
-
-    let date = Date()
-    let calendar = Calendar.current
-    let current = calendar.component(.hour, from: date as Date)
-    guard let hourInt = Int(current.description) else { return }
-
-    if hourInt >= 12 && hourInt <= 16 {
-      $0.text = "Good Afternoon!"
-    } else if hourInt >= 0 && hourInt <= 12 {
-      $0.text = "Good Morning!"
-    } else if hourInt >= 16 && hourInt <= 20 {
-      $0.text = "Good Evening!"
-    } else if hourInt >= 20 && hourInt <= 24 {
-      $0.text = "Good Night!"
-    }
+    $0.font = .black(size: 34)
   }
 
   let displayDate = UILabel() <== {
-    let date = DateInRegion()
-    $0.text = date.string(dateStyle: .long, timeStyle: .none)
-    $0.textColor = .charcoal
-    $0.font = .black(size: 20)
+    let date = Date()
+    $0.text =  date.currentDate()
+    $0.textColor = .charcoal ~ 45%
+    $0.font = .medium(size: 16)
   }
 
   // MARK: - Initializing
@@ -71,7 +57,7 @@ final class SectionHeaderView: UIView {
     }
 
     self.displayDate.snp.makeConstraints { make in
-      make.top.equalTo(self.titleLabel.snp.bottom).offset(-2)
+      make.top.equalTo(self.titleLabel.snp.bottom).offset(2)
       make.left.equalTo(Metric.leftPadding)
     }
   }
