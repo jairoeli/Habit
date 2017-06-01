@@ -16,7 +16,7 @@ final class TaskCell: BaseTableViewCell, View {
   // MARK: - Constants
 
   struct Constant {
-    static let titleLabelNumberOfLines = 2
+    static let titleLabelNumberOfLines = 0
   }
 
   struct Metric {
@@ -40,7 +40,7 @@ final class TaskCell: BaseTableViewCell, View {
 
   fileprivate let tagView = UIImageView() <== {
     $0.image = UIImage.resizable()
-      .color(.red)
+      .color(.redGraphite)
       .corner(topLeft: 2)
       .corner(bottomLeft: 2)
       .image

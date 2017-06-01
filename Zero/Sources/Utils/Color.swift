@@ -51,11 +51,6 @@ postfix func % (percent: CGFloat) -> CGFloat {
 extension UIColor {
   class var slate: UIColor { return 0xD5D5D5.color }
   class var charcoal: UIColor { return 0x333333.color }
-  class var platinumBorder: UIColor { return 0xE5E5E5.color }
-}
-
-extension UIFont {
-  static func black(size: CGFloat) -> UIFont {
-    return UIFont.systemFont(ofSize: size, weight: UIFontWeightBlack)
-  }
+  class var platinumBorder: UIColor { return 0xE3E3E3.color }
+  class var redGraphite: UIColor { return 0xDD4C4F.color }
 }
