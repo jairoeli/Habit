@@ -34,7 +34,7 @@ final class TaskEditViewController: BaseViewController, View {
 
   fileprivate lazy var titleInput = UITextField() <== {
     $0.autocorrectionType = .no
-    $0.font = .bold(size: 18)
+    $0.font = .black(size: 18)
     $0.textColor = .charcoal
     $0.placeholder = "Add a new task"
   }
@@ -42,7 +42,7 @@ final class TaskEditViewController: BaseViewController, View {
    fileprivate lazy var doneButtonTap = UIButton(type: .system) <== {
     $0.setTitle("Done", for: .normal)
     $0.setTitleColor(.charcoal ~ 50%, for: .normal)
-    $0.titleLabel?.font = .bold(size: 18)
+    $0.titleLabel?.font = .black(size: 18)
   }
 
   // MARK: - Initializing

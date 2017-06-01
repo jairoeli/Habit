@@ -21,7 +21,7 @@ final class SectionHeaderView: UIView {
   // MARK: - UI
 
   let titleLabel = UILabel() <== {
-    $0.font = .bold(size: 34)
+    $0.font = .black(size: 34)
     $0.textColor = .charcoal
 
     let date = Date()
@@ -44,7 +44,7 @@ final class SectionHeaderView: UIView {
     let date = DateInRegion()
     $0.text = date.string(dateStyle: .long, timeStyle: .none)
     $0.textColor = .charcoal
-    $0.font = .bold(size: 18)
+    $0.font = .black(size: 20)
   }
 
   // MARK: - Initializing

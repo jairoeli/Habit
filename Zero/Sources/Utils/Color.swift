@@ -55,7 +55,7 @@ extension UIColor {
 }
 
 extension UIFont {
-  static func bold(size: CGFloat) -> UIFont {
-    return UIFont(name: "AvenirNext-Bold", size: size)!
+  static func black(size: CGFloat) -> UIFont {
+    return UIFont.systemFont(ofSize: size, weight: UIFontWeightBlack)
   }
 }
