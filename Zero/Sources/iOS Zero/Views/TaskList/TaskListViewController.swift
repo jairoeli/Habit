@@ -39,7 +39,7 @@ final class TaskListViewController: BaseViewController, View {
 
   fileprivate let tableView = UITableView() <== {
     $0.alwaysBounceVertical = true
-    $0.backgroundColor = .white
+    $0.backgroundColor = .snow
     $0.separatorStyle = .none
     $0.register(Reusable.taskCell)
   }
@@ -52,10 +52,9 @@ final class TaskListViewController: BaseViewController, View {
     let customType = PresentationType.custom(width: width, height: height, center: center)
 
     let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = TransitionType.coverHorizontalFromRight
-    customPresenter.dismissOnSwipe = true
     customPresenter.transitionType = nil
     customPresenter.dismissTransitionType = nil
+    customPresenter.dismissOnSwipe = true
     customPresenter.keyboardTranslationType = .moveUp
     return customPresenter
   }()
@@ -64,7 +63,7 @@ final class TaskListViewController: BaseViewController, View {
 
   private lazy var emptyView: EmptyView = {
     let view = EmptyView(frame: .zero)
-    view.backgroundColor = UIColor.white
+    view.backgroundColor = .snow
     view.textLabel.text = "Looks like you don't have any drafts."
     return view
   }()
@@ -86,7 +85,7 @@ final class TaskListViewController: BaseViewController, View {
     super.viewDidLoad()
     self.view.addSubview(self.headerView)
     self.view.addSubview(self.tableView)
-    setupEmptyView()
+    self.setupEmptyView()
     self.view.addSubview(self.addButtonItem)
   }
 
@@ -145,13 +144,8 @@ final class TaskListViewController: BaseViewController, View {
 
     self.rxViewController()
 
-    self.tableView.rx.itemDeleted
-      .map(Reactor.Action.deleteTask)
-      .bind(to: reactor.action)
-      .disposed(by: self.disposeBag)
-
-    self.addButtonItem.rx.tap
-      .map(reactor.reactorForCreatingTask)
+    self.tableView.rx.itemSelected(dataSource: self.dataSource)
+      .map(reactor.reactorForEditingTask)
       .subscribe(onNext: { [weak self] reactor in
         guard let `self` = self else { return }
         let viewController = TaskEditViewController(reactor: reactor)
@@ -159,9 +153,19 @@ final class TaskListViewController: BaseViewController, View {
       })
       .disposed(by: self.disposeBag)
 
-    self.tableView.rx
-      .modelSelected(type(of: self.dataSource).Section.Item.self)
-      .map(reactor.reactorForEditingTask)
+    self.tableView.rx.itemSelected
+      .subscribe(onNext: { [weak tableView] indexPath in
+        tableView?.deselectRow(at: indexPath, animated: false)
+      })
+      .disposed(by: self.disposeBag)
+
+    self.tableView.rx.itemDeleted
+      .map(Reactor.Action.deleteTask)
+      .bind(to: reactor.action)
+      .disposed(by: self.disposeBag)
+
+    self.addButtonItem.rx.tap
+      .map(reactor.reactorForCreatingTask)
       .subscribe(onNext: { [weak self] reactor in
         guard let `self` = self else { return }
         let viewController = TaskEditViewController(reactor: reactor)

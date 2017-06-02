@@ -37,11 +37,12 @@ final class TaskEditViewController: BaseViewController, View {
     $0.font = .black(size: 18)
     $0.textColor = .charcoal
     $0.placeholder = "Add a new task"
+    $0.tintColor = .redGraphite
   }
 
    fileprivate lazy var doneButtonTap = UIButton(type: .system) <== {
     $0.setTitle("Done", for: .normal)
-    $0.setTitleColor(.charcoal ~ 50%, for: .normal)
+    $0.setTitleColor(.redGraphite ~ 50%, for: .normal)
     $0.titleLabel?.font = .black(size: 18)
   }
 
@@ -60,7 +61,7 @@ final class TaskEditViewController: BaseViewController, View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = .white
+    self.view.backgroundColor = .snow
 
     self.collectionView.contentInset.top = self.messageInputBar.intrinsicContentSize.height
     self.collectionView.scrollIndicatorInsets = self.collectionView.contentInset
@@ -107,18 +108,14 @@ final class TaskEditViewController: BaseViewController, View {
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
-    self.titleInput.rx.text
-      .subscribe(onNext: { [weak self] _ in
+    // swiftlint:disable empty_count
+    self.titleInput.rx.text.orEmpty
+      .map { $0.characters.count >= 0 }
+      .shareReplay(1)
+      .subscribe(onNext: { [weak self] isValid in
         guard let `self` = self else { return }
-        let isFormValid = self.titleInput.text?.characters.count ?? 0 > 0
-
-        if isFormValid {
-          self.doneButtonTap.isEnabled = true
-          self.doneButtonTap.titleLabel?.textColor = .charcoal
-        } else {
-          self.doneButtonTap.isEnabled = false
-          self.doneButtonTap.titleLabel?.textColor = .charcoal ~ 50%
-        }
+        self.doneButtonTap.isEnabled = isValid
+        self.doneButtonTap.titleLabel?.textColor = isValid ? .redGraphite : .redGraphite ~ 50%
       })
       .disposed(by: self.disposeBag)
 
@@ -176,7 +173,6 @@ extension TaskEditViewController: UITextFieldDelegate {
 
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
-    textField.isEnabled = false
     return true
   }
 

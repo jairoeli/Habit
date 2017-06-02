@@ -9,7 +9,6 @@
 import UIKit
 import ReactorKit
 import RxSwift
-import SwiftDate
 
 final class SectionHeaderView: UIView {
 
@@ -29,7 +28,7 @@ final class SectionHeaderView: UIView {
   let displayDate = UILabel() <== {
     let date = Date()
     $0.text =  date.currentDate()
-    $0.textColor = .charcoal ~ 45%
+    $0.textColor = .silver //.charcoal ~ 45%
     $0.font = .medium(size: 16)
   }
 
@@ -37,7 +36,7 @@ final class SectionHeaderView: UIView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    self.backgroundColor = .white
+    self.backgroundColor = .snow
 
     self.addSubview(self.titleLabel)
     self.addSubview(self.displayDate)

@@ -34,7 +34,7 @@ final class TaskCell: BaseTableViewCell, View {
       .border(color: .platinumBorder)
       .border(width: 2 / UIScreen.main.scale)
       .corner(radius: 2)
-      .color(.white)
+      .color(.snow)
       .image
   }
 
