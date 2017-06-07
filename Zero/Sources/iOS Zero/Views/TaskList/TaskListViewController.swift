@@ -64,7 +64,7 @@ final class TaskListViewController: BaseViewController, View {
   private lazy var emptyView: EmptyView = {
     let view = EmptyView(frame: .zero)
     view.backgroundColor = .snow
-    view.textLabel.text = "Looks like you don't have any drafts."
+    view.textLabel.text = "Looks like you don't have any tasks."
     return view
   }()
 
@@ -85,6 +85,7 @@ final class TaskListViewController: BaseViewController, View {
     super.viewDidLoad()
     self.view.addSubview(self.headerView)
     self.view.addSubview(self.tableView)
+//    self.view.addSubview(self.confettiView)
     self.setupEmptyView()
     self.view.addSubview(self.addButtonItem)
   }
@@ -144,18 +145,23 @@ final class TaskListViewController: BaseViewController, View {
 
     self.rxViewController()
 
-    self.tableView.rx.itemSelected(dataSource: self.dataSource)
-      .map(reactor.reactorForEditingTask)
-      .subscribe(onNext: { [weak self] reactor in
-        guard let `self` = self else { return }
-        let viewController = TaskEditViewController(reactor: reactor)
-        self.customPresentViewController(self.presenter, viewController: viewController, animated: true, completion: nil)
-      })
+//    self.tableView.rx.itemSelected(dataSource: self.dataSource)
+//      .map(reactor.reactorForEditingTask)
+//      .subscribe(onNext: { [weak self] reactor in
+//        guard let `self` = self else { return }
+//        let viewController = TaskEditViewController(reactor: reactor)
+//        self.customPresentViewController(self.presenter, viewController: viewController, animated: true, completion: nil)
+//      })
+//      .disposed(by: self.disposeBag)
+
+    self.tableView.rx.itemSelected
+      .map { indexPath in .taskDone(indexPath) }
+      .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
     self.tableView.rx.itemSelected
       .subscribe(onNext: { [weak tableView] indexPath in
-        tableView?.deselectRow(at: indexPath, animated: false)
+        tableView?.deselectRow(at: indexPath, animated: true)
       })
       .disposed(by: self.disposeBag)
 
@@ -179,7 +185,9 @@ final class TaskListViewController: BaseViewController, View {
       .disposed(by: self.disposeBag)
 
     reactor.state.map { !$0.sections.isEmpty }
-      .bind(to: self.emptyView.rx.isHidden)
+      .subscribe(onNext: { [weak self] empty in
+        self?.emptyView.isHidden = empty ? true : false
+      })
       .disposed(by: self.disposeBag)
   }
 

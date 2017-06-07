@@ -18,6 +18,7 @@ final class TaskListViewReactor: BaseReactor {
   enum Action {
     case refresh
     case deleteTask(IndexPath)
+    case taskDone(IndexPath)
   }
 
   enum Mutation {
@@ -28,7 +29,7 @@ final class TaskListViewReactor: BaseReactor {
   }
 
   struct State {
-//    var isEmpty: Bool
+    var isEmpty: Bool
     var sections: [TaskListSection]
   }
 
@@ -37,7 +38,7 @@ final class TaskListViewReactor: BaseReactor {
 
   init(provider: ServiceProviderType) {
     self.provider = provider
-    self.initialState = State(sections: [TaskListSection(model: Void(), items: [])])
+    self.initialState = State(isEmpty: false, sections: [TaskListSection(model: Void(), items: [])])
   }
 
   // MARK: - Mutate
@@ -55,6 +56,14 @@ final class TaskListViewReactor: BaseReactor {
     case let .deleteTask(indexPath):
       let task = self.currentState.sections[indexPath].currentState
       return self.provider.taskService.delete(taskID: task.id).flatMap { _ in Observable.empty() }
+
+    case let .taskDone(indexPath):
+      let task = self.currentState.sections[indexPath].currentState
+      if !task.isDone {
+        return self.provider.taskService.markAsDone(taskID: task.id).flatMap { _ in Observable.empty() }
+      } else {
+        return self.provider.taskService.markAsUnDone(taskID: task.id).flatMap { _ in Observable.empty() }
+      }
     }
 
   }
@@ -110,7 +119,7 @@ final class TaskListViewReactor: BaseReactor {
     switch mutation {
     case let .setSections(sections):
       state.sections = sections
-//      state.isEmpty = !sections.isEmpty
+      state.isEmpty = !sections.isEmpty
       return state
 
     case let .insertSectionItem(indexPath, sectionItem):
