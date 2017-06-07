@@ -18,7 +18,7 @@ PODS:
   - RxSwift (3.5.0)
   - SnapKit (3.2.0)
   - SwiftyImage (1.1.0)
-  - URLNavigator (1.2.0)
+  - URLNavigator (1.2.1)
 
 DEPENDENCIES:
   - ManualLayout
@@ -46,7 +46,7 @@ SPEC CHECKSUMS:
   RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyImage: 4d3feb0211beb7217b39ac553e3ee64ceb72d611
-  URLNavigator: 3ff788c985a0aae654e7de4959c4b0ea8a45f022
+  URLNavigator: eb2a968b58dc7c7ddd9b5f8167f04cbb039475b3
 
 PODFILE CHECKSUM: 65e361bd77eb8a7c66957ea453a5b5a0a0762890
 
