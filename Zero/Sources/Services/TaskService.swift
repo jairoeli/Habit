@@ -12,8 +12,7 @@ enum TaskEvent {
   case create(Task)
   case update(Task)
   case delete(id: String)
-  case markAsDone(id: String)
-  case markAsUnDone(id: String)
+  case increaseValue(taskID: String)
 }
 
 protocol TaskServiceType {
@@ -26,8 +25,7 @@ protocol TaskServiceType {
   func create(title: String, memo: String?) -> Observable<Task>
   func update(taskID: String, title: String, memo: String?) -> Observable<Task>
   func delete(taskID: String) -> Observable<Task>
-  func markAsDone(taskID: String) -> Observable<Task>
-  func markAsUnDone(taskID: String) -> Observable<Task>
+  func increaseValue(taskID: String) -> Observable<Task>
 }
 
 final class TaskService: BaseService, TaskServiceType {
@@ -102,39 +100,21 @@ final class TaskService: BaseService, TaskServiceType {
       })
   }
 
-  func markAsDone(taskID: String) -> Observable<Task> {
+  func increaseValue(taskID: String) -> Observable<Task> {
     return self.fetchTask()
       .flatMap { [weak self] tasks -> Observable<Task> in
         guard let `self` = self else { return .empty() }
         guard let index = tasks.index(where: { $0.id == taskID }) else { return .empty() }
         var tasks = tasks
-        let newTask = tasks[index].with {
-          $0.isDone = true
+        let newValue = tasks[index].with {
+          $0.value += 1
           return
         }
-        tasks[index] = newTask
-        return self.saveTasks(tasks).map { newTask }
+        tasks[index] = newValue
+        return self.saveTasks(tasks).map { newValue }
     }
       .do(onNext: { task in
-        self.event.onNext(.markAsDone(id: task.id))
-      })
-  }
-
-  func markAsUnDone(taskID: String) -> Observable<Task> {
-    return self.fetchTask()
-      .flatMap { [weak self] tasks -> Observable<Task> in
-        guard let `self` = self else { return .empty() }
-        guard let index = tasks.index(where: { $0.id == taskID }) else { return .empty() }
-        var tasks = tasks
-        let newTask = tasks[index].with {
-          $0.isDone = false
-          return
-        }
-        tasks[index] = newTask
-        return self.saveTasks(tasks).map { newTask }
-    }
-      .do(onNext: { task in
-        self.event.onNext(.markAsUnDone(id: task.id))
+        self.event.onNext(.increaseValue(taskID: task.id))
       })
   }
 

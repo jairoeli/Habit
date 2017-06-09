@@ -18,7 +18,7 @@ final class TaskListViewReactor: BaseReactor {
   enum Action {
     case refresh
     case deleteTask(IndexPath)
-    case taskDone(IndexPath)
+    case taskIncreaseValue(IndexPath)
   }
 
   enum Mutation {
@@ -56,13 +56,9 @@ final class TaskListViewReactor: BaseReactor {
       let task = self.currentState.sections[indexPath].currentState
       return self.provider.taskService.delete(taskID: task.id).flatMap { _ in Observable.empty() }
 
-    case let .taskDone(indexPath):
+    case let .taskIncreaseValue(indexPath):
       let task = self.currentState.sections[indexPath].currentState
-      if !task.isDone {
-        return self.provider.taskService.markAsDone(taskID: task.id).flatMap { _ in Observable.empty() }
-      } else {
-        return self.provider.taskService.markAsUnDone(taskID: task.id).flatMap { _ in Observable.empty() }
-      }
+      return self.provider.taskService.increaseValue(taskID: task.id).flatMap { _ in Observable.empty() }
     }
 
   }
@@ -93,17 +89,10 @@ final class TaskListViewReactor: BaseReactor {
       guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
       return .just(.deleteSectionItem(indexPath))
 
-    case let .markAsDone(id):
+    case let .increaseValue(id):
       guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
       var task = state.sections[indexPath].currentState
-      task.isDone = true
-      let reactor = TaskCellReactor(task: task)
-      return .just(.updateSectionItem(indexPath, reactor))
-
-    case let .markAsUnDone(id):
-      guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
-      var task = state.sections[indexPath].currentState
-      task.isDone = false
+      task.value += 1
       let reactor = TaskCellReactor(task: task)
       return .just(.updateSectionItem(indexPath, reactor))
     }
