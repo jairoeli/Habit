@@ -61,13 +61,6 @@ final class TaskListViewController: BaseViewController, View {
 
   fileprivate let headerView = SectionHeaderView()
 
-  private lazy var emptyView: EmptyView = {
-    let view = EmptyView(frame: .zero)
-    view.backgroundColor = .snow
-    view.textLabel.text = "Looks like you don't have any tasks."
-    return view
-  }()
-
   // MARK: - Initializing
 
   init(reactor: TaskListViewReactor) {
@@ -85,8 +78,6 @@ final class TaskListViewController: BaseViewController, View {
     super.viewDidLoad()
     self.view.addSubview(self.headerView)
     self.view.addSubview(self.tableView)
-//    self.view.addSubview(self.confettiView)
-    self.setupEmptyView()
     self.view.addSubview(self.addButtonItem)
   }
 
@@ -117,10 +108,6 @@ final class TaskListViewController: BaseViewController, View {
       self.addButtonItem.snp.updateConstraints { make in make.bottom.equalToSuperview().offset(-20) }
       self.addButtonItem.superview?.layoutIfNeeded()
     }
-  }
-
-  fileprivate func setupEmptyView() {
-    emptyView.addTo(view)
   }
 
   // MARK: - Binding
@@ -184,11 +171,6 @@ final class TaskListViewController: BaseViewController, View {
       .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
       .disposed(by: self.disposeBag)
 
-    reactor.state.map { !$0.sections.isEmpty }
-      .subscribe(onNext: { [weak self] empty in
-        self?.emptyView.isHidden = empty ? true : false
-      })
-      .disposed(by: self.disposeBag)
   }
 
   // MARK: - RxSwift wrapper

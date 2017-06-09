@@ -29,7 +29,6 @@ final class TaskListViewReactor: BaseReactor {
   }
 
   struct State {
-    var isEmpty: Bool
     var sections: [TaskListSection]
   }
 
@@ -38,7 +37,7 @@ final class TaskListViewReactor: BaseReactor {
 
   init(provider: ServiceProviderType) {
     self.provider = provider
-    self.initialState = State(isEmpty: false, sections: [TaskListSection(model: Void(), items: [])])
+    self.initialState = State(sections: [TaskListSection(model: Void(), items: [])])
   }
 
   // MARK: - Mutate
@@ -119,7 +118,6 @@ final class TaskListViewReactor: BaseReactor {
     switch mutation {
     case let .setSections(sections):
       state.sections = sections
-      state.isEmpty = !sections.isEmpty
       return state
 
     case let .insertSectionItem(indexPath, sectionItem):

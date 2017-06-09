@@ -27,7 +27,6 @@
 		9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */; };
 		9C3E2D801EC623F300EE5276 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */; };
 		9C4835B51ED7926500AE67D7 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */; };
-		9C62E98E1EDF31E10055AF10 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62E98D1EDF31E10055AF10 /* EmptyView.swift */; };
 		9C72EED91EE04C090069ED6C /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C72EED81EE04C090069ED6C /* DateExtension.swift */; };
 		9C81C1311EEA003A0046883D /* ZeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C1301EEA003A0046883D /* ZeroTests.swift */; };
 		9C81C1421EEA02750046883D /* MockUserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C1411EEA02750046883D /* MockUserDefaultsService.swift */; };
@@ -95,7 +94,6 @@
 		9C3E2D7B1EC61B8000EE5276 /* TaskEditViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewReactor.swift; path = "Sources/iOS Zero/Reactors/TaskEditViewReactor.swift"; sourceTree = "<group>"; };
 		9C3E2D7F1EC623F300EE5276 /* TaskEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskEditViewController.swift"; sourceTree = "<group>"; };
 		9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionHeaderView.swift; path = "Sources/iOS Zero/Views/TaskList/SectionHeaderView.swift"; sourceTree = "<group>"; };
-		9C62E98D1EDF31E10055AF10 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyView.swift; path = "Sources/iOS Zero/Views/EmptyView.swift"; sourceTree = "<group>"; };
 		9C72EED81EE04C090069ED6C /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtension.swift; path = Sources/Utils/DateExtension.swift; sourceTree = "<group>"; };
 		9C81C12E1EEA003A0046883D /* ZeroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZeroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C81C1301EEA003A0046883D /* ZeroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroTests.swift; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 			isa = PBXGroup;
 			children = (
 				9CF0F6F71ECBB63900E40437 /* BaseTableViewCell.swift */,
-				9C62E98D1EDF31E10055AF10 /* EmptyView.swift */,
 				9CEA33C81EC0D70A00816DAA /* BaseViewController.swift */,
 				9CEA33CA1EC0D72E00816DAA /* Task */,
 			);
@@ -649,7 +646,6 @@
 				9C1B1E3A1EEA1C5C002D0F93 /* ModalSize.swift in Sources */,
 				9C1B1E3B1EEA1C5C002D0F93 /* PresentationType.swift in Sources */,
 				9C4835B51ED7926500AE67D7 /* SectionHeaderView.swift in Sources */,
-				9C62E98E1EDF31E10055AF10 /* EmptyView.swift in Sources */,
 				9C1B1E391EEA1C5C002D0F93 /* ModalCenterPosition.swift in Sources */,
 				9C1B1E381EEA1C5C002D0F93 /* KeyboardTranslation.swift in Sources */,
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
