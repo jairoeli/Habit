@@ -20,7 +20,6 @@ target 'Zero' do
   # Misc.
   pod 'ReusableKit'
   pod 'URLNavigator'
-  pod 'Presentr'
   pod 'SwiftyImage'
 
   # Testing

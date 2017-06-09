@@ -10,7 +10,6 @@ import UIKit
 import ReactorKit
 import RxSwift
 import RxCocoa
-import Presentr
 
 final class TaskEditViewController: BaseViewController, View {
 
