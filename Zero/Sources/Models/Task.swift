@@ -14,6 +14,7 @@ struct Task: ModelType, Identifiable {
   var title: String
   var memo: String?
   var isDone: Bool = false
+  var value: Int = 0
 
   init(title: String, memo: String? = nil) {
     self.title = title
@@ -29,13 +30,15 @@ struct Task: ModelType, Identifiable {
     self.title = title
     self.memo = dictionary["memo"] as? String
     self.isDone = dictionary["isDone"] as? Bool ?? false
+    self.value = dictionary["value"] as? Int ?? 0
   }
 
   func asDictionary() -> [String: Any] {
     var dictionary: [String: Any] = [
       "id": self.id,
       "title": self.title,
-      "isDone": self.isDone
+      "isDone": self.isDone,
+      "value": self.value
       ]
 
     if let memo = self.memo {
