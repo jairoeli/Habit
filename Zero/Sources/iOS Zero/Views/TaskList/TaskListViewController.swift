@@ -142,7 +142,7 @@ final class TaskListViewController: BaseViewController, View {
 //      .disposed(by: self.disposeBag)
 
     self.tableView.rx.itemSelected
-      .map { indexPath in .taskDone(indexPath) }
+      .map { indexPath in .taskIncreaseValue(indexPath) }
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 

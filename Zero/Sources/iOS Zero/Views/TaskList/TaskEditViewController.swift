@@ -21,7 +21,6 @@ final class TaskEditViewController: BaseViewController, View {
     static let buttonHeight = 35.f
     static let buttonRight = 4.f
   }
-
   // MARK: - UI
 
   fileprivate lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()) <== {
@@ -35,7 +34,7 @@ final class TaskEditViewController: BaseViewController, View {
     $0.autocorrectionType = .no
     $0.font = .black(size: 18)
     $0.textColor = .charcoal
-    $0.placeholder = "Add a new task"
+    $0.placeholder = "Add a new goal"
     $0.tintColor = .redGraphite
   }
 
@@ -109,7 +108,7 @@ final class TaskEditViewController: BaseViewController, View {
 
     // swiftlint:disable empty_count
     self.titleInput.rx.text.orEmpty
-      .map { $0.characters.count >= 0 }
+      .map { $0.characters.count >= 0 && $0.characters.count < 20 }
       .shareReplay(1)
       .subscribe(onNext: { [weak self] isValid in
         guard let `self` = self else { return }
@@ -162,17 +161,6 @@ extension TaskEditViewController: PresentrDelegate {
 
   func presentrShouldDismiss(keyboardShowing: Bool) -> Bool {
     return keyboardShowing
-  }
-
-}
-
-// MARK: - UITextField Delegate
-
-extension TaskEditViewController: UITextFieldDelegate {
-
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
   }
 
 }
