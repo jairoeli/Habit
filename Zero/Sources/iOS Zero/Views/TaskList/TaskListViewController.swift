@@ -12,7 +12,6 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import ReusableKit
-import Presentr
 
 final class TaskListViewController: BaseViewController, View {
 
@@ -52,10 +51,11 @@ final class TaskListViewController: BaseViewController, View {
     let customType = PresentationType.custom(width: width, height: height, center: center)
 
     let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = nil
-    customPresenter.dismissTransitionType = nil
+    customPresenter.transitionType = .coverVertical
+    customPresenter.dismissTransitionType = .coverVertical
     customPresenter.dismissOnSwipe = true
     customPresenter.keyboardTranslationType = .moveUp
+
     return customPresenter
   }()
 
