@@ -14,6 +14,7 @@ final class MessageInputBar: UIView {
 
   // MARK: UI
   fileprivate let textView = UIView() <== {
+    $0.backgroundColor = .snow
     $0.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.6).cgColor
     $0.layer.borderWidth = 1 / UIScreen.main.scale
   }

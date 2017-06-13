@@ -58,9 +58,14 @@ final class TaskCell: BaseTableViewCell, View {
   // MARK: - Binding
 
   func bind(reactor: TaskCellReactor) {
-    self.titleLabel.text = reactor.currentState.title
-    self.titleLabel.textColor = reactor.currentState.isDone ? .silver : .charcoal
-    self.valueLabel.text = "\(reactor.currentState.value)"
+    reactor.state.map { $0.title }
+      .distinctUntilChanged()
+      .bind(to: self.titleLabel.rx.text)
+      .disposed(by: self.disposeBag)
+
+    reactor.state.map { "\($0.value)" }
+      .bind(to: self.valueLabel.rx.text)
+      .disposed(by: self.disposeBag)
   }
 
   // MARK: - Cell Height
