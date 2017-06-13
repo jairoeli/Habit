@@ -12,7 +12,7 @@ enum TaskEvent {
   case create(Task)
   case update(Task)
   case delete(id: String)
-  case increaseValue(taskID: String)
+  case increaseValue(id: String)
 }
 
 protocol TaskServiceType {
@@ -114,7 +114,7 @@ final class TaskService: BaseService, TaskServiceType {
         return self.saveTasks(tasks).map { newValue }
     }
       .do(onNext: { task in
-        self.event.onNext(.increaseValue(taskID: task.id))
+        self.event.onNext(.increaseValue(id: task.id))
       })
   }
 
