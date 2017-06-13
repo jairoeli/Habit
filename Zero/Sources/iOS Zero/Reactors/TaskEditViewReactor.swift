@@ -15,31 +15,10 @@ enum TaskEditViewMode {
   case edit(Task)
 }
 
-enum TaskEditViewCancelAlertAction: AlertActionType {
-  case leave
-  case stay
-
-  var title: String? {
-    switch self {
-      case .leave: return "Leave"
-      case .stay: return "Stay"
-    }
-  }
-
-  var style: UIAlertActionStyle {
-    switch self {
-      case .leave: return .destructive
-      case .stay: return .default
-    }
-  }
-
-}
-
 final class TaskEditViewReactor: BaseReactor {
 
   enum Action {
     case updateTaskTitle(String)
-    case cancel
     case submit
   }
 
@@ -97,19 +76,6 @@ final class TaskEditViewReactor: BaseReactor {
         return self.provider.taskService
           .update(taskID: task.id, title: self.currentState.taskTitle, memo: nil)
           .map { _ in .dismiss }
-      }
-
-    case .cancel:
-      if !self.currentState.shouldConfirmCancel { return .just(.dismiss) }
-
-      let alertActions: [TaskEditViewCancelAlertAction] = [.leave, .stay]
-      return self.provider.alertService
-        .show(title: "Really", message: "All changes will be lost", preferredStyle: .alert, actions: alertActions)
-        .flatMap { alertAction -> Observable<Mutation> in
-          switch alertAction {
-            case .leave: return .just(.dismiss)
-            case .stay: return .empty()
-          }
       }
     }
   }
