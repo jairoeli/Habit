@@ -12,14 +12,15 @@ target 'Zero' do
   pod 'RxDataSources'
   pod 'RxOptional'
   pod 'RxReusable'
+  pod 'RxKeyboard'
+  pod 'RxGesture'
 
   # UI
   pod 'SnapKit'
-  pod "ManualLayout"
+  pod 'ManualLayout'
 
   # Misc.
   pod 'ReusableKit'
-  pod 'URLNavigator'
   pod 'SwiftyImage'
 
   # Testing

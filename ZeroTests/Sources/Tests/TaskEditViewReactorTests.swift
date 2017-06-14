@@ -81,28 +81,6 @@ class TaskEditViewReactorTests: XCTestCase {
           ])
     }
 
-    RxExpect("it should dismiss when select leave on cancel alert") { test in
-      let provider = MockServiceProvider()
-      provider.alertService = MockAlertService(provider: provider) <== {
-        $0.selectAction = TaskEditViewCancelAlertAction.leave
-      }
-      let reactor = test.retain(TaskEditViewReactor(provider: provider, mode: .new))
-
-      // input
-      test.input(reactor.action, [
-        next(100, .updateTaskTitle("a")),
-        next(200, .cancel),
-        ])
-
-      // assert
-      test.assert(reactor.state.map { $0.isDismissed }.distinctUntilChanged())
-        .filterNext()
-        .equal([
-          false, // initial
-          true,  // cancel
-          ])
-    }
-
     RxExpect("it should dismiss on submit") { test in
       let provider = MockServiceProvider()
       let reactor = test.retain(TaskEditViewReactor(provider: provider, mode: .new))

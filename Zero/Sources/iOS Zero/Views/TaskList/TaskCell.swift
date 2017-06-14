@@ -24,7 +24,7 @@ final class TaskCell: BaseTableViewCell, View {
   }
 
   struct Font {
-    static let titleLabel = UIFont.black(size: 24)
+    static let titleLabel = UIFont.black(size: 20)
   }
 
   // MARK: - UI
@@ -35,6 +35,13 @@ final class TaskCell: BaseTableViewCell, View {
     $0.numberOfLines = Constant.titleLabelNumberOfLines
   }
 
+  let valueLabel = UILabel() <== {
+    $0.font = Font.titleLabel
+    $0.textColor = .charcoal
+    $0.text = "0"
+    $0.textAlignment = .right
+  }
+
   let separatorView = UIView() <== {
     $0.backgroundColor = UIColor(white: 0.85, alpha: 1)
   }
@@ -43,6 +50,7 @@ final class TaskCell: BaseTableViewCell, View {
 
   override func initialize() {
     self.contentView.addSubview(self.titleLabel)
+    self.contentView.addSubview(self.valueLabel)
     self.contentView.addSubview(self.separatorView)
     self.backgroundColor = .snow
   }
@@ -50,29 +58,38 @@ final class TaskCell: BaseTableViewCell, View {
   // MARK: - Binding
 
   func bind(reactor: TaskCellReactor) {
-    self.titleLabel.text = reactor.currentState.title
-    self.titleLabel.textColor = reactor.currentState.isDone ? .silver : .charcoal
+    reactor.state.map { $0.title }
+      .distinctUntilChanged()
+      .bind(to: self.titleLabel.rx.text)
+      .disposed(by: self.disposeBag)
+
+    reactor.state.map { "\($0.value)" }
+      .bind(to: self.valueLabel.rx.text)
+      .disposed(by: self.disposeBag)
   }
 
   // MARK: - Cell Height
 
   class func height(fits width: CGFloat, reactor: Reactor) -> CGFloat {
-    let height =  reactor.currentState.title.height(
-      fits: width - Metric.cellPadding * 2,
-      font: Font.titleLabel,
-      maximumNumberOfLines: Constant.titleLabelNumberOfLines
-    )
-    return height + Metric.cellPadding * 2
+    let height = reactor.currentState.title
+      .height(fits: width - Metric.cellPadding * 4, font: Font.titleLabel, maximumNumberOfLines: Constant.titleLabelNumberOfLines)
+
+    return height + Metric.cellPadding * 4
   }
 
   // MARK: - Layout
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    self.titleLabel.top = Metric.cellPadding
+    self.titleLabel.top = Metric.cellPadding * 2
     self.titleLabel.left = Metric.cellPadding
-    self.titleLabel.width = self.contentView.width - Metric.cellPadding * 2
+    self.titleLabel.width = self.contentView.width - Metric.cellPadding * 6
     self.titleLabel.sizeToFit()
+
+    self.valueLabel.top = Metric.cellPadding
+    self.valueLabel.left = self.contentView.width - Metric.cellPadding * 2
+    self.valueLabel.sizeToFit()
+    self.valueLabel.frame = CGRect(x: self.contentView.width - Metric.cellPadding, y: 0, width: -100, height: self.bounds.size.height)
 
     self.separatorView.bottom = self.contentView.bottom
     self.separatorView.left = Metric.cellPadding

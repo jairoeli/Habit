@@ -16,12 +16,15 @@ typealias TaskListSection = SectionModel<Void, TaskCellReactor>
 final class TaskListViewReactor: BaseReactor {
 
   enum Action {
+    case updateTaskTitle(String)
+    case submit
     case refresh
     case deleteTask(IndexPath)
-    case taskDone(IndexPath)
+    case taskIncreaseValue(IndexPath)
   }
 
   enum Mutation {
+    case updateTaskTitle(String)
     case setSections([TaskListSection])
     case insertSectionItem(IndexPath, TaskListSection.Item)
     case updateSectionItem(IndexPath, TaskListSection.Item)
@@ -30,6 +33,14 @@ final class TaskListViewReactor: BaseReactor {
 
   struct State {
     var sections: [TaskListSection]
+    var taskTitle: String
+    var canSubmit: Bool
+
+    init(sections: [TaskListSection], taskTitle: String, canSubmit: Bool) {
+      self.sections = sections
+      self.taskTitle = taskTitle
+      self.canSubmit = canSubmit
+    }
   }
 
   let provider: ServiceProviderType
@@ -37,13 +48,20 @@ final class TaskListViewReactor: BaseReactor {
 
   init(provider: ServiceProviderType) {
     self.provider = provider
-    self.initialState = State(sections: [TaskListSection(model: Void(), items: [])])
+    self.initialState = State(sections: [TaskListSection(model: Void(), items: [])], taskTitle: "", canSubmit: false)
   }
 
   // MARK: - Mutate
 
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
+
+    case let .updateTaskTitle(taskTitle): return .just(.updateTaskTitle(taskTitle))
+
+    case .submit:
+      guard self.currentState.canSubmit else { return .empty() }
+      return self.provider.taskService.create(title: self.currentState.taskTitle, memo: nil).flatMap { _ in Observable.empty() }
+
     case .refresh:
       return self.provider.taskService.fetchTask()
         .map { tasks in
@@ -56,13 +74,9 @@ final class TaskListViewReactor: BaseReactor {
       let task = self.currentState.sections[indexPath].currentState
       return self.provider.taskService.delete(taskID: task.id).flatMap { _ in Observable.empty() }
 
-    case let .taskDone(indexPath):
+    case let .taskIncreaseValue(indexPath):
       let task = self.currentState.sections[indexPath].currentState
-      if !task.isDone {
-        return self.provider.taskService.markAsDone(taskID: task.id).flatMap { _ in Observable.empty() }
-      } else {
-        return self.provider.taskService.markAsUnDone(taskID: task.id).flatMap { _ in Observable.empty() }
-      }
+      return self.provider.taskService.increaseValue(taskID: task.id).flatMap { _ in Observable.empty() }
     }
 
   }
@@ -93,17 +107,10 @@ final class TaskListViewReactor: BaseReactor {
       guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
       return .just(.deleteSectionItem(indexPath))
 
-    case let .markAsDone(id):
+    case let .increaseValue(id):
       guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
       var task = state.sections[indexPath].currentState
-      task.isDone = true
-      let reactor = TaskCellReactor(task: task)
-      return .just(.updateSectionItem(indexPath, reactor))
-
-    case let .markAsUnDone(id):
-      guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
-      var task = state.sections[indexPath].currentState
-      task.isDone = false
+      task.value += 1
       let reactor = TaskCellReactor(task: task)
       return .just(.updateSectionItem(indexPath, reactor))
     }
@@ -116,6 +123,11 @@ final class TaskListViewReactor: BaseReactor {
     var state = state
 
     switch mutation {
+    case let .updateTaskTitle(taskTitle):
+      state.taskTitle = taskTitle
+      state.canSubmit = !taskTitle.isEmpty
+      return state
+
     case let .setSections(sections):
       state.sections = sections
       return state
@@ -148,11 +160,7 @@ final class TaskListViewReactor: BaseReactor {
     }
   }
 
-  // MARK: - Creating Task
-
-  func reactorForCreatingTask() -> TaskEditViewReactor {
-    return TaskEditViewReactor(provider: self.provider, mode: .new)
-  }
+  // MARK: - Editing Task
 
   func reactorForEditingTask(_ taskCellReactor: TaskCellReactor) -> TaskEditViewReactor {
     let task = taskCellReactor.currentState

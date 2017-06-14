@@ -5,13 +5,13 @@
 //  Created by Jairo Eli de Leon on 5/9/17.
 //  Copyright © 2017 Jairo Eli de León. All rights reserved.
 //
-
 import UIKit
 import ReactorKit
 import RxSwift
 import RxCocoa
 import RxDataSources
 import ReusableKit
+import RxKeyboard
 
 final class TaskListViewController: BaseViewController, View {
 
@@ -22,44 +22,40 @@ final class TaskListViewController: BaseViewController, View {
   }
 
   fileprivate struct Metric {
-    static let buttonSize = 64.f
-    static let buttonBottom = 100.f
-    static let buttonRight = 20.f
-    static let sectionInsetLeftRight = 20.f
+    static let padding = 15.f
+    static let buttonWidth = 65.f
+    static let buttonHeight = 35.f
+    static let buttonRight = 4.f
   }
 
   // MARK: - Properties
 
   let dataSource = RxTableViewSectionedReloadDataSource<TaskListSection>()
 
-  lazy var addButtonItem = UIButton(type: .system) <== {
-    $0.setImage(#imageLiteral(resourceName: "add_icon").withRenderingMode(.alwaysOriginal), for: .normal)
-  }
-
   fileprivate let tableView = UITableView() <== {
     $0.alwaysBounceVertical = true
     $0.backgroundColor = .snow
     $0.separatorStyle = .none
+    $0.keyboardDismissMode = .interactive
+    $0.showsVerticalScrollIndicator = false
     $0.register(Reusable.taskCell)
   }
-
-  fileprivate lazy var presenter: Presentr = {
-    let width = ModalSize.full
-    let height = ModalSize.custom(size: 65)
-    let originY = self.tableView.frame.height + 45
-    let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: originY))
-    let customType = PresentationType.custom(width: width, height: height, center: center)
-
-    let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = .coverVertical
-    customPresenter.dismissTransitionType = .coverVertical
-    customPresenter.dismissOnSwipe = true
-    customPresenter.keyboardTranslationType = .moveUp
-
-    return customPresenter
-  }()
-
   fileprivate let headerView = SectionHeaderView()
+
+  fileprivate lazy var titleInput = UITextField() <== {
+    $0.autocorrectionType = .no
+    $0.font = .black(size: 18)
+    $0.textColor = .charcoal
+    $0.placeholder = "Add a new goal"
+    $0.tintColor = .redGraphite
+  }
+  fileprivate let messageInputBar = MessageInputBar()
+
+  fileprivate lazy var doneButtonTap = UIButton(type: .system) <== {
+    $0.setTitle("Done", for: .normal)
+    $0.setTitleColor(.redGraphite ~ 50%, for: .normal)
+    $0.titleLabel?.font = .black(size: 18)
+  }
 
   // MARK: - Initializing
 
@@ -78,7 +74,13 @@ final class TaskListViewController: BaseViewController, View {
     super.viewDidLoad()
     self.view.addSubview(self.headerView)
     self.view.addSubview(self.tableView)
-    self.view.addSubview(self.addButtonItem)
+    self.view.addSubview(self.messageInputBar)
+    self.view.addSubview(self.titleInput)
+    self.view.addSubview(self.doneButtonTap)
+    self.tableView.contentInset.bottom = self.messageInputBar.intrinsicContentSize.height
+    self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+    self.tableView.contentInset = UIEdgeInsets(top: 0.f, left: 0.f, bottom: 65.f, right: 0.f)
+    self.titleInput.delegate = self
   }
 
   override func setupConstraints() {
@@ -95,25 +97,28 @@ final class TaskListViewController: BaseViewController, View {
       make.bottom.equalToSuperview()
     }
 
-    self.addButtonItem.snp.makeConstraints { make in
-      make.bottom.equalTo(Metric.buttonBottom)
-      make.right.equalToSuperview().offset(-Metric.buttonRight)
-      make.width.equalTo(Metric.buttonSize)
-      make.height.equalTo(Metric.buttonSize)
+    self.messageInputBar.snp.makeConstraints { make in
+      make.left.right.equalTo(0)
+      make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
     }
-  }
 
-  fileprivate func showPlusButton() {
-    animate(0.5, completion: nil) {
-      self.addButtonItem.snp.updateConstraints { make in make.bottom.equalToSuperview().offset(-20) }
-      self.addButtonItem.superview?.layoutIfNeeded()
+    self.titleInput.snp.makeConstraints { make in
+      make.centerY.equalTo(self.messageInputBar.snp.centerY).offset(-0.5)
+      make.left.equalTo(Metric.padding)
+      make.right.equalTo(self.doneButtonTap.snp.left).offset(-Metric.buttonRight)
+    }
+
+    self.doneButtonTap.snp.makeConstraints { make in
+      make.centerY.equalTo(self.messageInputBar.snp.centerY)
+      make.right.equalTo(-Metric.padding)
+      make.width.equalTo(Metric.buttonWidth)
+      make.height.equalTo(Metric.buttonHeight)
     }
   }
 
   // MARK: - Binding
-
+  // swiftlint:disable function_body_length
   func bind(reactor: TaskListViewReactor) {
-    // Datasource
     self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
 
     self.dataSource.configureCell = { _, tableView, indexPath, reactor in
@@ -132,24 +137,30 @@ final class TaskListViewController: BaseViewController, View {
 
     self.rxViewController()
 
-//    self.tableView.rx.itemSelected(dataSource: self.dataSource)
-//      .map(reactor.reactorForEditingTask)
-//      .subscribe(onNext: { [weak self] reactor in
-//        guard let `self` = self else { return }
-//        let viewController = TaskEditViewController(reactor: reactor)
-//        self.customPresentViewController(self.presenter, viewController: viewController, animated: true, completion: nil)
-//      })
-//      .disposed(by: self.disposeBag)
+    self.titleInput.rx.text
+      .filterNil()
+      .map(Reactor.Action.updateTaskTitle)
+      .bind(to: reactor.action)
+      .disposed(by: self.disposeBag)
 
-    self.tableView.rx.itemSelected
-      .map { indexPath in .taskDone(indexPath) }
+    self.titleInput.rx.text
+      .map { $0?.isEmpty == false }
+      .subscribe(onNext: { [weak self] isValid in
+        guard let `self` = self else { return }
+        self.doneButtonTap.isEnabled = isValid
+        self.doneButtonTap.titleLabel?.textColor = isValid ? .redGraphite : .redGraphite ~ 50%
+      })
+      .disposed(by: self.disposeBag)
+
+    self.doneButtonTap.rx.tap
+      .map { Reactor.Action.submit }
+      .do(onNext: { [weak self] _ in self?.titleInput.text = nil })
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
     self.tableView.rx.itemSelected
-      .subscribe(onNext: { [weak tableView] indexPath in
-        tableView?.deselectRow(at: indexPath, animated: true)
-      })
+      .map { indexPath in .taskIncreaseValue(indexPath) }
+      .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
     self.tableView.rx.itemDeleted
@@ -157,32 +168,23 @@ final class TaskListViewController: BaseViewController, View {
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
-    self.addButtonItem.rx.tap
-      .map(reactor.reactorForCreatingTask)
-      .subscribe(onNext: { [weak self] reactor in
-        guard let `self` = self else { return }
-        let viewController = TaskEditViewController(reactor: reactor)
-        self.customPresentViewController(self.presenter, viewController: viewController, animated: true, completion: nil)
-      })
-      .disposed(by: self.disposeBag)
-
     // STATE
     reactor.state.map { $0.sections }
       .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
       .disposed(by: self.disposeBag)
 
-  }
-
-  // MARK: - RxSwift wrapper
-
-  fileprivate func rxViewController() {
-    self.rx.viewWillAppear
-      .subscribe(onNext: { [weak self] animated in self?.navigationController?.setNavigationBarHidden(true, animated: animated) })
+    reactor.state.asObservable().map { $0.taskTitle }
+      .distinctUntilChanged()
+      .bind(to: self.titleInput.rx.text)
       .disposed(by: self.disposeBag)
 
-    self.rx.viewDidAppear
-      .subscribe(onNext: { [weak self] _ in self?.showPlusButton() })
+    reactor.state.asObservable().map { $0.canSubmit }
+      .distinctUntilChanged()
+      .bind(to: self.doneButtonTap.rx.isEnabled)
       .disposed(by: self.disposeBag)
+
+    // Keyboard
+    self.rxKeyboard()
   }
 
 }
@@ -195,4 +197,51 @@ extension TaskListViewController: UITableViewDelegate {
     return TaskCell.height(fits: tableView.width, reactor: reactor)
   }
 
+}
+
+// MARK: - RxSwift wrapper
+extension TaskListViewController {
+  fileprivate func rxViewController() {
+    self.rx.viewWillAppear
+      .subscribe(onNext: { [weak self] animated in
+        self?.navigationController?.setNavigationBarHidden(true, animated: animated)
+      })
+      .disposed(by: self.disposeBag)
+
+    self.tableView.rx.itemSelected
+      .subscribe(onNext: { [weak tableView] indexPath in
+        tableView?.deselectRow(at: indexPath, animated: true)
+      })
+      .disposed(by: self.disposeBag)
+
+    self.tableView.rx.tapGesture(numberOfTapsRequired: 2)
+      .when(.recognized)
+      .subscribe(onNext: { [weak self] _ in
+        self?.view.endEditing(true)
+      })
+      .disposed(by: self.disposeBag)
+  }
+
+  fileprivate func rxKeyboard() {
+    RxKeyboard.instance.visibleHeight
+      .drive(onNext: { [weak self] keyboardVisibleHeight in
+        guard let `self` = self, self.didSetupConstraints else { return }
+        self.messageInputBar.snp.updateConstraints { make in
+          make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-keyboardVisibleHeight)
+        }
+        self.view.setNeedsLayout()
+        UIView.animate(withDuration: 0) {
+          self.tableView.contentInset.bottom = keyboardVisibleHeight + self.messageInputBar.height
+          self.tableView.scrollIndicatorInsets.bottom = self.tableView.contentInset.bottom
+          self.view.layoutIfNeeded()
+        }
+      })
+      .disposed(by: self.disposeBag)
+
+    RxKeyboard.instance.willShowVisibleHeight
+      .drive(onNext: { [weak self] keyboardVisibleHeight in
+        self?.tableView.contentOffset.y += keyboardVisibleHeight
+      })
+      .disposed(by: self.disposeBag)
+  }
 }
