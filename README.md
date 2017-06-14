@@ -1,13 +1,13 @@
-# Zero iOS App
+# Habit iOS App
 ![Swift](https://img.shields.io/badge/Swift-3.1-orange.svg)
 
-![zeroapp](https://user-images.githubusercontent.com/16951799/26894003-bcf81312-4b82-11e7-8349-f73b950b7767.png)
+![habitapp](https://user-images.githubusercontent.com/16951799/27144206-9a428ca2-50f6-11e7-8201-e6159ce3f3ec.jpg)
 
 ## Features
-* Using [RxSwift](https://github.com/ReactiveX/RxSwift)
-* Using [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources)
 * Using [ReactorKit](https://github.com/ReactorKit/ReactorKit)
-* Observing model updates across the view controllers
+* Using [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources)
+* Observing model updates
+* Interactive dismissing keyboards using [RxKeyboard](https://github.com/RxSwiftCommunity/RxKeyboard)
 
 ## Architecture
 ![reactorkit](https://user-images.githubusercontent.com/16951799/26894339-b7182a9e-4b83-11e7-9ba3-0b5a47bbe859.png)
