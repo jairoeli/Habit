@@ -12,6 +12,7 @@ enum TaskEvent {
   case create(Task)
   case update(Task)
   case delete(id: String)
+  case move(id: String, to: Int)
   case increaseValue(id: String)
 }
 
@@ -25,6 +26,7 @@ protocol TaskServiceType {
   func create(title: String, memo: String?) -> Observable<Task>
   func update(taskID: String, title: String, memo: String?) -> Observable<Task>
   func delete(taskID: String) -> Observable<Task>
+  func move(taskID: String, to: Int) -> Observable<Task>
   func increaseValue(taskID: String) -> Observable<Task>
 }
 
@@ -39,9 +41,8 @@ final class TaskService: BaseService, TaskServiceType {
     }
 
     let defaultTasks: [Task] = [
-      Task(title: "Walk 3000 steps"),
-      Task(title: "Read 10 chapters of book"),
-      Task(title: "Drink 3 glasses of water")
+      Task(title: "➕ Tap me"),
+      Task(title: "👈 Swipe left")
     ]
 
     let defaultsTaskDictionaries = defaultTasks.map { $0.asDictionary() }
@@ -97,6 +98,21 @@ final class TaskService: BaseService, TaskServiceType {
     }
       .do(onNext: { task in
         self.event.onNext(.delete(id: task.id))
+      })
+  }
+
+  func move(taskID: String, to destinationIndex: Int) -> Observable<Task> {
+    return self.fetchTask()
+      .flatMap { [weak self] tasks -> Observable<Task> in
+        guard let `self` = self else { return .empty() }
+        guard let sourceIndex = tasks.index(where: { $0.id == taskID }) else { return .empty() }
+        var tasks = tasks
+        let task = tasks.remove(at: sourceIndex)
+        tasks.insert(task, at: destinationIndex)
+        return self.saveTasks(tasks).map { task }
+      }
+      .do(onNext: { task in
+        self.event.onNext(.move(id: task.id, to: destinationIndex))
       })
   }
 

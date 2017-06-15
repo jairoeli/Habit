@@ -34,7 +34,6 @@ final class SettingsViewController: BaseViewController, View {
   init(reactor: SettingsViewReactor) {
     defer { self.reactor = reactor }
     super.init()
-    self.tabBarItem.image = #imageLiteral(resourceName: "setting")
   }
 
   required convenience init?(coder aDecoder: NSCoder) {

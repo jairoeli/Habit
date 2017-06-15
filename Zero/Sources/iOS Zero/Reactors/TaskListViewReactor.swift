@@ -19,6 +19,8 @@ final class TaskListViewReactor: BaseReactor {
     case updateTaskTitle(String)
     case submit
     case refresh
+    case toggleEditing
+    case moveTask(IndexPath, IndexPath)
     case deleteTask(IndexPath)
     case taskIncreaseValue(IndexPath)
   }
@@ -29,17 +31,21 @@ final class TaskListViewReactor: BaseReactor {
     case insertSectionItem(IndexPath, TaskListSection.Item)
     case updateSectionItem(IndexPath, TaskListSection.Item)
     case deleteSectionItem(IndexPath)
+    case toggleEditing
+    case moveSectionItem(IndexPath, IndexPath)
   }
 
   struct State {
     var sections: [TaskListSection]
+    var isEditing: Bool
     var taskTitle: String
     var canSubmit: Bool
 
-    init(sections: [TaskListSection], taskTitle: String, canSubmit: Bool) {
+    init(isEditing: Bool, sections: [TaskListSection], taskTitle: String, canSubmit: Bool) {
       self.sections = sections
       self.taskTitle = taskTitle
       self.canSubmit = canSubmit
+      self.isEditing = isEditing
     }
   }
 
@@ -48,7 +54,7 @@ final class TaskListViewReactor: BaseReactor {
 
   init(provider: ServiceProviderType) {
     self.provider = provider
-    self.initialState = State(sections: [TaskListSection(model: Void(), items: [])], taskTitle: "", canSubmit: false)
+    self.initialState = State(isEditing: false, sections: [TaskListSection(model: Void(), items: [])], taskTitle: "", canSubmit: false)
   }
 
   // MARK: - Mutate
@@ -69,6 +75,13 @@ final class TaskListViewReactor: BaseReactor {
           let section = TaskListSection(model: Void(), items: sectionItems)
           return .setSections([section])
       }
+
+    case .toggleEditing: return .just(.toggleEditing)
+
+    case let .moveTask(sourceIndexPath, destinationIndexPath):
+      let task = self.currentState.sections[sourceIndexPath].currentState
+      return self.provider.taskService.move(taskID: task.id, to: destinationIndexPath.item)
+        .flatMap { _ in Observable.empty() }
 
     case let .deleteTask(indexPath):
       let task = self.currentState.sections[indexPath].currentState
@@ -107,6 +120,11 @@ final class TaskListViewReactor: BaseReactor {
       guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
       return .just(.deleteSectionItem(indexPath))
 
+    case let .move(id, index):
+      guard let sourceIndexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
+      let destinationIndexPath = IndexPath(item: index, section: 0)
+      return .just(.moveSectionItem(sourceIndexPath, destinationIndexPath))
+
     case let .increaseValue(id):
       guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
       var task = state.sections[indexPath].currentState
@@ -132,6 +150,10 @@ final class TaskListViewReactor: BaseReactor {
       state.sections = sections
       return state
 
+    case .toggleEditing:
+      state.isEditing = !state.isEditing
+      return state
+
     case let .insertSectionItem(indexPath, sectionItem):
       state.sections.insert(sectionItem, at: indexPath)
       return state
@@ -142,6 +164,11 @@ final class TaskListViewReactor: BaseReactor {
 
     case let .deleteSectionItem(indexPath):
       state.sections.remove(at: indexPath)
+      return state
+
+    case let .moveSectionItem(sourceIndexPath, destinationIndexPath):
+      let sectionItem = state.sections.remove(at: sourceIndexPath)
+      state.sections.insert(sectionItem, at: destinationIndexPath)
       return state
     }
 
@@ -165,6 +192,12 @@ final class TaskListViewReactor: BaseReactor {
   func reactorForEditingTask(_ taskCellReactor: TaskCellReactor) -> TaskEditViewReactor {
     let task = taskCellReactor.currentState
     return TaskEditViewReactor(provider: self.provider, mode: .edit(task))
+  }
+
+  // MARK: - Present Settings
+
+  func settingsViewReactor() -> SettingsViewReactor {
+    return SettingsViewReactor(provider: provider)
   }
 
 }
