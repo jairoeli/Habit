@@ -10,9 +10,7 @@ import UIKit
 import SnapKit
 import ManualLayout
 import RxOptional
-import SwiftyImage
 import RxReusable
-import RxGesture
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

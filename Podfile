@@ -13,7 +13,6 @@ target 'Zero' do
   pod 'RxOptional'
   pod 'RxReusable'
   pod 'RxKeyboard'
-  pod 'RxGesture'
 
   # UI
   pod 'SnapKit'
@@ -21,7 +20,6 @@ target 'Zero' do
 
   # Misc.
   pod 'ReusableKit'
-  pod 'SwiftyImage'
 
   # Testing
   target 'ZeroTests' do
