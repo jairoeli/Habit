@@ -15,8 +15,15 @@ final class MessageInputBar: UIView {
   // MARK: UI
   fileprivate let textView = UIView() <== {
     $0.backgroundColor = .snow
-    $0.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.6).cgColor
-    $0.layer.borderWidth = 1 / UIScreen.main.scale
+  }
+
+  fileprivate let separatorView = UIView() <== {
+    $0.backgroundColor = UIColor(white: 0.85, alpha: 1)
+  }
+
+  fileprivate lazy var settingsButton = UIButton(type: .system) <== {
+    $0.setImage(#imageLiteral(resourceName: "settings").withRenderingMode(.alwaysTemplate), for: .normal)
+    $0.tintColor = .charcoal ~ 75%
   }
 
   // MARK: Initializing
@@ -24,8 +31,23 @@ final class MessageInputBar: UIView {
     super.init(frame: frame)
     self.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(self.textView)
+    self.addSubview(self.separatorView)
+    self.addSubview(self.settingsButton)
 
     self.textView.snp.makeConstraints { make in make.edges.equalTo(0) }
+
+    self.separatorView.snp.makeConstraints { (make) in
+      make.top.equalToSuperview()
+      make.left.right.equalToSuperview()
+      make.height.equalTo(1 / UIScreen.main.scale)
+    }
+
+    self.settingsButton.snp.makeConstraints { make in
+      make.bottom.equalTo(self.textView.snp.bottom).offset(-2)
+      make.left.equalToSuperview()
+      make.width.equalTo(44)
+      make.height.equalTo(44)
+    }
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -34,7 +56,22 @@ final class MessageInputBar: UIView {
 
   // MARK: Size
   override var intrinsicContentSize: CGSize {
-    return CGSize(width: self.width, height: 65)
+    return CGSize(width: self.width, height: 85)
+  }
+
+}
+
+extension Reactive where Base: MessageInputBar {
+
+  var settingsButtonTap: ControlEvent<Void> {
+    let source = base.settingsButton.rx.tap
+    return ControlEvent(events: source)
+  }
+
+  var tintColor: UIBindingObserver<Base, UIColor> {
+    return UIBindingObserver(UIElement: self.base) { navigationBar, tintColor in
+      navigationBar.tintColor = tintColor
+    }
   }
 
 }

@@ -28,8 +28,8 @@ final class SectionHeaderView: UIView {
   let displayDate = UILabel() <== {
     let date = Date()
     $0.text =  date.currentDate()
-    $0.textColor = .silver //.charcoal ~ 45%
-    $0.font = .medium(size: 16)
+    $0.textColor = .silver
+    $0.font = .medium(size: 14)
   }
 
   // MARK: - Initializing
@@ -51,12 +51,12 @@ final class SectionHeaderView: UIView {
 
   fileprivate func setUpView() {
     self.titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(Metric.cellPadding)
+      make.top.equalTo(self.displayDate.snp.bottom).offset(2)
       make.left.equalTo(Metric.leftPadding)
     }
 
     self.displayDate.snp.makeConstraints { make in
-      make.top.equalTo(self.titleLabel.snp.bottom).offset(2)
+      make.top.equalTo(Metric.cellPadding)
       make.left.equalTo(Metric.leftPadding)
     }
   }
@@ -64,7 +64,7 @@ final class SectionHeaderView: UIView {
   // MARK: - Size
 
   override var intrinsicContentSize: CGSize {
-    return CGSize(width: self.width, height: 110)
+    return CGSize(width: self.width, height: 100)
   }
 
 }

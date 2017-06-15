@@ -24,7 +24,7 @@ final class TaskCell: BaseTableViewCell, View {
   }
 
   struct Font {
-    static let titleLabel = UIFont.black(size: 20)
+    static let titleLabel = UIFont.medium(size: 20)
   }
 
   // MARK: - UI
