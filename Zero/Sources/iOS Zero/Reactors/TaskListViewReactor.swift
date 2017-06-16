@@ -37,7 +37,7 @@ final class TaskListViewReactor: BaseReactor {
 
   struct State {
     var sections: [TaskListSection]
-    var isEditing: Bool
+    var isMoving: Bool
     var taskTitle: String
     var canSubmit: Bool
 
@@ -45,7 +45,7 @@ final class TaskListViewReactor: BaseReactor {
       self.sections = sections
       self.taskTitle = taskTitle
       self.canSubmit = canSubmit
-      self.isEditing = isEditing
+      self.isMoving = isEditing
     }
   }
 
@@ -151,7 +151,7 @@ final class TaskListViewReactor: BaseReactor {
       return state
 
     case .toggleEditing:
-      state.isEditing = !state.isEditing
+      state.isMoving = !state.isMoving
       return state
 
     case let .insertSectionItem(indexPath, sectionItem):
