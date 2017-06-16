@@ -1,7 +1,7 @@
 # Habit iOS App
 ![Swift](https://img.shields.io/badge/Swift-3.1-orange.svg)
 
-![habitapp](https://user-images.githubusercontent.com/16951799/27144206-9a428ca2-50f6-11e7-8201-e6159ce3f3ec.jpg)
+![habit](https://user-images.githubusercontent.com/16951799/27207106-ba03c1a8-5201-11e7-950c-0f71516358fa.png)
 
 ## Features
 * Using [ReactorKit](https://github.com/ReactorKit/ReactorKit)
