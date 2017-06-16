@@ -23,8 +23,6 @@ final class TaskListViewController: BaseViewController, View {
 
   fileprivate struct Metric {
     static let padding = 15.f
-    static let buttonWidth = 65.f
-    static let buttonHeight = 35.f
   }
 
   // MARK: - Properties
@@ -45,21 +43,8 @@ final class TaskListViewController: BaseViewController, View {
   fileprivate lazy var titleInput = UITextField() <== {
     $0.font = .medium(size: 18)
     $0.textColor = .charcoal
-    $0.placeholder = "Add a new goal"
+    $0.placeholder = "Add a new goal..."
     $0.tintColor = .redGraphite
-  }
-
-  fileprivate lazy var doneButtonTap = UIButton(type: .system) <== {
-    $0.setTitle("Done", for: .normal)
-    $0.setTitleColor(.white, for: .normal)
-    $0.backgroundColor = .redGraphite ~ 50%
-    $0.layer.cornerRadius = 4
-    $0.titleLabel?.font = .black(size: 18)
-  }
-
-  fileprivate lazy var reorderButtonTap = UIButton(type: .system) <== {
-    $0.setImage(#imageLiteral(resourceName: "reorder").withRenderingMode(.alwaysTemplate), for: .normal)
-    $0.tintColor = .charcoal ~ 75%
   }
 
   // MARK: - Initializing
@@ -81,8 +66,6 @@ final class TaskListViewController: BaseViewController, View {
     view.addSubview(self.tableView)
     view.addSubview(self.messageInputBar)
     view.addSubview(self.titleInput)
-    view.addSubview(self.doneButtonTap)
-    view.addSubview(self.reorderButtonTap)
     tableView.contentInset.bottom = self.messageInputBar.intrinsicContentSize.height
     tableView.scrollIndicatorInsets = self.tableView.contentInset
     tableView.contentInset = UIEdgeInsets(top: 0.f, left: 0.f, bottom: 85.f, right: 0.f)
@@ -111,21 +94,7 @@ final class TaskListViewController: BaseViewController, View {
     self.titleInput.snp.makeConstraints { make in
       make.top.equalTo(self.messageInputBar.snp.top).offset(10)
       make.left.equalTo(Metric.padding)
-      make.right.equalTo(self.doneButtonTap.snp.left).offset(-4)
-    }
-
-    self.doneButtonTap.snp.makeConstraints { make in
-      make.bottom.equalTo(self.messageInputBar.snp.bottom).offset(-6)
       make.right.equalTo(-Metric.padding)
-      make.width.equalTo(Metric.buttonWidth)
-      make.height.equalTo(Metric.buttonHeight)
-    }
-
-    self.reorderButtonTap.snp.makeConstraints { make in
-      make.bottom.equalTo(self.messageInputBar.snp.bottom).offset(-2)
-      make.left.equalToSuperview().offset(50)
-      make.width.equalTo(44)
-      make.height.equalTo(44)
     }
   }
 
@@ -159,25 +128,29 @@ final class TaskListViewController: BaseViewController, View {
 
     self.titleInput.rx.text
       .map { $0?.isEmpty == false }
-      .subscribe(onNext: { [weak self] isValid in
+      .subscribe(onNext: { [weak self] validation in
         guard let `self` = self else { return }
-        self.doneButtonTap.isEnabled = isValid
-        self.doneButtonTap.backgroundColor = isValid ? .redGraphite : .redGraphite ~ 50%
+        self.messageInputBar.isEnabled = validation
+        self.messageInputBar.buttonColor = validation ? .redGraphite : .snow
+        self.messageInputBar.borderColor = validation ? .redGraphite : .platinumBorder
+        self.messageInputBar.buttonTitleColor = validation ? .white : .silver
       })
       .disposed(by: self.disposeBag)
 
-    self.doneButtonTap.rx.tap
+    self.messageInputBar.rx.doneButtonTap
       .map { Reactor.Action.submit }
       .do(onNext: { [weak self] _ in
         guard let `self` = self else { return }
         self.titleInput.text = nil
-        self.doneButtonTap.isEnabled = false
-        self.doneButtonTap.backgroundColor = .redGraphite ~ 50%
+        self.messageInputBar.isEnabled = false
+        self.messageInputBar.buttonColor = .snow
+        self.messageInputBar.borderColor = .platinumBorder
+        self.messageInputBar.buttonTitleColor = .silver
       })
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
-    self.reorderButtonTap.rx.tap
+    self.messageInputBar.rx.reorderButtonTap
       .map { Reactor.Action.toggleEditing }
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
@@ -218,14 +191,17 @@ final class TaskListViewController: BaseViewController, View {
 
     reactor.state.asObservable().map { $0.canSubmit }
       .distinctUntilChanged()
-      .bind(to: self.doneButtonTap.rx.isEnabled)
+      .subscribe(onNext: { [weak self] validation in
+        guard let `self` = self else { return }
+        self.messageInputBar.isEnabled = validation
+      })
       .disposed(by: self.disposeBag)
 
-    reactor.state.asObservable().map { $0.isEditing }
+    reactor.state.asObservable().map { $0.isMoving }
       .distinctUntilChanged()
       .subscribe(onNext: { [weak self] isEditing in
         guard let `self` = self else { return }
-        self.reorderButtonTap.tintColor = isEditing ? .redGraphite : .charcoal ~ 75%
+        self.messageInputBar.tintColor = isEditing ? .redGraphite : .charcoal ~ 75%
         self.tableView.setEditing(isEditing, animated: true)
       })
       .disposed(by: self.disposeBag)
