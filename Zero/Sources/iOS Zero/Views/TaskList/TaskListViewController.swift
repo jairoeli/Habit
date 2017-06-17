@@ -30,7 +30,6 @@ final class TaskListViewController: BaseViewController, View {
   let dataSource = RxTableViewSectionedReloadDataSource<TaskListSection>()
   fileprivate let headerView = SectionHeaderView()
   fileprivate let messageInputBar = MessageInputBar()
-
   fileprivate let tableView = UITableView() <== {
     $0.alwaysBounceVertical = true
     $0.backgroundColor = .snow
@@ -41,7 +40,7 @@ final class TaskListViewController: BaseViewController, View {
   }
 
   fileprivate lazy var titleInput = UITextField() <== {
-    $0.font = .medium(size: 18)
+    $0.font = .title3()
     $0.textColor = .charcoal
     $0.placeholder = "Add a new goal..."
     $0.tintColor = .redGraphite
@@ -73,16 +72,11 @@ final class TaskListViewController: BaseViewController, View {
   }
 
   override func setupConstraints() {
-    self.headerView.snp.makeConstraints { make in
-      make.top.equalToSuperview()
-      make.left.equalToSuperview()
-      make.right.equalToSuperview()
-    }
+    self.headerView.snp.makeConstraints { make in make.top.left.right.equalToSuperview() }
 
     self.tableView.snp.makeConstraints { make in
       make.top.equalTo(self.headerView.snp.bottom)
-      make.left.equalToSuperview()
-      make.right.equalToSuperview()
+      make.left.right.equalToSuperview()
       make.bottom.equalToSuperview()
     }
 
@@ -133,7 +127,7 @@ final class TaskListViewController: BaseViewController, View {
         self.messageInputBar.isEnabled = validation
         self.messageInputBar.buttonColor = validation ? .redGraphite : .snow
         self.messageInputBar.borderColor = validation ? .redGraphite : .platinumBorder
-        self.messageInputBar.buttonTitleColor = validation ? .white : .silver
+        self.messageInputBar.buttonTitleColor = validation ? .white : .midGray
       })
       .disposed(by: self.disposeBag)
 
@@ -145,7 +139,7 @@ final class TaskListViewController: BaseViewController, View {
         self.messageInputBar.isEnabled = false
         self.messageInputBar.buttonColor = .snow
         self.messageInputBar.borderColor = .platinumBorder
-        self.messageInputBar.buttonTitleColor = .silver
+        self.messageInputBar.buttonTitleColor = .midGray
       })
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)

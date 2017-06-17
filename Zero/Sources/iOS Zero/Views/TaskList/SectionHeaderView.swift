@@ -28,8 +28,8 @@ final class SectionHeaderView: UIView {
   let displayDate = UILabel() <== {
     let date = Date()
     $0.text =  date.currentDate()
-    $0.textColor = .silver
-    $0.font = .medium(size: 14)
+    $0.textColor = .midGray
+    $0.font = .footnote()
   }
 
   // MARK: - Initializing

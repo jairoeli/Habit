@@ -52,13 +52,6 @@ final class MessageInputBar: UIView {
 
   // MARK: - UI
 
-  fileprivate lazy var titleInput = UITextField() <== {
-    $0.font = .medium(size: 18)
-    $0.textColor = .charcoal
-    $0.placeholder = "Add a new goal..."
-    $0.tintColor = .redGraphite
-  }
-
   fileprivate let textView = UIView() <== {
     $0.backgroundColor = .snow
   }
@@ -79,7 +72,7 @@ final class MessageInputBar: UIView {
 
   fileprivate lazy var doneButton = UIButton(type: .system) <== {
     $0.setTitle("Done", for: .normal)
-    $0.setTitleColor(.silver, for: .normal)
+    $0.setTitleColor(.midGray, for: .normal)
     $0.backgroundColor = .snow
     $0.layer.borderWidth = 1
     $0.layer.borderColor = UIColor.platinumBorder.cgColor
@@ -112,26 +105,23 @@ final class MessageInputBar: UIView {
   // MARK: - Layout
 
   func setupLayout() {
-    self.textView.snp.makeConstraints { make in make.edges.equalTo(0) }
+    self.textView.snp.makeConstraints { make in make.edges.equalToSuperview() }
 
     self.separatorView.snp.makeConstraints { (make) in
-      make.top.equalToSuperview()
-      make.left.right.equalToSuperview()
+      make.top.left.right.equalToSuperview()
       make.height.equalTo(1 / UIScreen.main.scale)
     }
 
     self.settingsButton.snp.makeConstraints { make in
       make.bottom.equalTo(self.textView.snp.bottom).offset(-2)
       make.left.equalToSuperview()
-      make.width.equalTo(44)
-      make.height.equalTo(44)
+      make.width.height.equalTo(44)
     }
 
     self.reorderButton.snp.makeConstraints { make in
       make.bottom.equalTo(self.textView.snp.bottom).offset(-2)
       make.left.equalTo(self.settingsButton.snp.right).offset(2)
-      make.width.equalTo(44)
-      make.height.equalTo(44)
+      make.width.height.equalTo(44)
     }
 
     self.doneButton.snp.makeConstraints { make in
