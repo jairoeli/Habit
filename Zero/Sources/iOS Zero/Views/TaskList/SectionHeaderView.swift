@@ -22,7 +22,7 @@ final class SectionHeaderView: UIView {
   let titleLabel = UILabel() <== {
     $0.text = TimeOfTheDay.getGreetingFromTheCurrentOfTheDay()
     $0.textColor = .charcoal
-    $0.font = .black(size: 34)
+    $0.font = .black(size: 32)
   }
 
   let displayDate = UILabel() <== {

@@ -12,6 +12,10 @@ extension UIFont {
   static func black(size: CGFloat) -> UIFont {
     return UIFont.systemFont(ofSize: size, weight: UIFontWeightBlack)
   }
+
+  static func regular(size: CGFloat) -> UIFont {
+    return UIFont.systemFont(ofSize: size, weight: UIFontWeightMedium)
+  }
 }
 
 // swiftlint:disable valid_docs
@@ -30,11 +34,6 @@ extension UIFont {
   /// medium, 17pt font, 22pt leading, -24pt tracking
   static func body() -> UIFont {
     return .dynamicSize(style: .body, weight: .medium)
-  }
-
-  /// black, 16pt font, 21pt leading, -20pt tracking
-  static func callout() -> UIFont {
-    return .dynamicSize(style: .callout, weight: .black)
   }
 
   /// medium, 13pt font, 18pt leading, -6pt tracking

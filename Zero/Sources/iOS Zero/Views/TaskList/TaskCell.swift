@@ -93,7 +93,7 @@ final class TaskCell: BaseTableViewCell, View {
 
     self.separatorView.bottom = self.contentView.bottom
     self.separatorView.left = Metric.cellPadding
-    self.separatorView.width = self.contentView.width - Metric.cellPadding * 2
+    self.separatorView.width = self.contentView.width
     self.separatorView.height = 0.5 / UIScreen.main.scale
   }
 

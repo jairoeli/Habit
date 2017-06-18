@@ -62,12 +62,12 @@ final class MessageInputBar: UIView {
 
   fileprivate lazy var settingsButton = UIButton(type: .system) <== {
     $0.setImage(#imageLiteral(resourceName: "settings").withRenderingMode(.alwaysTemplate), for: .normal)
-    $0.tintColor = .charcoal ~ 75%
+    $0.tintColor = .midGray
   }
 
   fileprivate lazy var reorderButton = UIButton(type: .system) <== {
     $0.setImage(#imageLiteral(resourceName: "reorder").withRenderingMode(.alwaysTemplate), for: .normal)
-    $0.tintColor = .charcoal ~ 75%
+    $0.tintColor = .midGray
   }
 
   fileprivate lazy var doneButton = UIButton(type: .system) <== {
