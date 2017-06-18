@@ -25,6 +25,7 @@ PODS:
   - RxTest (3.5.0):
     - RxSwift (~> 3.4)
   - SnapKit (3.2.0)
+  - SwipeCellKit (1.8.0)
 
 DEPENDENCIES:
   - ManualLayout
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - RxSwift
   - RxTest
   - SnapKit
+  - SwipeCellKit
 
 SPEC CHECKSUMS:
   ManualLayout: 68ac8cfa6b5f656f7a9fadec3730208b95986880
@@ -53,7 +55,8 @@ SPEC CHECKSUMS:
   RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   RxTest: 1763765fd0e2282b0eb44c9050effdd7fe7156d4
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  SwipeCellKit: 01a58bf7e63d5df09aedd161828833944c4c333c
 
-PODFILE CHECKSUM: 417da241ab895faf13be4da9006490b8a8984cd6
+PODFILE CHECKSUM: 317e537a671f7ce98d930704e8fe55f37220483a
 
 COCOAPODS: 1.2.1

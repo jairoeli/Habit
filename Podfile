@@ -20,6 +20,7 @@ target 'Zero' do
 
   # Misc.
   pod 'ReusableKit'
+  pod 'SwipeCellKit'
 
   # Testing
   target 'ZeroTests' do
