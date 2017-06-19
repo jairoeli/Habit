@@ -23,6 +23,7 @@ final class TaskListViewReactor: BaseReactor {
     case moveTask(IndexPath, IndexPath)
     case deleteTask(IndexPath)
     case taskIncreaseValue(IndexPath)
+    case taskDecreaseValue(IndexPath)
   }
 
   enum Mutation {
@@ -90,6 +91,10 @@ final class TaskListViewReactor: BaseReactor {
     case let .taskIncreaseValue(indexPath):
       let task = self.currentState.sections[indexPath].currentState
       return self.provider.taskService.increaseValue(taskID: task.id).flatMap { _ in Observable.empty() }
+
+    case let .taskDecreaseValue(indexPath):
+      let task = self.currentState.sections[indexPath].currentState
+      return self.provider.taskService.decreaseValue(taskID: task.id).flatMap { _ in Observable.empty() }
     }
 
   }
@@ -102,6 +107,7 @@ final class TaskListViewReactor: BaseReactor {
     return Observable.of(mutation, taskEventMutation).merge()
   }
 
+  // swiftlint:disable cyclomatic_complexity
   private func mutate(taskEvent: TaskEvent) -> Observable<Mutation> {
     let state = self.currentState
 
@@ -129,6 +135,13 @@ final class TaskListViewReactor: BaseReactor {
       guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
       var task = state.sections[indexPath].currentState
       task.value += 1
+      let reactor = TaskCellReactor(task: task)
+      return .just(.updateSectionItem(indexPath, reactor))
+
+    case let .decreaseValue(id):
+      guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
+      var task = state.sections[indexPath].currentState
+      task.value -= 1
       let reactor = TaskCellReactor(task: task)
       return .just(.updateSectionItem(indexPath, reactor))
     }

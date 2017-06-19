@@ -12,6 +12,7 @@ import RxCocoa
 import RxDataSources
 import ReusableKit
 import RxKeyboard
+import SwipeCellKit
 
 final class TaskListViewController: BaseViewController, View {
 
@@ -26,6 +27,9 @@ final class TaskListViewController: BaseViewController, View {
   }
 
   // MARK: - Properties
+  var isSwipeRightEnabled = true
+  var buttonDisplayMode: ButtonDisplayMode = .titleAndImage
+  var buttonStyle: ButtonStyle = .backgroundColor
 
   let dataSource = RxTableViewSectionedReloadDataSource<TaskListSection>()
   fileprivate let headerView = SectionHeaderView()
@@ -100,6 +104,7 @@ final class TaskListViewController: BaseViewController, View {
     self.dataSource.configureCell = { _, tableView, indexPath, reactor in
       let cell = tableView.dequeue(Reusable.taskCell, for: indexPath)
       cell.selectionStyle = .none
+      cell.delegate = self
       cell.reactor = reactor
       return cell
     }
@@ -163,11 +168,6 @@ final class TaskListViewController: BaseViewController, View {
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
-    self.tableView.rx.itemDeleted
-      .map(Reactor.Action.deleteTask)
-      .bind(to: reactor.action)
-      .disposed(by: self.disposeBag)
-
     self.tableView.rx.itemMoved
       .map(Reactor.Action.moveTask)
       .bind(to: reactor.action)
@@ -195,7 +195,7 @@ final class TaskListViewController: BaseViewController, View {
       .distinctUntilChanged()
       .subscribe(onNext: { [weak self] isEditing in
         guard let `self` = self else { return }
-        self.messageInputBar.tintColor = isEditing ? .redGraphite : .charcoal ~ 75%
+        self.messageInputBar.tintColor = isEditing ? .redGraphite : .midGray
         self.tableView.setEditing(isEditing, animated: true)
       })
       .disposed(by: self.disposeBag)

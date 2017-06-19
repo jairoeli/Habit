@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9C15AD7E1EDFDF2F0092373A /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C15AD7D1EDFDF2F0092373A /* UIFont.swift */; };
 		9C2945A11EC9238B00A04CE9 /* MessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */; };
+		9C2F5BC31EF6EEB200A4E250 /* SwipeActionDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F5BC21EF6EEB200A4E250 /* SwipeActionDescriptor.swift */; };
+		9C2F5BC51EF6FB5300A4E250 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F5BC41EF6FB5300A4E250 /* TaskEditViewController.swift */; };
 		9C395C251ED11EE300DCFB8F /* BaseReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C395C241ED11EE300DCFB8F /* BaseReactor.swift */; };
 		9C3A10511EEC4E5D00DA1B1F /* SettingItemCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A10501EEC4E5D00DA1B1F /* SettingItemCellReactor.swift */; };
 		9C3A10531EEC4EB100DA1B1F /* SettingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A10521EEC4EB100DA1B1F /* SettingItemCell.swift */; };
@@ -67,6 +69,8 @@
 		5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.release.xcconfig"; sourceTree = "<group>"; };
 		9C15AD7D1EDFDF2F0092373A /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFont.swift; path = Sources/Utils/UIFont.swift; sourceTree = "<group>"; };
 		9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageInputBar.swift; path = "Sources/iOS Zero/Views/TaskList/MessageInputBar.swift"; sourceTree = "<group>"; };
+		9C2F5BC21EF6EEB200A4E250 /* SwipeActionDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeActionDescriptor.swift; path = "Sources/iOS Zero/Views/TaskList/SwipeActionDescriptor.swift"; sourceTree = "<group>"; };
+		9C2F5BC41EF6FB5300A4E250 /* TaskEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewController.swift; path = "Sources/iOS Zero/Views/TaskList/TaskEditViewController.swift"; sourceTree = "<group>"; };
 		9C395C241ED11EE300DCFB8F /* BaseReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseReactor.swift; path = "Sources/iOS Zero/Reactors/BaseReactor.swift"; sourceTree = "<group>"; };
 		9C3A10501EEC4E5D00DA1B1F /* SettingItemCellReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingItemCellReactor.swift; path = "Sources/iOS Zero/Views/Setting/SettingItemCellReactor.swift"; sourceTree = "<group>"; };
 		9C3A10521EEC4EB100DA1B1F /* SettingItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingItemCell.swift; path = "Sources/iOS Zero/Views/Setting/SettingItemCell.swift"; sourceTree = "<group>"; };
@@ -345,7 +349,9 @@
 			children = (
 				9CEA33CE1EC0D81800816DAA /* TaskCell.swift */,
 				9CDF098F1EC2283C00A2A25C /* TaskListViewController.swift */,
+				9C2F5BC41EF6FB5300A4E250 /* TaskEditViewController.swift */,
 				9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */,
+				9C2F5BC21EF6EEB200A4E250 /* SwipeActionDescriptor.swift */,
 				9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */,
 			);
 			name = Task;
@@ -630,11 +636,13 @@
 				9CDF09901EC2283C00A2A25C /* TaskListViewController.swift in Sources */,
 				9C3A10511EEC4E5D00DA1B1F /* SettingItemCellReactor.swift in Sources */,
 				9C3E2D7C1EC61B8000EE5276 /* TaskEditViewReactor.swift in Sources */,
+				9C2F5BC51EF6FB5300A4E250 /* TaskEditViewController.swift in Sources */,
 				9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */,
 				9CEA33C21EC0CA5500816DAA /* UserDefaultsKey.swift in Sources */,
 				9CEA33AF1EC0C10F00816DAA /* String+BoundingRect.swift in Sources */,
 				9CEA33C41EC0CAA900816DAA /* UserDefaultsService.swift in Sources */,
 				9CEA33AB1EC0C0C100816DAA /* MutateOperator.swift in Sources */,
+				9C2F5BC31EF6EEB200A4E250 /* SwipeActionDescriptor.swift in Sources */,
 				9CEA33B91EC0C29500816DAA /* Array+SectionModel.swift in Sources */,
 				9C395C251ED11EE300DCFB8F /* BaseReactor.swift in Sources */,
 			);

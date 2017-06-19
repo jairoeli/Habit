@@ -10,7 +10,7 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-final class SettingsViewReactor: Reactor {
+final class SettingsViewReactor: BaseReactor {
   typealias Action = NoAction
 
   struct State {

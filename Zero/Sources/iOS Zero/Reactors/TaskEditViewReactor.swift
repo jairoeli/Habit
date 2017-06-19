@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 
 enum TaskEditViewMode {
-  case new
   case edit(Task)
 }
 
@@ -19,6 +18,7 @@ final class TaskEditViewReactor: BaseReactor {
 
   enum Action {
     case updateTaskTitle(String)
+    case cancel
     case submit
   }
 
@@ -52,7 +52,6 @@ final class TaskEditViewReactor: BaseReactor {
     self.mode = mode
 
     switch mode {
-      case .new: self.initialState = State(taskTitle: "", canSubmit: false)
       case .edit(let task): self.initialState = State(taskTitle: task.title, canSubmit: true)
     }
   }
@@ -67,16 +66,13 @@ final class TaskEditViewReactor: BaseReactor {
     case .submit:
       guard self.currentState.canSubmit else { return .empty() }
       switch self.mode {
-      case .new:
-        return self.provider.taskService
-          .create(title: self.currentState.taskTitle, memo: nil)
-          .map { _ in .dismiss }
-
       case .edit(let task):
         return self.provider.taskService
           .update(taskID: task.id, title: self.currentState.taskTitle, memo: nil)
           .map { _ in .dismiss }
       }
+
+    case .cancel: return .just(.dismiss) // no need to confirm
     }
   }
 

@@ -8,8 +8,9 @@
 
 import Foundation
 import RxSwift
+import SwipeCellKit
 
-class BaseTableViewCell: UITableViewCell {
+class BaseTableViewCell: SwipeTableViewCell {
 
   // MARK: - Initializing
 

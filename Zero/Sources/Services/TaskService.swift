@@ -14,6 +14,7 @@ enum TaskEvent {
   case delete(id: String)
   case move(id: String, to: Int)
   case increaseValue(id: String)
+  case decreaseValue(id: String)
 }
 
 protocol TaskServiceType {
@@ -28,6 +29,7 @@ protocol TaskServiceType {
   func delete(taskID: String) -> Observable<Task>
   func move(taskID: String, to: Int) -> Observable<Task>
   func increaseValue(taskID: String) -> Observable<Task>
+  func decreaseValue(taskID: String) -> Observable<Task>
 }
 
 final class TaskService: BaseService, TaskServiceType {
@@ -42,7 +44,8 @@ final class TaskService: BaseService, TaskServiceType {
 
     let defaultTasks: [Task] = [
       Task(title: "➕ Tap me"),
-      Task(title: "👈 Swipe left")
+      Task(title: "👈 Swipe left"),
+      Task(title: "👉 Swipe right")
     ]
 
     let defaultsTaskDictionaries = defaultTasks.map { $0.asDictionary() }
@@ -131,6 +134,24 @@ final class TaskService: BaseService, TaskServiceType {
     }
       .do(onNext: { task in
         self.event.onNext(.increaseValue(id: task.id))
+      })
+  }
+
+  func decreaseValue(taskID: String) -> Observable<Task> {
+    return self.fetchTask()
+      .flatMap { [weak self] tasks -> Observable<Task> in
+        guard let `self` = self else { return .empty() }
+        guard let index = tasks.index(where: { $0.id == taskID }) else { return .empty() }
+        var tasks = tasks
+        let newValue = tasks[index].with {
+          $0.value -= 1
+          return
+        }
+        tasks[index] = newValue
+        return self.saveTasks(tasks).map { newValue }
+      }
+      .do(onNext: { task in
+        self.event.onNext(.decreaseValue(id: task.id))
       })
   }
 
