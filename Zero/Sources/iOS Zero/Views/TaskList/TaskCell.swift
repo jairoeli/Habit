@@ -43,7 +43,7 @@ final class TaskCell: BaseTableViewCell, View {
   }
 
   let separatorView = UIView() <== {
-    $0.backgroundColor = UIColor(white: 0.85, alpha: 1)
+    $0.backgroundColor = .platinumBorder
   }
 
   // MARK: - Initializing

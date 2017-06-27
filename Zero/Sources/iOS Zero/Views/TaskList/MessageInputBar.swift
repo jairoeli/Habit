@@ -57,7 +57,7 @@ final class MessageInputBar: UIView {
   }
 
   fileprivate let separatorView = UIView() <== {
-    $0.backgroundColor = UIColor(white: 0.85, alpha: 1)
+    $0.backgroundColor = .platinumBorder
   }
 
   fileprivate lazy var settingsButton = UIButton(type: .system) <== {

@@ -13,8 +13,8 @@ import RxSwift
 final class SectionHeaderView: UIView {
 
   struct Metric {
-    static let cellPadding = 30.f
-    static let leftPadding = 15.f
+    static let cellPadding = 32.f
+    static let leftPadding = 12.f
   }
 
   // MARK: - UI
@@ -51,13 +51,13 @@ final class SectionHeaderView: UIView {
 
   fileprivate func setUpView() {
     self.titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(self.displayDate.snp.bottom).offset(2)
-      make.left.equalTo(Metric.leftPadding)
+      make.top.equalTo(self.displayDate.snp.bottom)
+      make.leading.equalTo(Metric.leftPadding)
     }
 
     self.displayDate.snp.makeConstraints { make in
       make.top.equalTo(Metric.cellPadding)
-      make.left.equalTo(Metric.leftPadding)
+      make.leading.equalTo(Metric.leftPadding)
     }
   }
 

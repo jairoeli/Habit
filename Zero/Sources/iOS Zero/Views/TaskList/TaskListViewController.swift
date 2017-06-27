@@ -80,19 +80,19 @@ final class TaskListViewController: BaseViewController, View {
 
     self.tableView.snp.makeConstraints { make in
       make.top.equalTo(self.headerView.snp.bottom)
-      make.left.right.equalToSuperview()
+      make.leading.trailing.equalToSuperview()
       make.bottom.equalToSuperview()
     }
 
     self.messageInputBar.snp.makeConstraints { make in
-      make.left.right.equalToSuperview()
+      make.leading.trailing.equalToSuperview()
       make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
     }
 
     self.titleInput.snp.makeConstraints { make in
       make.top.equalTo(self.messageInputBar.snp.top).offset(10)
-      make.left.equalTo(Metric.padding)
-      make.right.equalTo(-Metric.padding)
+      make.leading.equalTo(Metric.padding)
+      make.trailing.equalTo(-Metric.padding)
     }
   }
 
@@ -132,7 +132,7 @@ final class TaskListViewController: BaseViewController, View {
         self.messageInputBar.isEnabled = validation
         self.messageInputBar.buttonColor = validation ? .redGraphite : .snow
         self.messageInputBar.borderColor = validation ? .redGraphite : .platinumBorder
-        self.messageInputBar.buttonTitleColor = validation ? .white : .midGray
+        self.messageInputBar.buttonTitleColor = validation ? .snow : .midGray
       })
       .disposed(by: self.disposeBag)
 
@@ -203,6 +203,7 @@ final class TaskListViewController: BaseViewController, View {
     // Keyboard
     self.rxKeyboard()
   }
+  // swiftlint:enable function_body_length
 
 }
 
