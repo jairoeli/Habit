@@ -18,23 +18,27 @@ final class TaskEditViewReactor: BaseReactor {
 
   enum Action {
     case updateTaskTitle(String)
+    case updateNote(String)
     case cancel
     case submit
   }
 
   enum Mutation {
     case updateTaskTitle(String)
+    case updateNote(String)
     case dismiss
   }
 
   struct State {
     var taskTitle: String
+    var taskNote: String?
     var canSubmit: Bool
     var shouldConfirmCancel: Bool
     var isDismissed: Bool
 
-    init(taskTitle: String, canSubmit: Bool) {
+    init(taskTitle: String, taskNote: String?, canSubmit: Bool) {
       self.taskTitle = taskTitle
+      self.taskNote = taskNote
       self.canSubmit = canSubmit
       self.shouldConfirmCancel = false
       self.isDismissed = false
@@ -50,9 +54,9 @@ final class TaskEditViewReactor: BaseReactor {
   init(provider: ServiceProviderType, mode: TaskEditViewMode) {
     self.provider = provider
     self.mode = mode
-
     switch mode {
-      case .edit(let task): self.initialState = State(taskTitle: task.title, canSubmit: true)
+      case .edit(let task):
+        self.initialState = State(taskTitle: task.title, taskNote: task.memo, canSubmit: true)
     }
   }
 
@@ -62,17 +66,19 @@ final class TaskEditViewReactor: BaseReactor {
     switch action {
 
     case let .updateTaskTitle(taskTitle): return .just(.updateTaskTitle(taskTitle))
+    case let .updateNote(addNote): return .just(.updateNote(addNote))
 
     case .submit:
       guard self.currentState.canSubmit else { return .empty() }
       switch self.mode {
       case .edit(let task):
-        return self.provider.taskService
-          .update(taskID: task.id, title: self.currentState.taskTitle, memo: nil)
+        return self.provider.taskService.update(taskID: task.id,
+                                                title: self.currentState.taskTitle,
+                                                memo: self.currentState.taskNote)
           .map { _ in .dismiss }
       }
 
-    case .cancel: return .just(.dismiss) // no need to confirm
+    case .cancel: return .just(.dismiss)
     }
   }
 
@@ -85,6 +91,10 @@ final class TaskEditViewReactor: BaseReactor {
       state.taskTitle = taskTitle
       state.canSubmit = !taskTitle.isEmpty
       state.shouldConfirmCancel = taskTitle != self.initialState.taskTitle
+      return state
+
+    case let .updateNote(addNote):
+      state.taskNote = addNote
       return state
 
     case .dismiss:
