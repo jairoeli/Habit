@@ -21,6 +21,7 @@ target 'Zero' do
   # Misc.
   pod 'ReusableKit'
   pod 'SwipeCellKit'
+  pod 'UITextView+Placeholder'
 
   # Testing
   target 'ZeroTests' do
