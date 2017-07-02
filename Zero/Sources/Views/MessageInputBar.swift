@@ -52,11 +52,11 @@ final class MessageInputBar: UIView {
 
   // MARK: - UI
 
-  fileprivate let textView = UIView() <== {
+  fileprivate lazy var textView = UIView() <== {
     $0.backgroundColor = .snow
   }
 
-  fileprivate let separatorView = UIView() <== {
+  fileprivate lazy var separatorView = UIView() <== {
     $0.backgroundColor = .platinumBorder
   }
 
@@ -74,10 +74,12 @@ final class MessageInputBar: UIView {
     $0.setTitle("Done", for: .normal)
     $0.setTitleColor(.midGray, for: .normal)
     $0.backgroundColor = .snow
-    $0.layer.borderWidth = 1
-    $0.layer.borderColor = UIColor.platinumBorder.cgColor
-    $0.layer.cornerRadius = 4
     $0.titleLabel?.font = .black(size: 16)
+    $0.layer <== {
+      $0.borderWidth = 1
+      $0.borderColor = UIColor.platinumBorder.cgColor
+      $0.cornerRadius = 4
+    }
   }
 
   // MARK: Initializing
@@ -89,7 +91,6 @@ final class MessageInputBar: UIView {
     self.addSubview(self.settingsButton)
     self.addSubview(self.reorderButton)
     self.addSubview(self.doneButton)
-
     self.setupLayout()
   }
 

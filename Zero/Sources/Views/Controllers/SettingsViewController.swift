@@ -25,7 +25,7 @@ final class SettingsViewController: BaseViewController, View {
   fileprivate let dataSource = RxTableViewSectionedReloadDataSource<SettingsViewSection>()
 
   // MARK: UI
-  fileprivate let tableView = UITableView(frame: .zero, style: .grouped) <== {
+  fileprivate lazy var tableView = UITableView(frame: .zero, style: .grouped) <== {
     $0.register(Reusable.cell)
   }
 

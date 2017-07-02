@@ -19,13 +19,13 @@ final class SectionHeaderView: UIView {
 
   // MARK: - UI
 
-  let titleLabel = UILabel() <== {
+  lazy var titleLabel = UILabel() <== {
     $0.text = TimeOfTheDay.getGreetingFromTheCurrentOfTheDay()
     $0.textColor = .charcoal
     $0.font = .black(size: 32)
   }
 
-  let displayDate = UILabel() <== {
+  lazy var displayDate = UILabel() <== {
     let date = Date()
     $0.text =  date.currentDate()
     $0.textColor = .midGray

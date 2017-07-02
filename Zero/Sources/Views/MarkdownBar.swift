@@ -18,11 +18,11 @@ final class MarkdownBar: UIView {
   }
 
   // MARK: UI
-  fileprivate let toolbar = UIView() <== {
+  fileprivate lazy var toolbar = UIView() <== {
     $0.backgroundColor = .snow
   }
 
-  fileprivate let saveButton = UIButton(type: .system) <== {
+  fileprivate lazy var saveButton = UIButton(type: .system) <== {
     $0.setTitle("Save", for: .normal)
     $0.titleLabel?.font = .black(size: 16)
     $0.setTitleColor(.snow, for: .normal)
@@ -34,10 +34,12 @@ final class MarkdownBar: UIView {
     $0.setTitle("Cancel", for: .normal)
     $0.setTitleColor(.midGray, for: .normal)
     $0.backgroundColor = .snow
-    $0.layer.borderWidth = 1
-    $0.layer.borderColor = UIColor.platinumBorder.cgColor
-    $0.layer.cornerRadius = 4
     $0.titleLabel?.font = .black(size: 16)
+    $0.layer <== {
+      $0.borderWidth = 1
+      $0.borderColor = UIColor.platinumBorder.cgColor
+      $0.cornerRadius = 4
+    }
   }
 
   var isEnabled: Bool = false {

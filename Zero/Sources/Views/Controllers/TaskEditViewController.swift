@@ -22,17 +22,17 @@ final class TaskEditViewController: BaseViewController, View {
   }
 
   // MARK: - UI
-  let titleInput = UITextField() <== {
+  lazy var titleInput = UITextField() <== {
     $0.autocorrectionType = .no
     $0.font = Font.titleLabel
     $0.textColor = .charcoal
   }
 
-  let headerline = UIView() <== {
+  lazy var headerline = UIView() <== {
     $0.backgroundColor = .redGraphite
   }
 
-  let noteInput = UITextView() <== {
+  lazy var noteInput = UITextView() <== {
     $0.font = .body()
     $0.placeholder = "Add notes..."
     $0.textColor = .charcoal
