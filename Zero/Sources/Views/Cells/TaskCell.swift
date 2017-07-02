@@ -16,33 +16,35 @@ final class TaskCell: BaseTableViewCell, View {
   // MARK: - Constants
 
   struct Constant {
-    static let titleLabelNumberOfLines = 0
+    static let titleLabelNumberOfLines = 2
   }
 
   struct Metric {
-    static let cellPadding = 15.f
+    static let paddingTop = 10.f
+    static let padding = 15.f
+    static let valueSize = 100.f
   }
 
   struct Font {
-    static let titleLabel = UIFont.title3()
+    static let titleLabel = UIFont.title2()
   }
 
   // MARK: - UI
 
-  let titleLabel = UILabel() <== {
+  lazy var titleLabel = UILabel() <== {
     $0.font = Font.titleLabel
     $0.textColor = .charcoal
     $0.numberOfLines = Constant.titleLabelNumberOfLines
   }
 
-  let valueLabel = UILabel() <== {
+  lazy var valueLabel = UILabel() <== {
     $0.font = Font.titleLabel
     $0.textColor = .charcoal
     $0.text = "0"
     $0.textAlignment = .right
   }
 
-  let separatorView = UIView() <== {
+  lazy var separatorView = UIView() <== {
     $0.backgroundColor = .platinumBorder
   }
 
@@ -71,28 +73,30 @@ final class TaskCell: BaseTableViewCell, View {
   // MARK: - Cell Height
 
   class func height(fits width: CGFloat, reactor: Reactor) -> CGFloat {
-    let height = reactor.currentState.title
-      .height(fits: width - Metric.cellPadding * 4, font: Font.titleLabel, maximumNumberOfLines: Constant.titleLabelNumberOfLines)
+    let height = reactor.currentState.title.height(fits: width - Metric.padding,
+                                                   font: Font.titleLabel,
+                                                   maximumNumberOfLines: Constant.titleLabelNumberOfLines)
 
-    return height + Metric.cellPadding * 4
+    return height + Metric.padding * 4
   }
 
   // MARK: - Layout
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    self.titleLabel.top = Metric.cellPadding * 2
-    self.titleLabel.left = Metric.cellPadding
-    self.titleLabel.width = self.contentView.width - Metric.cellPadding * 6
     self.titleLabel.sizeToFit()
+    self.titleLabel.top = Metric.paddingTop
+    self.titleLabel.left = Metric.padding
+    self.titleLabel.width = self.contentView.width - 130
+    self.titleLabel.height = self.contentView.height - 20
 
-    self.valueLabel.top = Metric.cellPadding
-    self.valueLabel.left = self.contentView.width - Metric.cellPadding * 2
     self.valueLabel.sizeToFit()
-    self.valueLabel.frame = CGRect(x: self.contentView.width - Metric.cellPadding, y: 0, width: -100, height: self.bounds.size.height)
+    self.valueLabel.top = Metric.padding * 2
+    self.valueLabel.left = self.titleLabel.right + Metric.padding - Metric.padding
+    self.valueLabel.width = Metric.valueSize
 
     self.separatorView.bottom = self.contentView.bottom
-    self.separatorView.left = Metric.cellPadding
+    self.separatorView.left = Metric.padding
     self.separatorView.width = self.contentView.width
     self.separatorView.height = 0.5 / UIScreen.main.scale
   }
