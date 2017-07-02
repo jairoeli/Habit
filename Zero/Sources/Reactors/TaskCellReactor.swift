@@ -10,7 +10,7 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-class TaskCellReactor: Reactor {
+final class TaskCellReactor: Reactor {
   typealias Action = NoAction
 
   let initialState: Task
