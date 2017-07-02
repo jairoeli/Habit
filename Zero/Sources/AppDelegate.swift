@@ -12,6 +12,7 @@ import RxOptional
 import RxReusable
 import SnapKit
 import UITextView_Placeholder
+import RxGesture
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

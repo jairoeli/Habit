@@ -19,6 +19,9 @@ PODS:
     - RxCocoa (>= 3.4)
     - RxSwift (>= 3.4)
     - RxTest (>= 3.4)
+  - RxGesture (1.0.1):
+    - RxCocoa (~> 3.4)
+    - RxSwift (~> 3.4)
   - RxKeyboard (0.5.0):
     - RxCocoa (>= 3.4)
     - RxSwift (>= 3.4)
@@ -42,6 +45,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxDataSources
   - RxExpect
+  - RxGesture
   - RxKeyboard
   - RxOptional
   - RxReusable
@@ -58,6 +62,7 @@ SPEC CHECKSUMS:
   RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
   RxDataSources: b3389acc5fe2eefb8fcd81a2b76a876ad08bc82a
   RxExpect: 6211e63608788e904cde817aa6ccc0ac4fd4beb5
+  RxGesture: 1f770b247c69e8133fb8f4ef263571efd0ae91a1
   RxKeyboard: a0a681f3efa0c265e42ced07537f7a464e867e74
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxReusable: c18e8e3b5f12a3292b76cc552dd946500f8d2c32
@@ -67,6 +72,6 @@ SPEC CHECKSUMS:
   SwipeCellKit: 893661973276ae3512a84ac0a47055923b10731e
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: 5134b2af15f43aed146d3b58021e3cfaf75ef352
+PODFILE CHECKSUM: 66bc55f955c977e6484f7af6cb5a933c283a252b
 
 COCOAPODS: 1.2.1
