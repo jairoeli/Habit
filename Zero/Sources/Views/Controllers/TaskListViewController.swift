@@ -34,7 +34,7 @@ final class TaskListViewController: BaseViewController, View {
   let dataSource = RxTableViewSectionedReloadDataSource<TaskListSection>()
   fileprivate let headerView = SectionHeaderView()
   fileprivate let messageInputBar = MessageInputBar()
-  fileprivate let tableView = UITableView() <== {
+  fileprivate lazy var tableView = UITableView() <== {
     $0.alwaysBounceVertical = true
     $0.backgroundColor = .snow
     $0.separatorStyle = .none
@@ -125,8 +125,8 @@ final class TaskListViewController: BaseViewController, View {
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
-    self.titleInput.rx.text
-      .map { $0?.isEmpty == false }
+    self.titleInput.rx.text.orEmpty
+      .map { !$0.isEmpty }
       .subscribe(onNext: { [weak self] validation in
         guard let `self` = self else { return }
         self.messageInputBar.isEnabled = validation
@@ -164,6 +164,7 @@ final class TaskListViewController: BaseViewController, View {
       .disposed(by: self.disposeBag)
 
     self.tableView.rx.itemSelected
+      .debounce(0.2, scheduler: MainScheduler.instance)
       .map { indexPath in .taskIncreaseValue(indexPath) }
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
@@ -172,6 +173,8 @@ final class TaskListViewController: BaseViewController, View {
       .map(Reactor.Action.moveTask)
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
+
+    self.rxKeyboard()
 
     // STATE
     reactor.state.map { $0.sections }
@@ -199,9 +202,6 @@ final class TaskListViewController: BaseViewController, View {
         self.tableView.setEditing(isEditing, animated: true)
       })
       .disposed(by: self.disposeBag)
-
-    // Keyboard
-    self.rxKeyboard()
   }
   // swiftlint:enable function_body_length
 
@@ -229,6 +229,13 @@ extension TaskListViewController {
     self.tableView.rx.itemSelected
       .subscribe(onNext: { [weak tableView] indexPath in
         tableView?.deselectRow(at: indexPath, animated: true)
+      })
+      .disposed(by: self.disposeBag)
+
+    self.messageInputBar.rx.tapGesture()
+      .when(.recognized)
+      .subscribe(onNext: { [weak self] _ in
+        self?.titleInput.becomeFirstResponder()
       })
       .disposed(by: self.disposeBag)
   }
