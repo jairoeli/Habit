@@ -56,11 +56,25 @@ final class MarkdownBar: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.translatesAutoresizingMaskIntoConstraints = false
-    self.addSubview(self.toolbar)
-    self.addSubview(self.separatorView)
-    self.addSubview(self.saveButton)
-    self.addSubview(self.cancelButton)
 
+    let subviews: [UIView] = [toolbar, separatorView, saveButton, cancelButton]
+    self.add(subviews)
+
+    setupLayout()
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  // MARK: Size
+  override var intrinsicContentSize: CGSize {
+    return CGSize(width: self.width, height: 45)
+  }
+
+  // MARK: - Layout
+
+  fileprivate func setupLayout() {
     self.separatorView.snp.makeConstraints { make in
       make.top.left.right.equalToSuperview()
       make.height.equalTo(1 / UIScreen.main.scale)
@@ -83,15 +97,6 @@ final class MarkdownBar: UIView {
       make.width.equalTo(Metric.buttonWidth)
       make.trailing.equalTo(-12)
     }
-  }
-
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  // MARK: Size
-  override var intrinsicContentSize: CGSize {
-    return CGSize(width: self.width, height: 45)
   }
 
 }

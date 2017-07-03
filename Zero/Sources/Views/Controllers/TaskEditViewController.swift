@@ -56,10 +56,8 @@ final class TaskEditViewController: BaseViewController, View {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .snow
-    self.view.addSubview(self.titleInput)
-    self.view.addSubview(self.headerline)
-    self.view.addSubview(self.noteInput)
-    self.view.addSubview(self.markdownBar)
+    let subviews: [UIView] = [titleInput, headerline, noteInput, markdownBar]
+    self.view.add(subviews)
   }
 
   override func viewDidAppear(_ animated: Bool) {

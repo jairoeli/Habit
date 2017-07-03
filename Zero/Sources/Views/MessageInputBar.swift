@@ -86,11 +86,8 @@ final class MessageInputBar: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.translatesAutoresizingMaskIntoConstraints = false
-    self.addSubview(self.textView)
-    self.addSubview(self.separatorView)
-    self.addSubview(self.settingsButton)
-    self.addSubview(self.reorderButton)
-    self.addSubview(self.doneButton)
+    let subviews: [UIView] = [textView, separatorView, settingsButton, reorderButton, doneButton]
+    self.add(subviews)
     self.setupLayout()
   }
 

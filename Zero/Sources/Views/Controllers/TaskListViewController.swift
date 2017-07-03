@@ -65,10 +65,9 @@ final class TaskListViewController: BaseViewController, View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.addSubview(self.headerView)
-    view.addSubview(self.tableView)
-    view.addSubview(self.messageInputBar)
-    view.addSubview(self.titleInput)
+    let subviews: [UIView] = [headerView, tableView, messageInputBar, titleInput]
+    self.view.add(subviews)
+
     tableView.contentInset.bottom = self.messageInputBar.intrinsicContentSize.height
     tableView.scrollIndicatorInsets = self.tableView.contentInset
     tableView.contentInset = UIEdgeInsets(top: 0.f, left: 0.f, bottom: 85.f, right: 0.f)

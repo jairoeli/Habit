@@ -51,9 +51,8 @@ final class TaskCell: BaseTableViewCell, View {
   // MARK: - Initializing
 
   override func initialize() {
-    self.contentView.addSubview(self.titleLabel)
-    self.contentView.addSubview(self.valueLabel)
-    self.contentView.addSubview(self.separatorView)
+    let subviews: [UIView] = [titleLabel, valueLabel, separatorView]
+    self.contentView.add(subviews)
     self.backgroundColor = .snow
   }
 

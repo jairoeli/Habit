@@ -38,8 +38,8 @@ final class SectionHeaderView: UIView {
     super.init(frame: frame)
     self.backgroundColor = .snow
 
-    self.addSubview(self.titleLabel)
-    self.addSubview(self.displayDate)
+    let subviews: [UIView] = [titleLabel, displayDate]
+    self.add(subviews)
     self.setUpView()
   }
 
