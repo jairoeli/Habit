@@ -43,7 +43,7 @@ final class TaskEditViewController: BaseViewController, View {
   fileprivate let markdownBar = MarkdownBar()
 
   // MARK: - Initializing
-  init(reactor: TaskEditViewReactor) {
+  init(reactor: HabitEditViewReactor) {
     defer { self.reactor = reactor }
     super.init()
   }
@@ -103,7 +103,7 @@ final class TaskEditViewController: BaseViewController, View {
   }
 
   // MARK: - Binding
-  func bind(reactor: TaskEditViewReactor) {
+  func bind(reactor: HabitEditViewReactor) {
     // Action
     self.markdownBar.rx.saveButtonTap
       .map { Reactor.Action.submit }
@@ -117,7 +117,7 @@ final class TaskEditViewController: BaseViewController, View {
 
     self.titleInput.rx.text
       .filterNil()
-      .map(Reactor.Action.updateTaskTitle)
+      .map(Reactor.Action.updateHabitTitle)
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
@@ -130,12 +130,12 @@ final class TaskEditViewController: BaseViewController, View {
     self.rxKeyboard()
 
     // State
-    reactor.state.asObservable().map { $0.taskTitle }
+    reactor.state.asObservable().map { $0.habitTitle }
       .distinctUntilChanged()
       .bind(to: self.titleInput.rx.text)
       .disposed(by: self.disposeBag)
 
-    reactor.state.asObservable().map { $0.taskNote }
+    reactor.state.asObservable().map { $0.habitNote }
       .distinctUntilChanged()
       .bind(to: self.noteInput.rx.text)
       .disposed(by: self.disposeBag)

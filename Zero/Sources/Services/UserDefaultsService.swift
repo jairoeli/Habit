@@ -9,7 +9,7 @@
 import Foundation
 
 extension UserDefaultsKey {
-  static var tasks: Key<[[String: Any]]> { return "tasks" }
+  static var habits: Key<[[String: Any]]> { return "habits" }
 }
 
 protocol UserDefaultsServiceType {

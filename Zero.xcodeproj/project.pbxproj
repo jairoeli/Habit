@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C0A6F3D1F0B2AAD000491C9 /* AppStoreAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A6F3C1F0B2AAD000491C9 /* AppStoreAPI.swift */; };
 		9C15AD7E1EDFDF2F0092373A /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C15AD7D1EDFDF2F0092373A /* UIFont.swift */; };
 		9C2945A11EC9238B00A04CE9 /* MessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */; };
 		9C2F5BC31EF6EEB200A4E250 /* SwipeActionDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F5BC21EF6EEB200A4E250 /* SwipeActionDescriptor.swift */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.release.xcconfig"; sourceTree = "<group>"; };
+		9C0A6F3C1F0B2AAD000491C9 /* AppStoreAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppStoreAPI.swift; path = Sources/Networking/AppStoreAPI.swift; sourceTree = "<group>"; };
 		9C15AD7D1EDFDF2F0092373A /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFont.swift; path = Sources/Utils/UIFont.swift; sourceTree = "<group>"; };
 		9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageInputBar.swift; path = Sources/Views/MessageInputBar.swift; sourceTree = "<group>"; };
 		9C2F5BC21EF6EEB200A4E250 /* SwipeActionDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeActionDescriptor.swift; path = Sources/Views/SwipeActionDescriptor.swift; sourceTree = "<group>"; };
@@ -155,6 +157,14 @@
 				FD7AAFC64BA9EEAF3CB14547 /* Pods-Zero-ZeroTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9C0A6F3B1F0B2A70000491C9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9C0A6F3C1F0B2AAD000491C9 /* AppStoreAPI.swift */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 		9C3A10541EEC537800DA1B1F /* DataSources */ = {
@@ -284,6 +294,7 @@
 			children = (
 				9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */,
 				9CEA33BA1EC0C47100816DAA /* Models */,
+				9C0A6F3B1F0B2A70000491C9 /* Networking */,
 				9CEA33B21EC0C19900816DAA /* Services */,
 				9C3A10541EEC537800DA1B1F /* DataSources */,
 				9CEA33CB1EC0D76F00816DAA /* Reactors */,
@@ -638,6 +649,7 @@
 				9C2F5BC51EF6FB5300A4E250 /* TaskEditViewController.swift in Sources */,
 				9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */,
 				9CEA33C21EC0CA5500816DAA /* UserDefaultsKey.swift in Sources */,
+				9C0A6F3D1F0B2AAD000491C9 /* AppStoreAPI.swift in Sources */,
 				9CEA33AF1EC0C10F00816DAA /* String+BoundingRect.swift in Sources */,
 				9CEA33C41EC0CAA900816DAA /* UserDefaultsService.swift in Sources */,
 				9CE32AB11F0A876D00FD7384 /* Subviews.swift in Sources */,

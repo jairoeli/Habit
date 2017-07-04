@@ -8,150 +8,150 @@
 
 import RxSwift
 
-enum TaskEvent {
-  case create(Task)
-  case update(Task)
+enum HabitEvent {
+  case create(Habit)
+  case update(Habit)
   case delete(id: String)
   case move(id: String, to: Int)
   case increaseValue(id: String)
   case decreaseValue(id: String)
 }
 
-protocol TaskServiceType {
-  var event: PublishSubject<TaskEvent> { get }
-  func fetchTask() -> Observable<[Task]>
+protocol HabitServiceType {
+  var event: PublishSubject<HabitEvent> { get }
+  func fetchHabit() -> Observable<[Habit]>
 
   @discardableResult
-  func saveTasks(_ tasks: [Task]) -> Observable<Void>
+  func saveHabits(_ habits: [Habit]) -> Observable<Void>
 
-  func create(title: String, memo: String?) -> Observable<Task>
-  func update(taskID: String, title: String, memo: String?) -> Observable<Task>
-  func delete(taskID: String) -> Observable<Task>
-  func move(taskID: String, to: Int) -> Observable<Task>
-  func increaseValue(taskID: String) -> Observable<Task>
-  func decreaseValue(taskID: String) -> Observable<Task>
+  func create(title: String, memo: String?) -> Observable<Habit>
+  func update(habitID: String, title: String, memo: String?) -> Observable<Habit>
+  func delete(habitID: String) -> Observable<Habit>
+  func move(habitID: String, to: Int) -> Observable<Habit>
+  func increaseValue(habitID: String) -> Observable<Habit>
+  func decreaseValue(habitID: String) -> Observable<Habit>
 }
 
-final class TaskService: BaseService, TaskServiceType {
+final class HabitService: BaseService, HabitServiceType {
 
-  let event = PublishSubject<TaskEvent>()
+  let event = PublishSubject<HabitEvent>()
 
-  func fetchTask() -> Observable<[Task]> {
-    if let savedTaskDictionaries = self.provider.userDefaultsService.value(forKey: .tasks) {
-      let tasks = savedTaskDictionaries.flatMap(Task.init)
-      return .just(tasks)
+  func fetchHabit() -> Observable<[Habit]> {
+    if let savedHabitDictionaries = self.provider.userDefaultsService.value(forKey: .habits) {
+      let habits = savedHabitDictionaries.flatMap(Habit.init)
+      return .just(habits)
     }
 
-    let defaultTasks: [Task] = [
-      Task(title: "➕ Tap me"),
-      Task(title: "👈 Swipe left"),
-      Task(title: "👉 Swipe right")
+    let defaultHabits: [Habit] = [
+      Habit(title: "➕ Tap me"),
+      Habit(title: "👈 Swipe left"),
+      Habit(title: "👉 Swipe right")
     ]
 
-    let defaultsTaskDictionaries = defaultTasks.map { $0.asDictionary() }
-    self.provider.userDefaultsService.set(value: defaultsTaskDictionaries, forKey: .tasks)
-    return .just(defaultTasks)
+    let defaultsHabitDictionaries = defaultHabits.map { $0.asDictionary() }
+    self.provider.userDefaultsService.set(value: defaultsHabitDictionaries, forKey: .habits)
+    return .just(defaultHabits)
   }
 
   @discardableResult
-  func saveTasks(_ tasks: [Task]) -> Observable<Void> {
-    let dicts = tasks.map { $0.asDictionary() }
-    self.provider.userDefaultsService.set(value: dicts, forKey: .tasks)
+  func saveHabits(_ habits: [Habit]) -> Observable<Void> {
+    let dicts = habits.map { $0.asDictionary() }
+    self.provider.userDefaultsService.set(value: dicts, forKey: .habits)
     return .just(Void())
   }
 
-  func create(title: String, memo: String?) -> Observable<Task> {
-    return self.fetchTask()
-      .flatMap { [weak self] tasks -> Observable<Task> in
+  func create(title: String, memo: String?) -> Observable<Habit> {
+    return self.fetchHabit()
+      .flatMap { [weak self] habits -> Observable<Habit> in
         guard let `self` = self else { return .empty() }
-        let newTask = Task(title: title, memo: memo)
-        return self.saveTasks(tasks + [newTask]).map { newTask }
+        let newHabit = Habit(title: title, memo: memo)
+        return self.saveHabits(habits + [newHabit]).map { newHabit }
     }
-    .do(onNext: { task in
-      self.event.onNext(.create(task))
+    .do(onNext: { habit in
+      self.event.onNext(.create(habit))
     })
   }
 
-  func update(taskID: String, title: String, memo: String?) -> Observable<Task> {
-    return self.fetchTask()
-      .flatMap { [weak self] tasks -> Observable<Task> in
+  func update(habitID: String, title: String, memo: String?) -> Observable<Habit> {
+    return self.fetchHabit()
+      .flatMap { [weak self] habits -> Observable<Habit> in
         guard let `self` = self else { return .empty() }
-        guard let index = tasks.index(where: { $0.id == taskID }) else { return .empty() }
-        var tasks = tasks
-        let newTask = tasks[index].with {
+        guard let index = habits.index(where: { $0.id == habitID }) else { return .empty() }
+        var habits = habits
+        let newHabit = habits[index].with {
           $0.title = title
           $0.memo = memo
         }
-        tasks[index] = newTask
-        return self.saveTasks(tasks).map { newTask }
+        habits[index] = newHabit
+        return self.saveHabits(habits).map { newHabit }
     }
-      .do(onNext: { task in
-        self.event.onNext(.update(task))
+      .do(onNext: { habit in
+        self.event.onNext(.update(habit))
       })
   }
 
-  func delete(taskID: String) -> Observable<Task> {
-    return self.fetchTask()
-      .flatMap { [weak self] tasks -> Observable<Task> in
+  func delete(habitID: String) -> Observable<Habit> {
+    return self.fetchHabit()
+      .flatMap { [weak self] habits -> Observable<Habit> in
         guard let `self` = self else { return .empty() }
-        guard let index = tasks.index(where: { $0.id == taskID }) else { return .empty() }
-        var tasks = tasks
-        let deletedTasks = tasks.remove(at: index)
-        return self.saveTasks(tasks).map { deletedTasks }
+        guard let index = habits.index(where: { $0.id == habitID }) else { return .empty() }
+        var habits = habits
+        let deletedHabits = habits.remove(at: index)
+        return self.saveHabits(habits).map { deletedHabits }
     }
-      .do(onNext: { task in
-        self.event.onNext(.delete(id: task.id))
+      .do(onNext: { habit in
+        self.event.onNext(.delete(id: habit.id))
       })
   }
 
-  func move(taskID: String, to destinationIndex: Int) -> Observable<Task> {
-    return self.fetchTask()
-      .flatMap { [weak self] tasks -> Observable<Task> in
+  func move(habitID: String, to destinationIndex: Int) -> Observable<Habit> {
+    return self.fetchHabit()
+      .flatMap { [weak self] habits -> Observable<Habit> in
         guard let `self` = self else { return .empty() }
-        guard let sourceIndex = tasks.index(where: { $0.id == taskID }) else { return .empty() }
-        var tasks = tasks
-        let task = tasks.remove(at: sourceIndex)
-        tasks.insert(task, at: destinationIndex)
-        return self.saveTasks(tasks).map { task }
+        guard let sourceIndex = habits.index(where: { $0.id == habitID }) else { return .empty() }
+        var habits = habits
+        let habit = habits.remove(at: sourceIndex)
+        habits.insert(habit, at: destinationIndex)
+        return self.saveHabits(habits).map { habit }
       }
-      .do(onNext: { task in
-        self.event.onNext(.move(id: task.id, to: destinationIndex))
+      .do(onNext: { habit in
+        self.event.onNext(.move(id: habit.id, to: destinationIndex))
       })
   }
 
-  func increaseValue(taskID: String) -> Observable<Task> {
-    return self.fetchTask()
-      .flatMap { [weak self] tasks -> Observable<Task> in
+  func increaseValue(habitID: String) -> Observable<Habit> {
+    return self.fetchHabit()
+      .flatMap { [weak self] habits -> Observable<Habit> in
         guard let `self` = self else { return .empty() }
-        guard let index = tasks.index(where: { $0.id == taskID }) else { return .empty() }
-        var tasks = tasks
-        let newValue = tasks[index].with {
+        guard let index = habits.index(where: { $0.id == habitID }) else { return .empty() }
+        var habits = habits
+        let newValue = habits[index].with {
           $0.value += 1
           return
         }
-        tasks[index] = newValue
-        return self.saveTasks(tasks).map { newValue }
+        habits[index] = newValue
+        return self.saveHabits(habits).map { newValue }
     }
-      .do(onNext: { task in
-        self.event.onNext(.increaseValue(id: task.id))
+      .do(onNext: { habit in
+        self.event.onNext(.increaseValue(id: habit.id))
       })
   }
 
-  func decreaseValue(taskID: String) -> Observable<Task> {
-    return self.fetchTask()
-      .flatMap { [weak self] tasks -> Observable<Task> in
+  func decreaseValue(habitID: String) -> Observable<Habit> {
+    return self.fetchHabit()
+      .flatMap { [weak self] habits -> Observable<Habit> in
         guard let `self` = self else { return .empty() }
-        guard let index = tasks.index(where: { $0.id == taskID }) else { return .empty() }
-        var tasks = tasks
-        let newValue = tasks[index].with {
+        guard let index = habits.index(where: { $0.id == habitID }) else { return .empty() }
+        var habits = habits
+        let newValue = habits[index].with {
           $0.value -= 1
           return
         }
-        tasks[index] = newValue
-        return self.saveTasks(tasks).map { newValue }
+        habits[index] = newValue
+        return self.saveHabits(habits).map { newValue }
       }
-      .do(onNext: { task in
-        self.event.onNext(.decreaseValue(id: task.id))
+      .do(onNext: { habit in
+        self.event.onNext(.decreaseValue(id: habit.id))
       })
   }
 

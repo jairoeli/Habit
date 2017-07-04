@@ -1,5 +1,5 @@
 //
-//  Task.swift
+//  Habit.swift
 //  Zero
 //
 //  Created by Jairo Eli de Leon on 5/8/17.
@@ -8,12 +8,11 @@
 
 import Foundation
 
-struct Task: ModelType, Identifiable {
+struct Habit: ModelType, Identifiable {
 
   var id: String = UUID().uuidString
   var title: String
   var memo: String?
-  var isDone: Bool = false
   var value: Int = 0
 
   init(title: String, memo: String? = nil) {
@@ -29,7 +28,6 @@ struct Task: ModelType, Identifiable {
     self.id = id
     self.title = title
     self.memo = dictionary["memo"] as? String
-    self.isDone = dictionary["isDone"] as? Bool ?? false
     self.value = dictionary["value"] as? Int ?? 0
   }
 
@@ -37,7 +35,6 @@ struct Task: ModelType, Identifiable {
     var dictionary: [String: Any] = [
       "id": self.id,
       "title": self.title,
-      "isDone": self.isDone,
       "value": self.value
       ]
 

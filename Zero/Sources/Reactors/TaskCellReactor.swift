@@ -13,9 +13,9 @@ import RxSwift
 final class TaskCellReactor: Reactor {
   typealias Action = NoAction
 
-  let initialState: Task
+  let initialState: Habit
 
-  init(task: Task) {
-    self.initialState = task
+  init(habit: Habit) {
+    self.initialState = habit
   }
 }

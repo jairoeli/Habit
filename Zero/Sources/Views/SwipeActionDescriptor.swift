@@ -72,14 +72,14 @@ extension TaskListViewController: SwipeTableViewCellDelegate {
       guard isSwipeRightEnabled else { return nil }
 
       let decreaseAction = SwipeAction(style: .default, title: "Decrease") { [weak self] _, indexPath in
-        self?.reactor?.action.onNext(Reactor.Action.taskDecreaseValue(indexPath))
+        self?.reactor?.action.onNext(Reactor.Action.habitDecreaseValue(indexPath))
       }
       configure(action: decreaseAction, with: .decrease)
 
       return [decreaseAction]
     } else {
       let deleteAction = SwipeAction(style: .destructive, title: "Trash") { [weak self] _, indexPath in
-        self?.reactor?.action.onNext(Reactor.Action.deleteTask(indexPath))
+        self?.reactor?.action.onNext(Reactor.Action.deleteHabit(indexPath))
       }
       configure(action: deleteAction, with: .trash)
 
@@ -87,7 +87,7 @@ extension TaskListViewController: SwipeTableViewCellDelegate {
         guard let `self` = self else { return }
         let dataSource = self.dataSource[indexPath]
 
-        guard let reactor = self.reactor?.reactorForEditingTask(dataSource) else { return }
+        guard let reactor = self.reactor?.reactorForEditingHabit(dataSource) else { return }
         let viewController = TaskEditViewController(reactor: reactor)
         let navController = UINavigationController(rootViewController: viewController)
         self.present(navController, animated: true, completion: nil)

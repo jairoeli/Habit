@@ -11,40 +11,40 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-typealias TaskListSection = SectionModel<Void, TaskCellReactor>
+typealias HabitListSection = SectionModel<Void, TaskCellReactor>
 
-final class TaskListViewReactor: BaseReactor {
+final class HabitListViewReactor: BaseReactor {
 
   enum Action {
-    case updateTaskTitle(String)
+    case updateHabitTitle(String)
     case submit
     case refresh
     case toggleEditing
-    case moveTask(IndexPath, IndexPath)
-    case deleteTask(IndexPath)
-    case taskIncreaseValue(IndexPath)
-    case taskDecreaseValue(IndexPath)
+    case moveHabit(IndexPath, IndexPath)
+    case deleteHabit(IndexPath)
+    case habitIncreaseValue(IndexPath)
+    case habitDecreaseValue(IndexPath)
   }
 
   enum Mutation {
-    case updateTaskTitle(String)
-    case setSections([TaskListSection])
-    case insertSectionItem(IndexPath, TaskListSection.Item)
-    case updateSectionItem(IndexPath, TaskListSection.Item)
+    case updateHabitTitle(String)
+    case setSections([HabitListSection])
+    case insertSectionItem(IndexPath, HabitListSection.Item)
+    case updateSectionItem(IndexPath, HabitListSection.Item)
     case deleteSectionItem(IndexPath)
     case toggleEditing
     case moveSectionItem(IndexPath, IndexPath)
   }
 
   struct State {
-    var sections: [TaskListSection]
+    var sections: [HabitListSection]
     var isMoving: Bool
-    var taskTitle: String
+    var habitTitle: String
     var canSubmit: Bool
 
-    init(isEditing: Bool, sections: [TaskListSection], taskTitle: String, canSubmit: Bool) {
+    init(isEditing: Bool, sections: [HabitListSection], habitTitle: String, canSubmit: Bool) {
       self.sections = sections
-      self.taskTitle = taskTitle
+      self.habitTitle = habitTitle
       self.canSubmit = canSubmit
       self.isMoving = isEditing
     }
@@ -55,7 +55,7 @@ final class TaskListViewReactor: BaseReactor {
 
   init(provider: ServiceProviderType) {
     self.provider = provider
-    self.initialState = State(isEditing: false, sections: [TaskListSection(model: Void(), items: [])], taskTitle: "", canSubmit: false)
+    self.initialState = State(isEditing: false, sections: [HabitListSection(model: Void(), items: [])], habitTitle: "", canSubmit: false)
   }
 
   // MARK: - Mutate
@@ -63,63 +63,63 @@ final class TaskListViewReactor: BaseReactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
 
-    case let .updateTaskTitle(taskTitle): return .just(.updateTaskTitle(taskTitle))
+    case let .updateHabitTitle(habitTitle): return .just(.updateHabitTitle(habitTitle))
 
     case .submit:
       guard self.currentState.canSubmit else { return .empty() }
-      return self.provider.taskService.create(title: self.currentState.taskTitle, memo: nil).flatMap { _ in Observable.empty() }
+      return self.provider.habitService.create(title: self.currentState.habitTitle, memo: nil).flatMap { _ in Observable.empty() }
 
     case .refresh:
-      return self.provider.taskService.fetchTask()
-        .map { tasks in
-          let sectionItems = tasks.map(TaskCellReactor.init)
-          let section = TaskListSection(model: Void(), items: sectionItems)
+      return self.provider.habitService.fetchHabit()
+        .map { habits in
+          let sectionItems = habits.map(TaskCellReactor.init)
+          let section = HabitListSection(model: Void(), items: sectionItems)
           return .setSections([section])
       }
 
     case .toggleEditing: return .just(.toggleEditing)
 
-    case let .moveTask(sourceIndexPath, destinationIndexPath):
-      let task = self.currentState.sections[sourceIndexPath].currentState
-      return self.provider.taskService.move(taskID: task.id, to: destinationIndexPath.item)
+    case let .moveHabit(sourceIndexPath, destinationIndexPath):
+      let habit = self.currentState.sections[sourceIndexPath].currentState
+      return self.provider.habitService.move(habitID: habit.id, to: destinationIndexPath.item)
         .flatMap { _ in Observable.empty() }
 
-    case let .deleteTask(indexPath):
-      let task = self.currentState.sections[indexPath].currentState
-      return self.provider.taskService.delete(taskID: task.id).flatMap { _ in Observable.empty() }
+    case let .deleteHabit(indexPath):
+      let habit = self.currentState.sections[indexPath].currentState
+      return self.provider.habitService.delete(habitID: habit.id).flatMap { _ in Observable.empty() }
 
-    case let .taskIncreaseValue(indexPath):
-      let task = self.currentState.sections[indexPath].currentState
-      return self.provider.taskService.increaseValue(taskID: task.id).flatMap { _ in Observable.empty() }
+    case let .habitIncreaseValue(indexPath):
+      let habit = self.currentState.sections[indexPath].currentState
+      return self.provider.habitService.increaseValue(habitID: habit.id).flatMap { _ in Observable.empty() }
 
-    case let .taskDecreaseValue(indexPath):
-      let task = self.currentState.sections[indexPath].currentState
-      return self.provider.taskService.decreaseValue(taskID: task.id).flatMap { _ in Observable.empty() }
+    case let .habitDecreaseValue(indexPath):
+      let habit = self.currentState.sections[indexPath].currentState
+      return self.provider.habitService.decreaseValue(habitID: habit.id).flatMap { _ in Observable.empty() }
     }
 
   }
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-    let taskEventMutation = self.provider.taskService.event
-      .flatMap { [weak self] taskEvent -> Observable<Mutation> in
-        self?.mutate(taskEvent: taskEvent) ?? .empty()
+    let habitEventMutation = self.provider.habitService.event
+      .flatMap { [weak self] habitEvent -> Observable<Mutation> in
+        self?.mutate(habitEvent: habitEvent) ?? .empty()
     }
-    return Observable.of(mutation, taskEventMutation).merge()
+    return Observable.of(mutation, habitEventMutation).merge()
   }
 
   // swiftlint:disable cyclomatic_complexity
-  private func mutate(taskEvent: TaskEvent) -> Observable<Mutation> {
+  private func mutate(habitEvent: HabitEvent) -> Observable<Mutation> {
     let state = self.currentState
 
-    switch taskEvent {
-    case let .create(task):
+    switch habitEvent {
+    case let .create(habit):
       let indexPath = IndexPath(item: 0, section: 0)
-      let reactor = TaskCellReactor(task: task)
+      let reactor = TaskCellReactor(habit: habit)
       return .just(.insertSectionItem(indexPath, reactor))
 
-    case let .update(task):
-      guard let indexPath = self.indexPath(forTaskID: task.id, from: state) else { return .empty() }
-      let reactor = TaskCellReactor(task: task)
+    case let .update(habit):
+      guard let indexPath = self.indexPath(forTaskID: habit.id, from: state) else { return .empty() }
+      let reactor = TaskCellReactor(habit: habit)
       return .just(.updateSectionItem(indexPath, reactor))
 
     case let .delete(id):
@@ -133,16 +133,16 @@ final class TaskListViewReactor: BaseReactor {
 
     case let .increaseValue(id):
       guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
-      var task = state.sections[indexPath].currentState
-      task.value += 1
-      let reactor = TaskCellReactor(task: task)
+      var habit = state.sections[indexPath].currentState
+      habit.value += 1
+      let reactor = TaskCellReactor(habit: habit)
       return .just(.updateSectionItem(indexPath, reactor))
 
     case let .decreaseValue(id):
       guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
-      var task = state.sections[indexPath].currentState
-      task.value -= 1
-      let reactor = TaskCellReactor(task: task)
+      var habit = state.sections[indexPath].currentState
+      habit.value -= 1
+      let reactor = TaskCellReactor(habit: habit)
       return .just(.updateSectionItem(indexPath, reactor))
     }
 
@@ -154,9 +154,9 @@ final class TaskListViewReactor: BaseReactor {
     var state = state
 
     switch mutation {
-    case let .updateTaskTitle(taskTitle):
-      state.taskTitle = taskTitle
-      state.canSubmit = !taskTitle.isEmpty
+    case let .updateHabitTitle(habitTitle):
+      state.habitTitle = habitTitle
+      state.canSubmit = !habitTitle.isEmpty
       return state
 
     case let .setSections(sections):
@@ -200,11 +200,11 @@ final class TaskListViewReactor: BaseReactor {
     }
   }
 
-  // MARK: - Editing Task
+  // MARK: - Editing Habit
 
-  func reactorForEditingTask(_ taskCellReactor: TaskCellReactor) -> TaskEditViewReactor {
-    let task = taskCellReactor.currentState
-    return TaskEditViewReactor(provider: self.provider, mode: .edit(task))
+  func reactorForEditingHabit(_ taskCellReactor: TaskCellReactor) -> HabitEditViewReactor {
+    let habit = taskCellReactor.currentState
+    return HabitEditViewReactor(provider: self.provider, mode: .edit(habit))
   }
 
   // MARK: - Present Settings

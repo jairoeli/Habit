@@ -31,7 +31,7 @@ final class TaskListViewController: BaseViewController, View {
   var buttonDisplayMode: ButtonDisplayMode = .titleAndImage
   var buttonStyle: ButtonStyle = .backgroundColor
 
-  let dataSource = RxTableViewSectionedReloadDataSource<TaskListSection>()
+  let dataSource = RxTableViewSectionedReloadDataSource<HabitListSection>()
   fileprivate let headerView = SectionHeaderView()
   fileprivate let messageInputBar = MessageInputBar()
   fileprivate lazy var tableView = UITableView() <== {
@@ -52,7 +52,7 @@ final class TaskListViewController: BaseViewController, View {
 
   // MARK: - Initializing
 
-  init(reactor: TaskListViewReactor) {
+  init(reactor: HabitListViewReactor) {
     defer { self.reactor = reactor }
     super.init()
   }
@@ -97,7 +97,7 @@ final class TaskListViewController: BaseViewController, View {
 
   // MARK: - Binding
   // swiftlint:disable function_body_length
-  func bind(reactor: TaskListViewReactor) {
+  func bind(reactor: HabitListViewReactor) {
     self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
 
     self.dataSource.configureCell = { _, tableView, indexPath, reactor in
@@ -120,7 +120,7 @@ final class TaskListViewController: BaseViewController, View {
 
     self.titleInput.rx.text
       .filterNil()
-      .map(Reactor.Action.updateTaskTitle)
+      .map(Reactor.Action.updateHabitTitle)
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
@@ -164,12 +164,12 @@ final class TaskListViewController: BaseViewController, View {
 
     self.tableView.rx.itemSelected
       .debounce(0.2, scheduler: MainScheduler.instance)
-      .map { indexPath in .taskIncreaseValue(indexPath) }
+      .map { indexPath in .habitIncreaseValue(indexPath) }
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
     self.tableView.rx.itemMoved
-      .map(Reactor.Action.moveTask)
+      .map(Reactor.Action.moveHabit)
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
@@ -180,7 +180,7 @@ final class TaskListViewController: BaseViewController, View {
       .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
       .disposed(by: self.disposeBag)
 
-    reactor.state.asObservable().map { $0.taskTitle }
+    reactor.state.asObservable().map { $0.habitTitle }
       .distinctUntilChanged()
       .bind(to: self.titleInput.rx.text)
       .disposed(by: self.disposeBag)

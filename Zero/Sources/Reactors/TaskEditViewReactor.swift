@@ -10,35 +10,35 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-enum TaskEditViewMode {
-  case edit(Task)
+enum HabitEditViewMode {
+  case edit(Habit)
 }
 
-final class TaskEditViewReactor: BaseReactor {
+final class HabitEditViewReactor: BaseReactor {
 
   enum Action {
-    case updateTaskTitle(String)
+    case updateHabitTitle(String)
     case updateNote(String)
     case cancel
     case submit
   }
 
   enum Mutation {
-    case updateTaskTitle(String)
+    case updateHabitTitle(String)
     case updateNote(String)
     case dismiss
   }
 
   struct State {
-    var taskTitle: String
-    var taskNote: String?
+    var habitTitle: String
+    var habitNote: String?
     var canSubmit: Bool
     var shouldConfirmCancel: Bool
     var isDismissed: Bool
 
-    init(taskTitle: String, taskNote: String?, canSubmit: Bool) {
-      self.taskTitle = taskTitle
-      self.taskNote = taskNote
+    init(habitTitle: String, habitNote: String?, canSubmit: Bool) {
+      self.habitTitle = habitTitle
+      self.habitNote = habitNote
       self.canSubmit = canSubmit
       self.shouldConfirmCancel = false
       self.isDismissed = false
@@ -48,15 +48,15 @@ final class TaskEditViewReactor: BaseReactor {
   // MARK: - Initializing
 
   let provider: ServiceProviderType
-  let mode: TaskEditViewMode
+  let mode: HabitEditViewMode
   let initialState: State
 
-  init(provider: ServiceProviderType, mode: TaskEditViewMode) {
+  init(provider: ServiceProviderType, mode: HabitEditViewMode) {
     self.provider = provider
     self.mode = mode
     switch mode {
-      case .edit(let task):
-        self.initialState = State(taskTitle: task.title, taskNote: task.memo, canSubmit: true)
+      case .edit(let habit):
+        self.initialState = State(habitTitle: habit.title, habitNote: habit.memo, canSubmit: true)
     }
   }
 
@@ -65,16 +65,16 @@ final class TaskEditViewReactor: BaseReactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
 
-    case let .updateTaskTitle(taskTitle): return .just(.updateTaskTitle(taskTitle))
+    case let .updateHabitTitle(habitTitle): return .just(.updateHabitTitle(habitTitle))
     case let .updateNote(addNote): return .just(.updateNote(addNote))
 
     case .submit:
       guard self.currentState.canSubmit else { return .empty() }
       switch self.mode {
-      case .edit(let task):
-        return self.provider.taskService.update(taskID: task.id,
-                                                title: self.currentState.taskTitle,
-                                                memo: self.currentState.taskNote)
+      case .edit(let habit):
+        return self.provider.habitService.update(habitID: habit.id,
+                                                title: self.currentState.habitTitle,
+                                                memo: self.currentState.habitNote)
           .map { _ in .dismiss }
       }
 
@@ -87,14 +87,14 @@ final class TaskEditViewReactor: BaseReactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
-    case let .updateTaskTitle(taskTitle):
-      state.taskTitle = taskTitle
-      state.canSubmit = !taskTitle.isEmpty
-      state.shouldConfirmCancel = taskTitle != self.initialState.taskTitle
+    case let .updateHabitTitle(habitTitle):
+      state.habitTitle = habitTitle
+      state.canSubmit = !habitTitle.isEmpty
+      state.shouldConfirmCancel = habitTitle != self.initialState.habitTitle
       return state
 
     case let .updateNote(addNote):
-      state.taskNote = addNote
+      state.habitNote = addNote
       return state
 
     case .dismiss:
