@@ -1,5 +1,5 @@
 //
-//  TaskCellReactor.swift
+//  HabitCellReactor.swift
 //  Zero
 //
 //  Created by Jairo Eli de Leon on 5/8/17.
@@ -10,7 +10,7 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-final class TaskCellReactor: Reactor {
+final class HabitCellReactor: Reactor {
   typealias Action = NoAction
 
   let initialState: Habit

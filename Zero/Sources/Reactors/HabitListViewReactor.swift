@@ -1,5 +1,5 @@
 //
-//  TaskListViewReactor.swift
+//  HabitListViewReactor.swift
 //  Zero
 //
 //  Created by Jairo Eli de Leon on 5/9/17.
@@ -11,7 +11,7 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-typealias HabitListSection = SectionModel<Void, TaskCellReactor>
+typealias HabitListSection = SectionModel<Void, HabitCellReactor>
 
 final class HabitListViewReactor: BaseReactor {
 
@@ -72,7 +72,7 @@ final class HabitListViewReactor: BaseReactor {
     case .refresh:
       return self.provider.habitService.fetchHabit()
         .map { habits in
-          let sectionItems = habits.map(TaskCellReactor.init)
+          let sectionItems = habits.map(HabitCellReactor.init)
           let section = HabitListSection(model: Void(), items: sectionItems)
           return .setSections([section])
       }
@@ -114,35 +114,35 @@ final class HabitListViewReactor: BaseReactor {
     switch habitEvent {
     case let .create(habit):
       let indexPath = IndexPath(item: 0, section: 0)
-      let reactor = TaskCellReactor(habit: habit)
+      let reactor = HabitCellReactor(habit: habit)
       return .just(.insertSectionItem(indexPath, reactor))
 
     case let .update(habit):
-      guard let indexPath = self.indexPath(forTaskID: habit.id, from: state) else { return .empty() }
-      let reactor = TaskCellReactor(habit: habit)
+      guard let indexPath = self.indexPath(forHabitID: habit.id, from: state) else { return .empty() }
+      let reactor = HabitCellReactor(habit: habit)
       return .just(.updateSectionItem(indexPath, reactor))
 
     case let .delete(id):
-      guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
+      guard let indexPath = self.indexPath(forHabitID: id, from: state) else { return .empty() }
       return .just(.deleteSectionItem(indexPath))
 
     case let .move(id, index):
-      guard let sourceIndexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
+      guard let sourceIndexPath = self.indexPath(forHabitID: id, from: state) else { return .empty() }
       let destinationIndexPath = IndexPath(item: index, section: 0)
       return .just(.moveSectionItem(sourceIndexPath, destinationIndexPath))
 
     case let .increaseValue(id):
-      guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
+      guard let indexPath = self.indexPath(forHabitID: id, from: state) else { return .empty() }
       var habit = state.sections[indexPath].currentState
       habit.value += 1
-      let reactor = TaskCellReactor(habit: habit)
+      let reactor = HabitCellReactor(habit: habit)
       return .just(.updateSectionItem(indexPath, reactor))
 
     case let .decreaseValue(id):
-      guard let indexPath = self.indexPath(forTaskID: id, from: state) else { return .empty() }
+      guard let indexPath = self.indexPath(forHabitID: id, from: state) else { return .empty() }
       var habit = state.sections[indexPath].currentState
       habit.value -= 1
-      let reactor = TaskCellReactor(habit: habit)
+      let reactor = HabitCellReactor(habit: habit)
       return .just(.updateSectionItem(indexPath, reactor))
     }
 
@@ -189,9 +189,9 @@ final class HabitListViewReactor: BaseReactor {
 
   // MARK: - IndexPath
 
-  private func indexPath(forTaskID taskID: String, from state: State) -> IndexPath? {
+  private func indexPath(forHabitID habitID: String, from state: State) -> IndexPath? {
     let section = 0
-    let item = state.sections[section].items.index { reactor in reactor.currentState.id == taskID }
+    let item = state.sections[section].items.index { reactor in reactor.currentState.id == habitID }
 
     if let item = item {
       return IndexPath(item: item, section: section)
@@ -202,8 +202,8 @@ final class HabitListViewReactor: BaseReactor {
 
   // MARK: - Editing Habit
 
-  func reactorForEditingHabit(_ taskCellReactor: TaskCellReactor) -> HabitEditViewReactor {
-    let habit = taskCellReactor.currentState
+  func reactorForEditingHabit(_ habitCellReactor: HabitCellReactor) -> HabitEditViewReactor {
+    let habit = habitCellReactor.currentState
     return HabitEditViewReactor(provider: self.provider, mode: .edit(habit))
   }
 

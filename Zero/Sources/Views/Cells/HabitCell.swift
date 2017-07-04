@@ -1,5 +1,5 @@
 //
-//  TaskCell.swift
+//  HabitCell.swift
 //  Zero
 //
 //  Created by Jairo Eli de Leon on 5/8/17.
@@ -10,8 +10,8 @@ import UIKit
 import ReactorKit
 import RxSwift
 
-final class TaskCell: BaseTableViewCell, View {
-  typealias Reactor = TaskCellReactor
+final class HabitCell: BaseTableViewCell, View {
+  typealias Reactor = HabitCellReactor
 
   // MARK: - Constants
 
@@ -58,7 +58,7 @@ final class TaskCell: BaseTableViewCell, View {
 
   // MARK: - Binding
 
-  func bind(reactor: TaskCellReactor) {
+  func bind(reactor: HabitCellReactor) {
     reactor.state.map { $0.title }
       .distinctUntilChanged()
       .bind(to: self.titleLabel.rx.text)

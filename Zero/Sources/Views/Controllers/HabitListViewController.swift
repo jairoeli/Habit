@@ -1,5 +1,5 @@
 //
-//  TaskListViewController.swift
+//  HabitListViewController.swift
 //  Zero
 //
 //  Created by Jairo Eli de Leon on 5/9/17.
@@ -14,12 +14,12 @@ import ReusableKit
 import RxKeyboard
 import SwipeCellKit
 
-final class TaskListViewController: BaseViewController, View {
+final class HabitListViewController: BaseViewController, View {
 
   // MARK: - Constants
 
   fileprivate struct Reusable {
-    static let taskCell = ReusableCell<TaskCell>()
+    static let habitCell = ReusableCell<HabitCell>()
   }
 
   fileprivate struct Metric {
@@ -40,7 +40,7 @@ final class TaskListViewController: BaseViewController, View {
     $0.separatorStyle = .none
     $0.keyboardDismissMode = .onDrag
     $0.allowsSelectionDuringEditing = true
-    $0.register(Reusable.taskCell)
+    $0.register(Reusable.habitCell)
   }
 
   fileprivate lazy var titleInput = UITextField() <== {
@@ -101,7 +101,7 @@ final class TaskListViewController: BaseViewController, View {
     self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
 
     self.dataSource.configureCell = { _, tableView, indexPath, reactor in
-      let cell = tableView.dequeue(Reusable.taskCell, for: indexPath)
+      let cell = tableView.dequeue(Reusable.habitCell, for: indexPath)
       cell.selectionStyle = .none
       cell.delegate = self
       cell.reactor = reactor
@@ -207,17 +207,17 @@ final class TaskListViewController: BaseViewController, View {
 }
 
 // MARK: - Table View Delegate
-extension TaskListViewController: UITableViewDelegate {
+extension HabitListViewController: UITableViewDelegate {
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let reactor = self.dataSource[indexPath]
-    return TaskCell.height(fits: tableView.width, reactor: reactor)
+    return HabitCell.height(fits: tableView.width, reactor: reactor)
   }
 
 }
 
 // MARK: - Reactive wrapper
-extension TaskListViewController {
+extension HabitListViewController {
   fileprivate func rxViewController() {
     self.rx.viewWillAppear
       .subscribe(onNext: { [weak self] animated in

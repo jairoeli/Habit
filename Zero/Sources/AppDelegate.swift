@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let serviceProvider = ServiceProvider()
     let reactor = HabitListViewReactor(provider: serviceProvider)
-    let viewController = TaskListViewController(reactor: reactor)
+    let viewController = HabitListViewController(reactor: reactor)
     let navigationController = UINavigationController(rootViewController: viewController)
     window.rootViewController = navigationController
 

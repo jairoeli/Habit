@@ -53,7 +53,7 @@ enum ButtonStyle {
 }
 
 // MARK: - Swipe Table View Delegate
-extension TaskListViewController: SwipeTableViewCellDelegate {
+extension HabitListViewController: SwipeTableViewCellDelegate {
 
   func configure(action: SwipeAction, with descriptor: ActionDescriptor) {
     action.title = descriptor.title(forDisplayMode: buttonDisplayMode)
@@ -88,7 +88,7 @@ extension TaskListViewController: SwipeTableViewCellDelegate {
         let dataSource = self.dataSource[indexPath]
 
         guard let reactor = self.reactor?.reactorForEditingHabit(dataSource) else { return }
-        let viewController = TaskEditViewController(reactor: reactor)
+        let viewController = HabitEditViewController(reactor: reactor)
         let navController = UINavigationController(rootViewController: viewController)
         self.present(navController, animated: true, completion: nil)
       }

@@ -23,7 +23,7 @@ extension NSRange {
 }
 
 // MARK: - Character limit
-extension TaskListViewController: UITextFieldDelegate {
+extension HabitListViewController: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     let currentText = textField.text ?? ""
     guard let stringRange = range.range(for: currentText) else { return false }

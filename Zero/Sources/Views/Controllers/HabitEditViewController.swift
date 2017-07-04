@@ -1,5 +1,5 @@
 //
-//  TaskEditViewController.swift
+//  HabitEditViewController.swift
 //  Zero
 //
 //  Created by Jairo Eli de Leon on 6/18/17.
@@ -10,7 +10,7 @@ import ReactorKit
 import RxSwift
 import RxKeyboard
 
-final class TaskEditViewController: BaseViewController, View {
+final class HabitEditViewController: BaseViewController, View {
 
   // MARK: - Constants
   struct Metric {
