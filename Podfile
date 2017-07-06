@@ -1,10 +1,15 @@
 platform :ios, '10.0'
+inhibit_all_warnings!
 
 target 'Zero' do
   use_frameworks!
 
   # Architecture
   pod 'ReactorKit'
+
+  # Networking
+  pod 'Moya/RxSwift'
+  pod 'MoyaSugar/RxSwift'
 
   # Rx
   pod 'RxSwift'
@@ -18,6 +23,9 @@ target 'Zero' do
   # UI
   pod 'SnapKit'
   pod 'ManualLayout'
+
+  # Logging
+  pod 'CocoaLumberjack/Swift'
 
   # Misc.
   pod 'ReusableKit'
