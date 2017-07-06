@@ -27,9 +27,9 @@ class BaseViewController: UIViewController {
     self.init()
   }
 
-//  deinit {
-//    log.verbose("DEINIT: \(self.className)")
-//  }
+  deinit {
+    log.verbose("DEINIT: \(self.className)")
+  }
 
   // MARK: - Rx
   var disposeBag = DisposeBag()
