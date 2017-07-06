@@ -34,6 +34,7 @@ final class SettingsViewController: BaseViewController, View {
   init(reactor: SettingsViewReactor) {
     defer { self.reactor = reactor }
     super.init()
+    self.title = "Settings"
   }
 
   required convenience init?(coder aDecoder: NSCoder) {
@@ -59,6 +60,9 @@ final class SettingsViewController: BaseViewController, View {
       let cell = tableView.dequeue(Reusable.cell, for: indexPath)
 
       switch sectionItem {
+      case .version(let reactor):
+        cell.reactor = reactor
+
       case .github(let reactor):
         cell.reactor = reactor
 
@@ -79,6 +83,11 @@ final class SettingsViewController: BaseViewController, View {
       .subscribe(onNext: { [weak self] sectionItem in
         guard let `self` = self else { return }
         switch sectionItem {
+        case .version:
+          let reactor = VersionViewReactor(provider: reactor.provider)
+          let viewController = VersionViewController(reactor: reactor)
+          self.navigationController?.pushViewController(viewController, animated: true)
+
         case .github:
           let url = URL(string: "https://github.com/jairoeli/Zero")!
           let viewController = SFSafariViewController(url: url)
@@ -88,7 +97,6 @@ final class SettingsViewController: BaseViewController, View {
           let url = URL(string: "https://nucleoapp.com")!
           let viewController = SFSafariViewController(url: url)
           self.present(viewController, animated: true, completion: nil)
-
         }
       })
       .disposed(by: self.disposeBag)

@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C0A6F3D1F0B2AAD000491C9 /* AppStoreAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A6F3C1F0B2AAD000491C9 /* AppStoreAPI.swift */; };
+		9C0A6F3F1F0B3B6E000491C9 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A6F3E1F0B3B6E000491C9 /* Logging.swift */; };
+		9C0A6F411F0B3C05000491C9 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A6F401F0B3C05000491C9 /* Networking.swift */; };
+		9C0A6F431F0B3CAB000491C9 /* AppStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A6F421F0B3CAB000491C9 /* AppStoreService.swift */; };
+		9C0A6F451F0B3D60000491C9 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A6F441F0B3D60000491C9 /* Bundle.swift */; };
+		9C0A6F471F0B3DDE000491C9 /* VersionViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A6F461F0B3DDE000491C9 /* VersionViewReactor.swift */; };
+		9C0A6F491F0B3FAE000491C9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A6F481F0B3FAE000491C9 /* VersionViewController.swift */; };
 		9C15AD7E1EDFDF2F0092373A /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C15AD7D1EDFDF2F0092373A /* UIFont.swift */; };
 		9C2945A11EC9238B00A04CE9 /* MessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */; };
 		9C2F5BC31EF6EEB200A4E250 /* SwipeActionDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F5BC21EF6EEB200A4E250 /* SwipeActionDescriptor.swift */; };
@@ -21,6 +26,8 @@
 		9C3E2D771EC60C6C00EE5276 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D761EC60C6C00EE5276 /* Color.swift */; };
 		9C3E2D7C1EC61B8000EE5276 /* HabitEditViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E2D7B1EC61B8000EE5276 /* HabitEditViewReactor.swift */; };
 		9C4835B51ED7926500AE67D7 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */; };
+		9C66AF0E1F0C022200EA72F6 /* AppStoreAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C66AF0D1F0C022200EA72F6 /* AppStoreAPI.swift */; };
+		9C66AF101F0C04FA00EA72F6 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C66AF0F1F0C04FA00EA72F6 /* VersionCell.swift */; };
 		9C72EED91EE04C090069ED6C /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C72EED81EE04C090069ED6C /* DateExtension.swift */; };
 		9C78F73F1EEF3324005434D0 /* CharacterLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C78F73E1EEF3324005434D0 /* CharacterLimit.swift */; };
 		9C81C1311EEA003A0046883D /* ZeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C1301EEA003A0046883D /* ZeroTests.swift */; };
@@ -35,8 +42,8 @@
 		9CDF098E1EC21EAB00A2A25C /* HabitListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098D1EC21EAB00A2A25C /* HabitListViewReactor.swift */; };
 		9CDF09901EC2283C00A2A25C /* HabitListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF098F1EC2283C00A2A25C /* HabitListViewController.swift */; };
 		9CE32AB11F0A876D00FD7384 /* Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE32AB01F0A876D00FD7384 /* Subviews.swift */; };
+		9CE65DF11F0E957500194A18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CE65DF01F0E957500194A18 /* Assets.xcassets */; };
 		9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */; };
-		9CEA33961EC0BBDA00816DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CEA33951EC0BBDA00816DAA /* Assets.xcassets */; };
 		9CEA33991EC0BBDA00816DAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CEA33971EC0BBDA00816DAA /* LaunchScreen.storyboard */; };
 		9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33A71EC0C07200816DAA /* UIViewController+Rx.swift */; };
 		9CEA33AB1EC0C0C100816DAA /* MutateOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA33AA1EC0C0C100816DAA /* MutateOperator.swift */; };
@@ -70,7 +77,12 @@
 
 /* Begin PBXFileReference section */
 		5B3B037FF5F6A769DBD39C32 /* Pods-Zero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zero.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zero/Pods-Zero.release.xcconfig"; sourceTree = "<group>"; };
-		9C0A6F3C1F0B2AAD000491C9 /* AppStoreAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppStoreAPI.swift; path = Sources/Networking/AppStoreAPI.swift; sourceTree = "<group>"; };
+		9C0A6F3E1F0B3B6E000491C9 /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logging.swift; path = Sources/Utils/Logging.swift; sourceTree = "<group>"; };
+		9C0A6F401F0B3C05000491C9 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Networking.swift; path = Sources/Networking/Networking.swift; sourceTree = "<group>"; };
+		9C0A6F421F0B3CAB000491C9 /* AppStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppStoreService.swift; path = Sources/Services/AppStoreService.swift; sourceTree = "<group>"; };
+		9C0A6F441F0B3D60000491C9 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bundle.swift; path = Sources/Utils/Bundle.swift; sourceTree = "<group>"; };
+		9C0A6F461F0B3DDE000491C9 /* VersionViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionViewReactor.swift; path = Sources/Reactors/VersionViewReactor.swift; sourceTree = "<group>"; };
+		9C0A6F481F0B3FAE000491C9 /* VersionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionViewController.swift; path = Sources/Views/Controllers/VersionViewController.swift; sourceTree = "<group>"; };
 		9C15AD7D1EDFDF2F0092373A /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFont.swift; path = Sources/Utils/UIFont.swift; sourceTree = "<group>"; };
 		9C2945A01EC9238B00A04CE9 /* MessageInputBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageInputBar.swift; path = Sources/Views/MessageInputBar.swift; sourceTree = "<group>"; };
 		9C2F5BC21EF6EEB200A4E250 /* SwipeActionDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeActionDescriptor.swift; path = Sources/Views/SwipeActionDescriptor.swift; sourceTree = "<group>"; };
@@ -84,6 +96,8 @@
 		9C3E2D761EC60C6C00EE5276 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = Sources/Utils/Color.swift; sourceTree = "<group>"; };
 		9C3E2D7B1EC61B8000EE5276 /* HabitEditViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HabitEditViewReactor.swift; path = Sources/Reactors/HabitEditViewReactor.swift; sourceTree = "<group>"; };
 		9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionHeaderView.swift; path = Sources/Views/SectionHeaderView.swift; sourceTree = "<group>"; };
+		9C66AF0D1F0C022200EA72F6 /* AppStoreAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppStoreAPI.swift; path = Sources/Networking/AppStoreAPI.swift; sourceTree = "<group>"; };
+		9C66AF0F1F0C04FA00EA72F6 /* VersionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionCell.swift; path = Sources/Views/Cells/VersionCell.swift; sourceTree = "<group>"; };
 		9C72EED81EE04C090069ED6C /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtension.swift; path = Sources/Utils/DateExtension.swift; sourceTree = "<group>"; };
 		9C78F73E1EEF3324005434D0 /* CharacterLimit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CharacterLimit.swift; path = Sources/Utils/CharacterLimit.swift; sourceTree = "<group>"; };
 		9C81C12E1EEA003A0046883D /* ZeroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZeroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,9 +114,9 @@
 		9CDF098D1EC21EAB00A2A25C /* HabitListViewReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HabitListViewReactor.swift; path = Sources/Reactors/HabitListViewReactor.swift; sourceTree = "<group>"; };
 		9CDF098F1EC2283C00A2A25C /* HabitListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HabitListViewController.swift; path = Sources/Views/Controllers/HabitListViewController.swift; sourceTree = "<group>"; };
 		9CE32AB01F0A876D00FD7384 /* Subviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Subviews.swift; path = Sources/Utils/Subviews.swift; sourceTree = "<group>"; };
+		9CE65DF01F0E957500194A18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		9CEA338B1EC0BBDA00816DAA /* Zero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
-		9CEA33951EC0BBDA00816DAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		9CEA33981EC0BBDA00816DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CEA339A1EC0BBDA00816DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Support Files/Info.plist"; sourceTree = "<group>"; };
 		9CEA33A71EC0C07200816DAA /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Rx.swift"; path = "Sources/Rx/UIViewController+Rx.swift"; sourceTree = "<group>"; };
@@ -162,7 +176,8 @@
 		9C0A6F3B1F0B2A70000491C9 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				9C0A6F3C1F0B2AAD000491C9 /* AppStoreAPI.swift */,
+				9C0A6F401F0B3C05000491C9 /* Networking.swift */,
+				9C66AF0D1F0C022200EA72F6 /* AppStoreAPI.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -227,6 +242,7 @@
 				9CF0F6F71ECBB63900E40437 /* BaseTableViewCell.swift */,
 				9CEA33CE1EC0D81800816DAA /* HabitCell.swift */,
 				9C3A10521EEC4EB100DA1B1F /* SettingItemCell.swift */,
+				9C66AF0F1F0C04FA00EA72F6 /* VersionCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -238,6 +254,7 @@
 				9CDF098F1EC2283C00A2A25C /* HabitListViewController.swift */,
 				9C2F5BC41EF6FB5300A4E250 /* HabitEditViewController.swift */,
 				9C3A10591EEC566D00DA1B1F /* SettingsViewController.swift */,
+				9C0A6F481F0B3FAE000491C9 /* VersionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -275,7 +292,7 @@
 		9CEA33A01EC0BBE800816DAA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9CEA33951EC0BBDA00816DAA /* Assets.xcassets */,
+				9CE65DF01F0E957500194A18 /* Assets.xcassets */,
 				9CEA33971EC0BBDA00816DAA /* LaunchScreen.storyboard */,
 			);
 			name = Resources;
@@ -318,6 +335,8 @@
 			isa = PBXGroup;
 			children = (
 				9CEA33AA1EC0C0C100816DAA /* MutateOperator.swift */,
+				9C0A6F441F0B3D60000491C9 /* Bundle.swift */,
+				9C0A6F3E1F0B3B6E000491C9 /* Logging.swift */,
 				9CE32AB01F0A876D00FD7384 /* Subviews.swift */,
 				9C78F73E1EEF3324005434D0 /* CharacterLimit.swift */,
 				9CEA33AC1EC0C0ED00816DAA /* Snap.swift */,
@@ -337,6 +356,7 @@
 			children = (
 				9CEA33B31EC0C1AA00816DAA /* BaseService.swift */,
 				9CEA33B51EC0C1C900816DAA /* ServiceProvider.swift */,
+				9C0A6F421F0B3CAB000491C9 /* AppStoreService.swift */,
 				9CEA33BF1EC0C89500816DAA /* HabitService.swift */,
 				9CEA33C31EC0CAA900816DAA /* UserDefaultsService.swift */,
 			);
@@ -370,10 +390,11 @@
 			children = (
 				9C395C241ED11EE300DCFB8F /* BaseReactor.swift */,
 				9CEA33CC1EC0D79E00816DAA /* HabitCellReactor.swift */,
-				9C3A10501EEC4E5D00DA1B1F /* SettingItemCellReactor.swift */,
-				9C3A10571EEC540E00DA1B1F /* SettingsViewReactor.swift */,
 				9CDF098D1EC21EAB00A2A25C /* HabitListViewReactor.swift */,
 				9C3E2D7B1EC61B8000EE5276 /* HabitEditViewReactor.swift */,
+				9C3A10501EEC4E5D00DA1B1F /* SettingItemCellReactor.swift */,
+				9C3A10571EEC540E00DA1B1F /* SettingsViewReactor.swift */,
+				9C0A6F461F0B3DDE000491C9 /* VersionViewReactor.swift */,
 			);
 			name = Reactors;
 			sourceTree = "<group>";
@@ -486,8 +507,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CE65DF11F0E957500194A18 /* Assets.xcassets in Resources */,
 				9CEA33991EC0BBDA00816DAA /* LaunchScreen.storyboard in Resources */,
-				9CEA33961EC0BBDA00816DAA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,11 +646,13 @@
 				9C3E2D771EC60C6C00EE5276 /* Color.swift in Sources */,
 				9C3A10531EEC4EB100DA1B1F /* SettingItemCell.swift in Sources */,
 				9C3A10561EEC539700DA1B1F /* SettingsViewSection.swift in Sources */,
+				9C66AF0E1F0C022200EA72F6 /* AppStoreAPI.swift in Sources */,
 				9CAC53CD1EE07F030091B690 /* UITableView+Rx.swift in Sources */,
 				9CEA33CF1EC0D81800816DAA /* HabitCell.swift in Sources */,
 				9C72EED91EE04C090069ED6C /* DateExtension.swift in Sources */,
 				9CF0F6F81ECBB63900E40437 /* BaseTableViewCell.swift in Sources */,
 				9C2945A11EC9238B00A04CE9 /* MessageInputBar.swift in Sources */,
+				9C0A6F471F0B3DDE000491C9 /* VersionViewReactor.swift in Sources */,
 				9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */,
 				9CEA33AD1EC0C0ED00816DAA /* Snap.swift in Sources */,
 				9C15AD7E1EDFDF2F0092373A /* UIFont.swift in Sources */,
@@ -642,21 +665,26 @@
 				9C3A105A1EEC566D00DA1B1F /* SettingsViewController.swift in Sources */,
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
 				9CEA33BC1EC0C48900816DAA /* ModelType.swift in Sources */,
+				9C66AF101F0C04FA00EA72F6 /* VersionCell.swift in Sources */,
 				9CDF09901EC2283C00A2A25C /* HabitListViewController.swift in Sources */,
 				9C3A10511EEC4E5D00DA1B1F /* SettingItemCellReactor.swift in Sources */,
 				9CACB0841F02E4AF00C95167 /* MarkdownBar.swift in Sources */,
+				9C0A6F451F0B3D60000491C9 /* Bundle.swift in Sources */,
 				9C3E2D7C1EC61B8000EE5276 /* HabitEditViewReactor.swift in Sources */,
 				9C2F5BC51EF6FB5300A4E250 /* HabitEditViewController.swift in Sources */,
 				9CEA338F1EC0BBDA00816DAA /* AppDelegate.swift in Sources */,
 				9CEA33C21EC0CA5500816DAA /* UserDefaultsKey.swift in Sources */,
-				9C0A6F3D1F0B2AAD000491C9 /* AppStoreAPI.swift in Sources */,
+				9C0A6F3F1F0B3B6E000491C9 /* Logging.swift in Sources */,
 				9CEA33AF1EC0C10F00816DAA /* String+BoundingRect.swift in Sources */,
+				9C0A6F411F0B3C05000491C9 /* Networking.swift in Sources */,
 				9CEA33C41EC0CAA900816DAA /* UserDefaultsService.swift in Sources */,
 				9CE32AB11F0A876D00FD7384 /* Subviews.swift in Sources */,
 				9CEA33AB1EC0C0C100816DAA /* MutateOperator.swift in Sources */,
 				9C2F5BC31EF6EEB200A4E250 /* SwipeActionDescriptor.swift in Sources */,
 				9CEA33B91EC0C29500816DAA /* Array+SectionModel.swift in Sources */,
+				9C0A6F491F0B3FAE000491C9 /* VersionViewController.swift in Sources */,
 				9C395C251ED11EE300DCFB8F /* BaseReactor.swift in Sources */,
+				9C0A6F431F0B3CAB000491C9 /* AppStoreService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

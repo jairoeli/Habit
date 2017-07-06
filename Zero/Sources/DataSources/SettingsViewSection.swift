@@ -29,4 +29,5 @@ extension SettingsViewSection: SectionModelType {
 enum SettingsViewSectionItem {
   case github(SettingItemCellReactor)
   case icons(SettingItemCellReactor)
+  case version(SettingItemCellReactor)
 }

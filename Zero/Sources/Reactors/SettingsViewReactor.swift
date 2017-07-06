@@ -28,6 +28,7 @@ final class SettingsViewReactor: BaseReactor {
     self.provider = provider
 
     let aboutSection = SettingsViewSection.about([
+        .version(SettingItemCellReactor(text: "Version", detailText: Bundle.main.version)),
         .github(SettingItemCellReactor(text: "View on GitHub", detailText: nil)),
         .icons(SettingItemCellReactor(text: "Icons from", detailText: "nucleoapp.com"))
       ])
