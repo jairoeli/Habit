@@ -19,7 +19,6 @@ final class HabitEditViewReactor: BaseReactor {
   enum Action {
     case updateHabitTitle(String)
     case updateNote(String)
-    case cancel
     case submit
   }
 
@@ -33,14 +32,12 @@ final class HabitEditViewReactor: BaseReactor {
     var habitTitle: String
     var habitNote: String?
     var canSubmit: Bool
-    var shouldConfirmCancel: Bool
     var isDismissed: Bool
 
     init(habitTitle: String, habitNote: String?, canSubmit: Bool) {
       self.habitTitle = habitTitle
       self.habitNote = habitNote
       self.canSubmit = canSubmit
-      self.shouldConfirmCancel = false
       self.isDismissed = false
     }
   }
@@ -77,8 +74,6 @@ final class HabitEditViewReactor: BaseReactor {
                                                 memo: self.currentState.habitNote)
           .map { _ in .dismiss }
       }
-
-    case .cancel: return .just(.dismiss)
     }
   }
 
@@ -90,7 +85,6 @@ final class HabitEditViewReactor: BaseReactor {
     case let .updateHabitTitle(habitTitle):
       state.habitTitle = habitTitle
       state.canSubmit = !habitTitle.isEmpty
-      state.shouldConfirmCancel = habitTitle != self.initialState.habitTitle
       return state
 
     case let .updateNote(addNote):

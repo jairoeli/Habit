@@ -65,11 +65,6 @@ final class HabitEditViewController: BaseViewController, View {
     self.titleInput.becomeFirstResponder()
   }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    self.navigationController?.setNavigationBarHidden(true, animated: animated)
-  }
-
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     self.view.endEditing(true)
@@ -77,7 +72,7 @@ final class HabitEditViewController: BaseViewController, View {
 
   override func setupConstraints() {
     self.titleInput.snp.makeConstraints { make in
-      make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(30)
+      make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(15)
       make.leading.equalTo(Metric.padding)
       make.trailing.equalTo(-Metric.padding)
     }
@@ -107,11 +102,6 @@ final class HabitEditViewController: BaseViewController, View {
     // Action
     self.markdownBar.rx.saveButtonTap
       .map { Reactor.Action.submit }
-      .bind(to: reactor.action)
-      .disposed(by: self.disposeBag)
-
-    self.markdownBar.rx.cancelButtonTap
-      .map { Reactor.Action.cancel }
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
