@@ -70,6 +70,11 @@ final class MessageInputBar: UIView {
     $0.tintColor = .midGray
   }
 
+  fileprivate lazy var smileyButton = UIButton(type: .system) <== {
+    $0.setImage(#imageLiteral(resourceName: "smiley").withRenderingMode(.alwaysTemplate), for: .normal)
+    $0.tintColor = .midGray
+  }
+
   fileprivate lazy var doneButton = UIButton(type: .system) <== {
     $0.setTitle("Done", for: .normal)
     $0.setTitleColor(.midGray, for: .normal)
@@ -86,7 +91,7 @@ final class MessageInputBar: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.translatesAutoresizingMaskIntoConstraints = false
-    let subviews: [UIView] = [textView, separatorView, settingsButton, reorderButton, doneButton]
+    let subviews: [UIView] = [textView, separatorView, smileyButton, settingsButton, reorderButton, doneButton]
     self.add(subviews)
     self.setupLayout()
   }
@@ -97,7 +102,7 @@ final class MessageInputBar: UIView {
 
   // MARK: Size
   override var intrinsicContentSize: CGSize {
-    return CGSize(width: self.width, height: 85)
+    return CGSize(width: self.width, height: 95)
   }
 
   // MARK: - Layout
@@ -110,16 +115,21 @@ final class MessageInputBar: UIView {
       make.height.equalTo(1 / UIScreen.main.scale)
     }
 
+    self.smileyButton.snp.makeConstraints { make in
+      make.top.equalToSuperview().offset(6)
+      make.left.equalToSuperview().offset(2)
+      make.size.equalTo(44)
+    }
+
     self.settingsButton.snp.makeConstraints { make in
-      make.bottom.equalTo(self.textView.snp.bottom).offset(-2)
-      make.left.equalToSuperview()
-      make.width.height.equalTo(44)
+      make.bottom.left.equalToSuperview()
+      make.size.equalTo(44)
     }
 
     self.reorderButton.snp.makeConstraints { make in
-      make.bottom.equalTo(self.textView.snp.bottom).offset(-2)
+      make.bottom.equalToSuperview()
       make.left.equalTo(self.settingsButton.snp.right).offset(2)
-      make.width.height.equalTo(44)
+      make.size.equalTo(44)
     }
 
     self.doneButton.snp.makeConstraints { make in

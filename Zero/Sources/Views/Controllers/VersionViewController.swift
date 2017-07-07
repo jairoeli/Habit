@@ -18,7 +18,7 @@ class VersionViewController: BaseViewController, View {
   }
 
   fileprivate struct Metric {
-    static let iconViewTop = 35.f
+    static let iconViewTop = 20.f
     static let iconViewSize = 100.f
     static let iconViewBottom = 0.f
   }
@@ -36,7 +36,9 @@ class VersionViewController: BaseViewController, View {
   }
 
   fileprivate let tableView = UITableView(frame: .zero, style: .grouped) <== {
+    $0.alwaysBounceVertical = false
     $0.register(Reusable.cell)
+    $0.backgroundColor = .snow
   }
 
   // MARK: Initializing
@@ -66,7 +68,7 @@ class VersionViewController: BaseViewController, View {
     }
 
     self.iconView.snp.makeConstraints { make in
-      make.top.equalTo(Metric.iconViewTop - self.tableView.contentInset.top)
+      make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(12)
       make.centerX.equalToSuperview()
       make.size.equalTo(Metric.iconViewSize)
     }

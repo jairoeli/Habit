@@ -89,8 +89,8 @@ final class HabitListViewController: BaseViewController, View {
     }
 
     self.titleInput.snp.makeConstraints { make in
-      make.top.equalTo(self.messageInputBar.snp.top).offset(10)
-      make.leading.equalTo(Metric.padding)
+      make.top.equalTo(self.messageInputBar.snp.top).offset(16)
+      make.leading.equalTo(50)
       make.trailing.equalTo(-Metric.padding)
     }
   }

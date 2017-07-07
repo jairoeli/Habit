@@ -30,18 +30,6 @@ final class MarkdownBar: UIView {
     $0.layer.cornerRadius = 4
   }
 
-  fileprivate lazy var cancelButton = UIButton(type: .system) <== {
-    $0.setTitle("Cancel", for: .normal)
-    $0.setTitleColor(.midGray, for: .normal)
-    $0.backgroundColor = .snow
-    $0.titleLabel?.font = .black(size: 16)
-    $0.layer <== {
-      $0.borderWidth = 1
-      $0.borderColor = UIColor.platinumBorder.cgColor
-      $0.cornerRadius = 4
-    }
-  }
-
   var isEnabled: Bool = false {
     didSet {
       self.saveButton.isEnabled = isEnabled
@@ -57,7 +45,7 @@ final class MarkdownBar: UIView {
     super.init(frame: frame)
     self.translatesAutoresizingMaskIntoConstraints = false
 
-    let subviews: [UIView] = [toolbar, separatorView, saveButton, cancelButton]
+    let subviews: [UIView] = [toolbar, separatorView, saveButton]
     self.add(subviews)
 
     setupLayout()
@@ -84,13 +72,6 @@ final class MarkdownBar: UIView {
       make.edges.equalToSuperview()
     }
 
-    self.cancelButton.snp.makeConstraints { make in
-      make.centerY.equalToSuperview()
-      make.trailing.equalTo(self.saveButton.snp.leading).offset(-8)
-      make.width.equalTo(70)
-      make.height.equalTo(Metric.buttonHeight)
-    }
-
     self.saveButton.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
       make.height.equalTo(Metric.buttonHeight)
@@ -106,11 +87,6 @@ extension Reactive where Base: MarkdownBar {
 
   var saveButtonTap: ControlEvent<Void> {
     let source = base.saveButton.rx.tap
-    return ControlEvent(events: source)
-  }
-
-  var cancelButtonTap: ControlEvent<Void> {
-    let source = base.cancelButton.rx.tap
     return ControlEvent(events: source)
   }
 
