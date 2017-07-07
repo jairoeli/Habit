@@ -42,6 +42,11 @@ class BaseViewController: UIViewController {
     }
   }
 
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    dch_checkDeallocation()
+  }
+
   // MARK: - Layout Constraints
   private(set) var didSetupConstraints = false
 
