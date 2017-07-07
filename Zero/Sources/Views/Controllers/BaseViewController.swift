@@ -64,13 +64,12 @@ class BaseViewController: UIViewController {
   // MARK: - Adjusting Navigation Item
   func adjustLeftBarButtonItem() {
     if self.navigationController?.viewControllers.count ?? 0 > 1 { // pushed
-      self.navigationItem.leftBarButtonItem = nil
+      self.navigationItem.rightBarButtonItem = nil
     } else if self.presentingViewController != nil { // presented
-      self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-        barButtonSystemItem: .cancel,
-        target: self,
-        action: #selector(cancelButtonDidTap)
-      )
+      self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"),
+                                                               style: .plain,
+                                                               target: self,
+                                                               action:  #selector(cancelButtonDidTap))
     }
   }
 

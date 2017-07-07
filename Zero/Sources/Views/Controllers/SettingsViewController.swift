@@ -27,6 +27,7 @@ final class SettingsViewController: BaseViewController, View {
   // MARK: UI
   fileprivate lazy var tableView = UITableView(frame: .zero, style: .grouped) <== {
     $0.register(Reusable.cell)
+    $0.backgroundColor = .snow
   }
 
   // MARK: Initializing
@@ -35,6 +36,7 @@ final class SettingsViewController: BaseViewController, View {
     defer { self.reactor = reactor }
     super.init()
     self.title = "Settings"
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
 
   required convenience init?(coder aDecoder: NSCoder) {

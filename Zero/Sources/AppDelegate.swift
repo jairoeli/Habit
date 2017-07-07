@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    self.configureAppearance()
 
     let window = UIWindow(frame: UIScreen.main.bounds)
     window.backgroundColor = .snow
@@ -33,6 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     self.window = window
     return true
+  }
+
+  // MARK: - Appearance
+  private func configureAppearance() {
+    UINavigationBar.appearance().barTintColor = .snow
+    UINavigationBar.appearance().tintColor = .midGray
+    UINavigationBar.appearance().isTranslucent = false
+    UINavigationBar.appearance().shadowImage = UIImage()
+    UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
   }
 
 }
