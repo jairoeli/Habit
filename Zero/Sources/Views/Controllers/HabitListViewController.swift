@@ -126,13 +126,7 @@ final class HabitListViewController: BaseViewController, View {
 
     self.titleInput.rx.text.orEmpty
       .map { !$0.isEmpty }
-      .subscribe(onNext: { [weak self] validation in
-        guard let `self` = self else { return }
-        self.messageInputBar.isEnabled = validation
-        self.messageInputBar.buttonColor = validation ? .redGraphite : .snow
-        self.messageInputBar.borderColor = validation ? .redGraphite : .platinumBorder
-        self.messageInputBar.buttonTitleColor = validation ? .snow : .midGray
-      })
+      .bind(to: self.messageInputBar.rx.isEnabled)
       .disposed(by: self.disposeBag)
 
     self.messageInputBar.rx.doneButtonTap
@@ -140,10 +134,7 @@ final class HabitListViewController: BaseViewController, View {
       .do(onNext: { [weak self] _ in
         guard let `self` = self else { return }
         self.titleInput.text = nil
-        self.messageInputBar.isEnabled = false
-        self.messageInputBar.buttonColor = .snow
-        self.messageInputBar.borderColor = .platinumBorder
-        self.messageInputBar.buttonTitleColor = .midGray
+        self.messageInputBar.doneButtonColor = .midGray
       })
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
@@ -187,10 +178,7 @@ final class HabitListViewController: BaseViewController, View {
 
     reactor.state.asObservable().map { $0.canSubmit }
       .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] validation in
-        guard let `self` = self else { return }
-        self.messageInputBar.isEnabled = validation
-      })
+      .bind(to: self.messageInputBar.rx.isEnabled)
       .disposed(by: self.disposeBag)
 
     reactor.state.asObservable().map { $0.isMoving }

@@ -18,28 +18,12 @@ final class MessageInputBar: UIView {
     static let buttonHeight = 35.f
   }
 
-  var isEnabled: Bool = false {
+  var doneButtonColor: UIColor? {
     didSet {
-      self.doneButton.isEnabled = isEnabled
-    }
-  }
-
-  var buttonColor: UIColor? {
-    didSet {
-      guard let color = buttonColor else { return }
-      self.doneButton.backgroundColor = color
-    }
-  }
-
-  var borderColor: UIColor? {
-    didSet {
-      self.doneButton.layer.borderColor = borderColor?.cgColor
-    }
-  }
-
-  var buttonTitleColor: UIColor? {
-    didSet {
-      self.doneButton.setTitleColor(buttonTitleColor, for: .normal)
+      self.doneButton.setTitleColor(.midGray, for: .normal)
+      self.doneButton.layer.borderColor = UIColor.platinumBorder.cgColor
+      self.doneButton.backgroundColor = .snow
+      self.doneButton.isEnabled = false
     }
   }
 
@@ -158,6 +142,15 @@ extension Reactive where Base: MessageInputBar {
   var doneButtonTap: ControlEvent<Void> {
     let source = base.doneButton.rx.tap
     return ControlEvent(events: source)
+  }
+
+  var isEnabled: UIBindingObserver<Base, Bool> {
+    return UIBindingObserver(UIElement: self.base) { view, enabled in
+      view.doneButton.isEnabled = enabled ? true : false
+      view.doneButton.backgroundColor = enabled ? .redGraphite : .snow
+      view.doneButton.layer.borderColor = enabled ? UIColor.redGraphite.cgColor : UIColor.platinumBorder.cgColor
+      view.doneButton.setTitleColor(enabled ? .snow : .midGray, for: .normal)
+    }
   }
 
 }
