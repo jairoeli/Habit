@@ -18,7 +18,7 @@ target 'Zero' do
   pod 'RxOptional'
   pod 'RxReusable'
   pod 'RxKeyboard'
-  pod "RxGesture"
+  pod 'RxGesture'
 
   # UI
   pod 'SnapKit'

@@ -18,7 +18,7 @@ PODS:
     - Moya/RxSwift (>= 8.0.0)
     - MoyaSugar/Core
     - RxSwift (>= 3.0.0)
-  - ReactorKit (0.4.5):
+  - ReactorKit (0.5.3):
     - RxSwift (>= 3.0.0)
   - Result (3.2.3)
   - ReusableKit (1.3.0):
@@ -29,8 +29,8 @@ PODS:
     - ReusableKit/Core
     - RxCocoa (>= 3.4)
     - RxSwift (>= 3.4)
-  - RxCocoa (3.5.0):
-    - RxSwift (~> 3.4)
+  - RxCocoa (3.6.1):
+    - RxSwift (~> 3.6)
   - RxDataSources (1.0.4):
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
@@ -41,7 +41,7 @@ PODS:
   - RxGesture (1.0.1):
     - RxCocoa (~> 3.4)
     - RxSwift (~> 3.4)
-  - RxKeyboard (0.5.0):
+  - RxKeyboard (0.5.1):
     - RxCocoa (>= 3.4)
     - RxSwift (>= 3.4)
   - RxOptional (3.1.3):
@@ -50,9 +50,9 @@ PODS:
   - RxReusable (0.3.1):
     - RxCocoa (>= 3.0)
     - RxSwift (>= 3.0)
-  - RxSwift (3.5.0)
-  - RxTest (3.5.0):
-    - RxSwift (~> 3.4)
+  - RxSwift (3.6.1)
+  - RxTest (3.6.1):
+    - RxSwift (~> 3.6)
   - SnapKit (3.2.0)
   - SwipeCellKit (1.9.0)
   - UITextView+Placeholder (1.2.0)
@@ -83,22 +83,22 @@ SPEC CHECKSUMS:
   ManualLayout: 68ac8cfa6b5f656f7a9fadec3730208b95986880
   Moya: c37eec09a098ba9991b5a963b291fc5704bdb9ef
   MoyaSugar: 7cf45602d45d067834bd705001908d6444597b10
-  ReactorKit: 545c457c350da37ba922350692390c78e7062216
+  ReactorKit: e6c5091baf9f2eee430b6e672ff1a74da9c83256
   Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   ReusableKit: 4e4f45128985987555bde17abbf261c0a604f9f2
-  RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
+  RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
   RxDataSources: b3389acc5fe2eefb8fcd81a2b76a876ad08bc82a
   RxExpect: 6211e63608788e904cde817aa6ccc0ac4fd4beb5
   RxGesture: 1f770b247c69e8133fb8f4ef263571efd0ae91a1
-  RxKeyboard: a0a681f3efa0c265e42ced07537f7a464e867e74
+  RxKeyboard: bded7b486c447ccc82dc5296e156efc0d46b83e7
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxReusable: c18e8e3b5f12a3292b76cc552dd946500f8d2c32
-  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
-  RxTest: 1763765fd0e2282b0eb44c9050effdd7fe7156d4
+  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
+  RxTest: 1d00348a7848c91ab5bf5d197d2378aa6b2bb356
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwipeCellKit: 893661973276ae3512a84ac0a47055923b10731e
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: 269c26f4ff5836b1a716b9a0e0ef99cb852eb2ef
+PODFILE CHECKSUM: f7ef31aa121ade56445d6f472b3f033f64570377
 
 COCOAPODS: 1.2.1
