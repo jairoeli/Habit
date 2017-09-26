@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '9.0'
 inhibit_all_warnings!
 
 target 'Zero' do
@@ -8,20 +8,20 @@ target 'Zero' do
   pod 'ReactorKit'
 
   # Networking
-  pod 'Moya/RxSwift'
-  pod 'MoyaSugar/RxSwift'
+  pod 'Moya/RxSwift', :git => 'https://github.com/Moya/Moya.git', :branch => '10.0.0-dev'
+  pod 'MoyaSugar/RxSwift', :git => 'https://github.com/devxoul/MoyaSugar.git', :branch => 'master'
 
   # Rx
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'RxDataSources'
+  pod 'RxSwift', '4.0.0-beta.0'
+  pod 'RxCocoa', '4.0.0-beta.0'
+  pod 'RxDataSources', :git => 'https://github.com/RxSwiftCommunity/RxDataSources.git', :branch => 'swift4.0'
+  pod 'Differentiator', :git => 'https://github.com/RxSwiftCommunity/RxDataSources.git', :branch => 'swift4.0'
   pod 'RxOptional'
-  pod 'RxReusable'
   pod 'RxKeyboard'
-  pod 'RxGesture'
+  pod 'RxGesture', :git => 'https://github.com/sidmani/RxGesture.git', :branch => 'swift-4'
 
   # UI
-  pod 'SnapKit'
+  pod 'SnapKit', '~> 4.0.0'
   pod 'ManualLayout'
 
   # Logging
@@ -29,12 +29,12 @@ target 'Zero' do
 
   # Misc.
   pod 'ReusableKit'
-  pod 'SwipeCellKit'
+  pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'swift4'
   pod 'UITextView+Placeholder'
 
   # Testing
   target 'ZeroTests' do
-    pod 'RxTest'
+    pod 'RxTest', '4.0.0-beta.0'
     pod 'RxExpect'
     pod 'RxOptional'
   end
@@ -42,9 +42,5 @@ target 'Zero' do
 end
 
 post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
-    end
-  end
+  pods_dir = File.dirname(installer.pods_project.path)
 end
