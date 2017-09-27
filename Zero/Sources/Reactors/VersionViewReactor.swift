@@ -38,6 +38,7 @@ final class VersionViewReactor: Reactor {
       let startLoading: Observable<Mutation> = .just(.setLoading(true))
       let clearLatestVersion: Observable<Mutation> = .just(.setLatestVersion(nil))
       let setLatestVersion: Observable<Mutation> = self.provider.appStoreService.latestVersion()
+        .asObservable()
         .map { $0 ?? "⚠️" }
         .map(Mutation.setLatestVersion)
       let stopLoading: Observable<Mutation> = .just(.setLoading(false))

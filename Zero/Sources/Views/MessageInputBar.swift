@@ -144,8 +144,8 @@ extension Reactive where Base: MessageInputBar {
     return ControlEvent(events: source)
   }
 
-  var isEnabled: UIBindingObserver<Base, Bool> {
-    return UIBindingObserver(UIElement: self.base) { view, enabled in
+  var isEnabled: Binder<Bool> {
+    return Binder(self.base) { view, enabled in
       view.doneButton.isEnabled = enabled ? true : false
       view.doneButton.backgroundColor = enabled ? .redGraphite : .snow
       view.doneButton.layer.borderColor = enabled ? UIColor.redGraphite.cgColor : UIColor.platinumBorder.cgColor

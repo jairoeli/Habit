@@ -12,6 +12,8 @@ import SwipeCellKit
 
 class BaseTableViewCell: SwipeTableViewCell {
 
+  var disposeBag = DisposeBag()
+
   // MARK: - Initializing
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

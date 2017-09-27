@@ -107,8 +107,9 @@ final class HabitListViewController: BaseViewController, View {
       cell.reactor = reactor
       return cell
     }
-    self.dataSource.canEditRowAtIndexPath = { _ in true }
-    self.dataSource.canMoveRowAtIndexPath = { _ in true }
+
+    self.dataSource.canEditRowAtIndexPath = { _, _ in return true }
+    self.dataSource.canMoveRowAtIndexPath = { _, _ in return true }
 
     // ACTION
     self.rx.viewDidLoad

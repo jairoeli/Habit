@@ -10,7 +10,7 @@ import Moya
 import MoyaSugar
 import RxSwift
 
-final class Networking<Target: SugarTargetType>: RxMoyaSugarProvider<Target> {
+final class Networking<Target: SugarTargetType>: MoyaSugarProvider<Target> {
 
   init(plugins: [PluginType] = []) {
     let configuration = URLSessionConfiguration.default
@@ -22,14 +22,9 @@ final class Networking<Target: SugarTargetType>: RxMoyaSugarProvider<Target> {
     super.init(manager: manager, plugins: plugins)
   }
 
-  @available(*, unavailable)
-  override func request(_ token: Target) -> Observable<Response> {
-    return super.request(token)
-  }
-
-  func request(_ token: Target, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Observable<Response> {
-    let requestString = "\(token.method) \(token.path)"
-    return super.request(token)
+  func request(_ target: Target, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Single<Response> {
+    let requestString = "\(target.method) \(target.path)"
+    return self.rx.request(target)
       .filterSuccessfulStatusCodes()
       .do(
         onNext: { value in
@@ -53,7 +48,7 @@ final class Networking<Target: SugarTargetType>: RxMoyaSugarProvider<Target> {
             log.warning(message, file: file, function: function, line: line)
           }
       },
-        onSubscribe: {
+        onSubscribed: {
           let message = "REQUEST: \(requestString)"
           log.debug(message, file: file, function: function, line: line)
       }
