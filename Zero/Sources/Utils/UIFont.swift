@@ -10,11 +10,11 @@ import UIKit
 
 extension UIFont {
   static func black(size: CGFloat) -> UIFont {
-    return UIFont.systemFont(ofSize: size, weight: UIFontWeightHeavy)
+    return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.heavy)
   }
 
   static func regular(size: CGFloat) -> UIFont {
-    return UIFont.systemFont(ofSize: size, weight: UIFontWeightMedium)
+    return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.medium)
   }
 }
 
@@ -56,19 +56,19 @@ extension UIFont {
 
     var CGFloatValue: CGFloat {
       switch self {
-      case .regular: return UIFontWeightRegular
-      case .medium: return UIFontWeightMedium
-      case .semibold: return UIFontWeightSemibold
-      case .bold: return UIFontWeightBold
-      case .heavy: return UIFontWeightHeavy
-      case .black: return UIFontWeightBlack
+      case .regular: return UIFont.Weight.regular.rawValue
+      case .medium: return UIFont.Weight.medium.rawValue
+      case .semibold: return UIFont.Weight.semibold.rawValue
+      case .bold: return UIFont.Weight.bold.rawValue
+      case .heavy: return UIFont.Weight.heavy.rawValue
+      case .black: return UIFont.Weight.black.rawValue
       }
     }
   }
 
   static func dynamicSize(style: UIFontTextStyle, weight: FontWeight) -> UIFont {
     let pointSize = UIFont.preferredFont(forTextStyle: style).pointSize
-    return UIFont.systemFont(ofSize: pointSize, weight: weight.CGFloatValue)
+    return UIFont.systemFont(ofSize: pointSize, weight: UIFont.Weight(rawValue: weight.CGFloatValue))
   }
 
 }

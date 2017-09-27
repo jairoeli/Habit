@@ -22,18 +22,19 @@ extension AppStoreAPI: SugarTargetType {
     }
   }
 
-  var params: Parameters? {
+  var task: Task {
     switch self {
-    case let .lookup(bundleID): return ["bundleId": bundleID]
+    case let .lookup(bundleID):
+      return .requestParameters(parameters: ["bundleId": bundleID], encoding: URLEncoding())
     }
+  }
+
+  var headers: [String: String]? {
+    return nil
   }
 
   var sampleData: Data {
     return Data()
-  }
-
-  var task: Task {
-    return .request
   }
 
 }
