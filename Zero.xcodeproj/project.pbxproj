@@ -943,6 +943,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Y9CEQN88G2;
 				INFOPLIST_FILE = "$(SRCROOT)/Zero/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jairoeli.Zero;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -957,6 +958,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Y9CEQN88G2;
 				INFOPLIST_FILE = "$(SRCROOT)/Zero/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jairoeli.Zero;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -56,7 +56,11 @@ final class SectionHeaderView: UIView {
     }
 
     self.displayDate.snp.makeConstraints { make in
-      make.top.equalTo(Metric.cellPadding)
+      if #available(iOS 11.0, *), iPhoneX() == true {
+        make.top.equalTo(self.safeAreaLayoutGuide.snp.topMargin).offset(8)
+      } else {
+        make.top.equalTo(Metric.cellPadding)
+      }
       make.leading.equalTo(Metric.leftPadding)
     }
   }
@@ -64,7 +68,16 @@ final class SectionHeaderView: UIView {
   // MARK: - Size
 
   override var intrinsicContentSize: CGSize {
-    return CGSize(width: self.width, height: 100)
+    if iPhoneX() == true {
+      return CGSize(width: self.width, height: 110)
+    } else {
+      return CGSize(width: self.width, height: 100)
+    }
+  }
+
+  func iPhoneX() -> Bool {
+    let screenRect: CGRect = UIScreen.main.bounds
+    return max(screenRect.size.height, screenRect.size.width) == 812
   }
 
 }

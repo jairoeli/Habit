@@ -85,7 +85,11 @@ final class HabitListViewController: BaseViewController, View {
 
     self.messageInputBar.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
+      if #available(iOS 11.0, *) {
+        make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottomMargin)
+      } else {
+        make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
+      }
     }
 
     self.titleInput.snp.makeConstraints { make in
@@ -232,8 +236,17 @@ extension HabitListViewController {
     RxKeyboard.instance.visibleHeight
       .drive(onNext: { [weak self] keyboardVisibleHeight in
         guard let `self` = self, self.didSetupConstraints else { return }
+        var actualKeyboardHeight = keyboardVisibleHeight
+        if #available(iOS 11.0, *), keyboardVisibleHeight > 0 {
+          actualKeyboardHeight -= self.view.safeAreaInsets.bottom
+        }
+
         self.messageInputBar.snp.updateConstraints { make in
-          make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-keyboardVisibleHeight)
+          if #available(iOS 11, *) {
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin).offset(-actualKeyboardHeight)
+          } else {
+            make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-actualKeyboardHeight)
+          }
         }
         self.view.setNeedsLayout()
         UIView.animate(withDuration: 0) {
