@@ -68,7 +68,11 @@ class VersionViewController: BaseViewController, View {
     }
 
     self.iconView.snp.makeConstraints { make in
-      make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(12)
+      if #available(iOS 11.0, *) {
+        make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(12)
+      } else {
+        make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(12)
+      }
       make.centerX.equalToSuperview()
       make.size.equalTo(Metric.iconViewSize)
     }
