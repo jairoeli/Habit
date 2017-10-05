@@ -9,8 +9,11 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import RxKeyboard
 
 final class MessageInputBar: UIView {
+
+  private let disposeBag = DisposeBag()
 
   fileprivate struct Metric {
     static let padding = 15.f

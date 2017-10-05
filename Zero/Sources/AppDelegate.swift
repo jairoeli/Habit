@@ -37,11 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   // MARK: - Appearance
   private func configureAppearance() {
+    if #available(iOS 11.0, *) { UINavigationBar.appearance().prefersLargeTitles = true }
+    UINavigationBar.appearance().backgroundColor = .snow
     UINavigationBar.appearance().barTintColor = .snow
     UINavigationBar.appearance().tintColor = .midGray
     UINavigationBar.appearance().isTranslucent = false
     UINavigationBar.appearance().shadowImage = UIImage()
-    UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
   }
 
 }

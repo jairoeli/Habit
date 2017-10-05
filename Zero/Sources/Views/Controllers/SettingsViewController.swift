@@ -37,6 +37,7 @@ final class SettingsViewController: BaseViewController, View {
     super.init()
     self.title = "Settings"
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    if #available(iOS 11.0, *) { self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic }
   }
 
   required convenience init?(coder aDecoder: NSCoder) {

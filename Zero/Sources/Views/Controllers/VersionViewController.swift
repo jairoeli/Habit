@@ -55,7 +55,6 @@ class VersionViewController: BaseViewController, View {
   // MARK: View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = .snow
     self.tableView.dataSource = self
     self.tableView.contentInset.top = Metric.iconViewTop + Metric.iconViewSize + Metric.iconViewBottom
     self.tableView.addSubview(self.iconView)
