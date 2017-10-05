@@ -37,6 +37,8 @@
 		9C81C1481EEA03CB0046883D /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C1471EEA03CB0046883D /* MockError.swift */; };
 		9C81C14A1EEA04230046883D /* TaskEditViewReactorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C1491EEA04230046883D /* TaskEditViewReactorTests.swift */; };
 		9C81C14C1EEA05380046883D /* TaskListViewReactorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C14B1EEA05380046883D /* TaskListViewReactorTests.swift */; };
+		9C948C771F86EDEB005EBB9A /* SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C948C761F86EDEB005EBB9A /* SafeArea.swift */; };
+		9CA4C7AF1F7F1411006040D3 /* UITableView+ScrollToBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4C7AE1F7F1411006040D3 /* UITableView+ScrollToBottom.swift */; };
 		9CAC53CD1EE07F030091B690 /* UITableView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAC53CC1EE07F030091B690 /* UITableView+Rx.swift */; };
 		9CACB0841F02E4AF00C95167 /* MarkdownBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CACB0831F02E4AF00C95167 /* MarkdownBar.swift */; };
 		9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCC9A41EC399C100F6DD96 /* Animation.swift */; };
@@ -110,6 +112,8 @@
 		9C81C1471EEA03CB0046883D /* MockError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockError.swift; path = Sources/Mock/Services/MockError.swift; sourceTree = "<group>"; };
 		9C81C1491EEA04230046883D /* TaskEditViewReactorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewReactorTests.swift; path = Sources/Tests/TaskEditViewReactorTests.swift; sourceTree = "<group>"; };
 		9C81C14B1EEA05380046883D /* TaskListViewReactorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewReactorTests.swift; path = Sources/Tests/TaskListViewReactorTests.swift; sourceTree = "<group>"; };
+		9C948C761F86EDEB005EBB9A /* SafeArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SafeArea.swift; path = Sources/Utils/SafeArea.swift; sourceTree = "<group>"; };
+		9CA4C7AE1F7F1411006040D3 /* UITableView+ScrollToBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableView+ScrollToBottom.swift"; path = "Sources/Utils/UITableView+ScrollToBottom.swift"; sourceTree = "<group>"; };
 		9CAC53CC1EE07F030091B690 /* UITableView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITableView+Rx.swift"; path = "Sources/Rx/UITableView+Rx.swift"; sourceTree = "<group>"; };
 		9CACB0831F02E4AF00C95167 /* MarkdownBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarkdownBar.swift; path = Sources/Views/MarkdownBar.swift; sourceTree = "<group>"; };
 		9CDCC9A41EC399C100F6DD96 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = Sources/Utils/Animation.swift; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				9CEA33AA1EC0C0C100816DAA /* MutateOperator.swift */,
+				9C948C761F86EDEB005EBB9A /* SafeArea.swift */,
 				9C16585B1F104A05003271D1 /* DeallocationChecker.swift */,
 				9C0A6F441F0B3D60000491C9 /* Bundle.swift */,
 				9C0A6F3E1F0B3B6E000491C9 /* Logging.swift */,
@@ -344,6 +349,7 @@
 				9C78F73E1EEF3324005434D0 /* CharacterLimit.swift */,
 				9CEA33AC1EC0C0ED00816DAA /* Snap.swift */,
 				9CEA33AE1EC0C10F00816DAA /* String+BoundingRect.swift */,
+				9CA4C7AE1F7F1411006040D3 /* UITableView+ScrollToBottom.swift */,
 				9CEA33B81EC0C29500816DAA /* Array+SectionModel.swift */,
 				9CEA33C11EC0CA5500816DAA /* UserDefaultsKey.swift */,
 				9CDCC9A41EC399C100F6DD96 /* Animation.swift */,
@@ -754,6 +760,7 @@
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
 				9CEA33BC1EC0C48900816DAA /* ModelType.swift in Sources */,
 				9C66AF101F0C04FA00EA72F6 /* VersionCell.swift in Sources */,
+				9CA4C7AF1F7F1411006040D3 /* UITableView+ScrollToBottom.swift in Sources */,
 				9CDF09901EC2283C00A2A25C /* HabitListViewController.swift in Sources */,
 				9C3A10511EEC4E5D00DA1B1F /* SettingItemCellReactor.swift in Sources */,
 				9CACB0841F02E4AF00C95167 /* MarkdownBar.swift in Sources */,
@@ -771,6 +778,7 @@
 				9C2F5BC31EF6EEB200A4E250 /* SwipeActionDescriptor.swift in Sources */,
 				9CEA33B91EC0C29500816DAA /* Array+SectionModel.swift in Sources */,
 				9C0A6F491F0B3FAE000491C9 /* VersionViewController.swift in Sources */,
+				9C948C771F86EDEB005EBB9A /* SafeArea.swift in Sources */,
 				9C395C251ED11EE300DCFB8F /* BaseReactor.swift in Sources */,
 				9C0A6F431F0B3CAB000491C9 /* AppStoreService.swift in Sources */,
 			);

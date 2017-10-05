@@ -72,11 +72,7 @@ final class HabitEditViewController: BaseViewController, View {
 
   override func setupConstraints() {
     self.titleInput.snp.makeConstraints { make in
-      if #available(iOS 11.0, *) {
-        make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
-      } else {
-        make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(15)
-      }
+      make.top.equalTo(self.safeAreaTop).offset(Metric.padding)
       make.leading.equalTo(Metric.padding)
       make.trailing.equalTo(-Metric.padding)
     }
@@ -97,11 +93,7 @@ final class HabitEditViewController: BaseViewController, View {
 
     self.markdownBar.snp.makeConstraints { make in
       make.left.right.equalToSuperview()
-      if #available(iOS 11.0, *) {
-        make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin).offset(100)
-      } else {
-        make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(100)
-      }
+      make.bottom.equalTo(self.safeAreaBottom).offset(100)
     }
   }
 
@@ -165,11 +157,7 @@ final class HabitEditViewController: BaseViewController, View {
         }
 
         self.markdownBar.snp.updateConstraints { make in
-          if #available(iOS 11, *) {
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin).offset(-actualKeyboardHeight)
-          } else {
-            make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-keyboardVisibleHeight)
-          }
+          make.bottom.equalTo(self.safeAreaBottom).offset(-actualKeyboardHeight)
         }
         self.view.setNeedsLayout()
         UIView.animate(withDuration: 0) { self.view.layoutIfNeeded() }

@@ -32,15 +32,15 @@ final class HabitListViewController: BaseViewController, View {
   var buttonStyle: ButtonStyle = .backgroundColor
 
   let dataSource = RxTableViewSectionedReloadDataSource<HabitListSection>()
-  fileprivate let headerView = SectionHeaderView()
+//  fileprivate let headerView = SectionHeaderView()
   fileprivate let messageInputBar = MessageInputBar()
   fileprivate lazy var tableView = UITableView() <== {
+    $0.register(Reusable.habitCell)
     $0.alwaysBounceVertical = true
     $0.backgroundColor = .snow
     $0.separatorStyle = .none
-    $0.keyboardDismissMode = .onDrag
+    $0.keyboardDismissMode = .interactive
     $0.allowsSelectionDuringEditing = true
-    $0.register(Reusable.habitCell)
   }
 
   fileprivate lazy var titleInput = UITextField() <== {
@@ -55,6 +55,8 @@ final class HabitListViewController: BaseViewController, View {
   init(reactor: HabitListViewReactor) {
     defer { self.reactor = reactor }
     super.init()
+    self.title = "2017"
+    if #available(iOS 11.0, *) { self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic }
   }
 
   required convenience init?(coder aDecoder: NSCoder) {
@@ -65,37 +67,33 @@ final class HabitListViewController: BaseViewController, View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    let subviews: [UIView] = [headerView, tableView, messageInputBar, titleInput]
+    let subviews: [UIView] = [tableView, messageInputBar, titleInput]
     self.view.add(subviews)
-
-    tableView.contentInset.bottom = self.messageInputBar.intrinsicContentSize.height
-    tableView.scrollIndicatorInsets = self.tableView.contentInset
-    tableView.contentInset = UIEdgeInsets(top: 0.f, left: 0.f, bottom: 85.f, right: 0.f)
     titleInput.delegate = self
   }
 
   override func setupConstraints() {
-    self.headerView.snp.makeConstraints { make in make.top.left.right.equalToSuperview() }
-
     self.tableView.snp.makeConstraints { make in
-      make.top.equalTo(self.headerView.snp.bottom)
-      make.leading.trailing.equalToSuperview()
-      make.bottom.equalToSuperview()
+      make.edges.equalToSuperview()
     }
 
     self.messageInputBar.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview()
-      if #available(iOS 11.0, *) {
-        make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottomMargin)
-      } else {
-        make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
-      }
+      make.left.right.equalTo(0)
+      make.bottom.equalTo(self.safeAreaBottom)
     }
 
     self.titleInput.snp.makeConstraints { make in
       make.top.equalTo(self.messageInputBar.snp.top).offset(16)
       make.leading.equalTo(50)
       make.trailing.equalTo(-Metric.padding)
+    }
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    if self.tableView.contentInset.bottom == 0 {
+      self.tableView.contentInset.bottom = self.messageInputBar.height
+      self.tableView.scrollIndicatorInsets.bottom = self.tableView.contentInset.bottom
     }
   }
 
@@ -114,6 +112,11 @@ final class HabitListViewController: BaseViewController, View {
 
     self.dataSource.canEditRowAtIndexPath = { _, _ in return true }
     self.dataSource.canMoveRowAtIndexPath = { _, _ in return true }
+
+    let wasReachedBottom: Observable<Bool> = self.tableView.rx.contentOffset
+      .map { [weak self] _ in
+        self?.tableView.isReachedBottom() ?? false
+    }
 
     // ACTION
     self.rx.viewDidLoad
@@ -176,6 +179,15 @@ final class HabitListViewController: BaseViewController, View {
       .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
       .disposed(by: self.disposeBag)
 
+    reactor.state.map { $0.sections }
+      .debounce(0.1, scheduler: MainScheduler.instance)
+      .withLatestFrom(wasReachedBottom) { ($0, $1) }
+      .filter { _, wasReachedBottom in wasReachedBottom == true }
+      .subscribe(onNext: { [weak self] _ in
+        self?.tableView.scrollToBottom(animated: true)
+      })
+      .disposed(by: self.disposeBag)
+
     reactor.state.asObservable().map { $0.habitTitle }
       .distinctUntilChanged()
       .bind(to: self.titleInput.rx.text)
@@ -190,8 +202,8 @@ final class HabitListViewController: BaseViewController, View {
       .distinctUntilChanged()
       .subscribe(onNext: { [weak self] isEditing in
         guard let `self` = self else { return }
-        self.messageInputBar.tintColor = isEditing ? .redGraphite : .midGray
         self.tableView.setEditing(isEditing, animated: true)
+        self.messageInputBar.tintColor = isEditing ? .redGraphite : .midGray
       })
       .disposed(by: self.disposeBag)
   }
@@ -212,12 +224,6 @@ extension HabitListViewController: UITableViewDelegate {
 // MARK: - Reactive wrapper
 extension HabitListViewController {
   fileprivate func rxViewController() {
-    self.rx.viewWillAppear
-      .subscribe(onNext: { [weak self] animated in
-        self?.navigationController?.setNavigationBarHidden(true, animated: animated)
-      })
-      .disposed(by: self.disposeBag)
-
     self.tableView.rx.itemSelected
       .subscribe(onNext: { [weak tableView] indexPath in
         tableView?.deselectRow(at: indexPath, animated: true)
@@ -242,11 +248,7 @@ extension HabitListViewController {
         }
 
         self.messageInputBar.snp.updateConstraints { make in
-          if #available(iOS 11, *) {
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin).offset(-actualKeyboardHeight)
-          } else {
-            make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-actualKeyboardHeight)
-          }
+          make.bottom.equalTo(self.safeAreaBottom).offset(-actualKeyboardHeight)
         }
         self.view.setNeedsLayout()
         UIView.animate(withDuration: 0) {
