@@ -19,7 +19,6 @@ final class HabitListViewReactor: BaseReactor {
     case updateHabitTitle(String)
     case submit
     case refresh
-    case toggleEditing
     case moveHabit(IndexPath, IndexPath)
     case deleteHabit(IndexPath)
     case habitIncreaseValue(IndexPath)
@@ -32,21 +31,18 @@ final class HabitListViewReactor: BaseReactor {
     case insertSectionItem(IndexPath, HabitListSection.Item)
     case updateSectionItem(IndexPath, HabitListSection.Item)
     case deleteSectionItem(IndexPath)
-    case toggleEditing
     case moveSectionItem(IndexPath, IndexPath)
   }
 
   struct State {
     var sections: [HabitListSection]
-    var isMoving: Bool
     var habitTitle: String
     var canSubmit: Bool
 
-    init(isEditing: Bool, sections: [HabitListSection], habitTitle: String, canSubmit: Bool) {
+    init(sections: [HabitListSection], habitTitle: String, canSubmit: Bool) {
       self.sections = sections
       self.habitTitle = habitTitle
       self.canSubmit = canSubmit
-      self.isMoving = isEditing
     }
   }
 
@@ -55,7 +51,7 @@ final class HabitListViewReactor: BaseReactor {
 
   init(provider: ServiceProviderType) {
     self.provider = provider
-    self.initialState = State(isEditing: false, sections: [HabitListSection(model: Void(), items: [])], habitTitle: "", canSubmit: false)
+    self.initialState = State(sections: [HabitListSection(model: Void(), items: [])], habitTitle: "", canSubmit: false)
   }
 
   // MARK: - Mutate
@@ -76,8 +72,6 @@ final class HabitListViewReactor: BaseReactor {
           let section = HabitListSection(model: Void(), items: sectionItems)
           return .setSections([section])
       }
-
-    case .toggleEditing: return .just(.toggleEditing)
 
     case let .moveHabit(sourceIndexPath, destinationIndexPath):
       let habit = self.currentState.sections[sourceIndexPath].currentState
@@ -161,10 +155,6 @@ final class HabitListViewReactor: BaseReactor {
 
     case let .setSections(sections):
       state.sections = sections
-      return state
-
-    case .toggleEditing:
-      state.isMoving = !state.isMoving
       return state
 
     case let .insertSectionItem(indexPath, sectionItem):
