@@ -9,7 +9,6 @@
 import UIKit
 import RxCocoa
 import RxSwift
-import RxKeyboard
 
 final class MessageInputBar: UIView {
 
@@ -30,13 +29,6 @@ final class MessageInputBar: UIView {
     }
   }
 
-  override var tintColor: UIColor? {
-    didSet {
-      guard let color = tintColor else { return }
-      self.reorderButton.tintColor = color
-    }
-  }
-
   // MARK: - UI
 
   fileprivate lazy var textView = UIView() <== {
@@ -45,16 +37,6 @@ final class MessageInputBar: UIView {
 
   fileprivate lazy var separatorView = UIView() <== {
     $0.backgroundColor = .platinumBorder
-  }
-
-  fileprivate lazy var settingsButton = UIButton(type: .system) <== {
-    $0.setImage(#imageLiteral(resourceName: "settings").withRenderingMode(.alwaysTemplate), for: .normal)
-    $0.tintColor = .midGray
-  }
-
-  fileprivate lazy var reorderButton = UIButton(type: .system) <== {
-    $0.setImage(#imageLiteral(resourceName: "reorder").withRenderingMode(.alwaysTemplate), for: .normal)
-    $0.tintColor = .midGray
   }
 
   fileprivate lazy var smileyButton = UIButton(type: .system) <== {
@@ -78,7 +60,7 @@ final class MessageInputBar: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.translatesAutoresizingMaskIntoConstraints = false
-    let subviews: [UIView] = [textView, separatorView, smileyButton, settingsButton, reorderButton, doneButton]
+    let subviews: [UIView] = [textView, separatorView, smileyButton, doneButton]
     self.add(subviews)
     self.setupLayout()
   }
@@ -89,7 +71,7 @@ final class MessageInputBar: UIView {
 
   // MARK: Size
   override var intrinsicContentSize: CGSize {
-    return CGSize(width: self.width, height: 95)
+    return CGSize(width: self.width, height: 60)
   }
 
   // MARK: - Layout
@@ -103,44 +85,22 @@ final class MessageInputBar: UIView {
     }
 
     self.smileyButton.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(6)
+      make.centerY.equalToSuperview()
       make.left.equalToSuperview().offset(2)
       make.size.equalTo(44)
     }
 
-    self.settingsButton.snp.makeConstraints { make in
-      make.bottom.left.equalToSuperview()
-      make.size.equalTo(44)
-    }
-
-    self.reorderButton.snp.makeConstraints { make in
-      make.bottom.equalToSuperview()
-      make.left.equalTo(self.settingsButton.snp.right).offset(2)
-      make.size.equalTo(44)
-    }
-
     self.doneButton.snp.makeConstraints { make in
-      make.bottom.equalTo(self.textView.snp.bottom).offset(-6)
+      make.centerY.equalToSuperview()
       make.right.equalTo(-Metric.padding)
       make.width.equalTo(Metric.buttonWidth)
       make.height.equalTo(Metric.buttonHeight)
     }
   }
-
 }
 
 // MARK: - Reactive
 extension Reactive where Base: MessageInputBar {
-
-  var settingsButtonTap: ControlEvent<Void> {
-    let source = base.settingsButton.rx.tap
-    return ControlEvent(events: source)
-  }
-
-  var reorderButtonTap: ControlEvent<Void> {
-    let source = base.reorderButton.rx.tap
-    return ControlEvent(events: source)
-  }
 
   var doneButtonTap: ControlEvent<Void> {
     let source = base.doneButton.rx.tap

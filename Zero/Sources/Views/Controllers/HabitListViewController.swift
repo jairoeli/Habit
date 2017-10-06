@@ -40,7 +40,8 @@ final class HabitListViewController: BaseViewController, View {
     $0.backgroundColor = .snow
     $0.separatorStyle = .none
     $0.keyboardDismissMode = .interactive
-    $0.allowsSelectionDuringEditing = true
+    $0.allowsSelectionDuringEditing = false
+    $0.reorder.delegate = self
   }
 
   fileprivate lazy var titleInput = UITextField() <== {
@@ -50,12 +51,15 @@ final class HabitListViewController: BaseViewController, View {
     $0.tintColor = .redGraphite
   }
 
+  let settingButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: nil, action: nil)
+
   // MARK: - Initializing
 
   init(reactor: HabitListViewReactor) {
     defer { self.reactor = reactor }
     super.init()
     self.title = "2017"
+    self.navigationItem.rightBarButtonItem = self.settingButtonItem
     if #available(iOS 11.0, *) { self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic }
   }
 
@@ -70,11 +74,14 @@ final class HabitListViewController: BaseViewController, View {
     let subviews: [UIView] = [tableView, messageInputBar, titleInput]
     self.view.add(subviews)
     titleInput.delegate = self
+    self.tableView.estimatedRowHeight = 75.0
+    self.tableView.rowHeight = UITableViewAutomaticDimension
   }
 
   override func setupConstraints() {
     self.tableView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
+      make.top.left.right.equalToSuperview()
+      make.bottom.equalTo(self.safeAreaBottom)
     }
 
     self.messageInputBar.snp.makeConstraints { make in
@@ -83,9 +90,9 @@ final class HabitListViewController: BaseViewController, View {
     }
 
     self.titleInput.snp.makeConstraints { make in
-      make.top.equalTo(self.messageInputBar.snp.top).offset(16)
+      make.top.equalTo(self.messageInputBar.snp.top).offset(18)
       make.leading.equalTo(50)
-      make.trailing.equalTo(-Metric.padding)
+      make.trailing.equalTo(-Metric.padding * 5)
     }
   }
 
@@ -103,6 +110,9 @@ final class HabitListViewController: BaseViewController, View {
     self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
 
     self.dataSource.configureCell = { _, tableView, indexPath, reactor in
+      if let spacer = tableView.reorder.spacerCell(for: indexPath) {
+        return spacer
+      }
       let cell = tableView.dequeue(Reusable.habitCell, for: indexPath)
       cell.selectionStyle = .none
       cell.delegate = self
@@ -147,12 +157,7 @@ final class HabitListViewController: BaseViewController, View {
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
-    self.messageInputBar.rx.reorderButtonTap
-      .map { Reactor.Action.toggleEditing }
-      .bind(to: reactor.action)
-      .disposed(by: self.disposeBag)
-
-    self.messageInputBar.rx.settingsButtonTap
+    self.settingButtonItem.rx.tap
       .map { reactor.settingsViewReactor() }
       .subscribe(onNext: { [weak self] reactor in
         let controller = SettingsViewController(reactor: reactor)
@@ -164,11 +169,6 @@ final class HabitListViewController: BaseViewController, View {
     self.tableView.rx.itemSelected
       .debounce(0.2, scheduler: MainScheduler.instance)
       .map { indexPath in .habitIncreaseValue(indexPath) }
-      .bind(to: reactor.action)
-      .disposed(by: self.disposeBag)
-
-    self.tableView.rx.itemMoved
-      .map(Reactor.Action.moveHabit)
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
 
@@ -197,15 +197,6 @@ final class HabitListViewController: BaseViewController, View {
       .distinctUntilChanged()
       .bind(to: self.messageInputBar.rx.isEnabled)
       .disposed(by: self.disposeBag)
-
-    reactor.state.asObservable().map { $0.isMoving }
-      .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] isEditing in
-        guard let `self` = self else { return }
-        self.tableView.setEditing(isEditing, animated: true)
-        self.messageInputBar.tintColor = isEditing ? .redGraphite : .midGray
-      })
-      .disposed(by: self.disposeBag)
   }
   // swiftlint:enable function_body_length
 
@@ -219,6 +210,12 @@ extension HabitListViewController: UITableViewDelegate {
     return HabitCell.height(fits: tableView.width, reactor: reactor)
   }
 
+}
+// MARK: - Reorder
+extension HabitListViewController: TableViewReorderDelegate {
+  func tableView(_ tableView: UITableView, reorderRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    self.reactor?.action.onNext(Reactor.Action.moveHabit(sourceIndexPath, destinationIndexPath))
+  }
 }
 
 // MARK: - Reactive wrapper

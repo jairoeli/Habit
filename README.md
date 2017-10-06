@@ -11,6 +11,7 @@ An iOS app that keeps things simple. Add the habit you want to count, and check-
 * Observing model updates
 * Navigating between view controllers
 * Interactive dismissing keyboards using [RxKeyboard](https://github.com/RxSwiftCommunity/RxKeyboard)
+* Drag & Drop Reordering
 
 ## Architecture
 ![reactorkit](https://user-images.githubusercontent.com/16951799/26894339-b7182a9e-4b83-11e7-9ba3-0b5a47bbe859.png)
