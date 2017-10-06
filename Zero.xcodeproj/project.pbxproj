@@ -38,6 +38,12 @@
 		9C81C14A1EEA04230046883D /* TaskEditViewReactorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C1491EEA04230046883D /* TaskEditViewReactorTests.swift */; };
 		9C81C14C1EEA05380046883D /* TaskListViewReactorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C14B1EEA05380046883D /* TaskListViewReactorTests.swift */; };
 		9C948C771F86EDEB005EBB9A /* SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C948C761F86EDEB005EBB9A /* SafeArea.swift */; };
+		9C97093A1F86F9740065BE4D /* ReorderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C948C791F86F7BC005EBB9A /* ReorderController.swift */; };
+		9C97093B1F86F9760065BE4D /* ReorderController+AutoScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C948C7C1F86F7BD005EBB9A /* ReorderController+AutoScroll.swift */; };
+		9C97093C1F86F9790065BE4D /* ReorderController+DestinationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C948C7A1F86F7BC005EBB9A /* ReorderController+DestinationRow.swift */; };
+		9C97093D1F86F97B0065BE4D /* ReorderController+GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C948C7B1F86F7BC005EBB9A /* ReorderController+GestureRecognizer.swift */; };
+		9C97093E1F86F97E0065BE4D /* ReorderController+SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C948C7D1F86F7BD005EBB9A /* ReorderController+SnapshotView.swift */; };
+		9C97093F1F86F9800065BE4D /* UITableView+Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C948C7E1F86F7BD005EBB9A /* UITableView+Reorder.swift */; };
 		9CA4C7AF1F7F1411006040D3 /* UITableView+ScrollToBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4C7AE1F7F1411006040D3 /* UITableView+ScrollToBottom.swift */; };
 		9CAC53CD1EE07F030091B690 /* UITableView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAC53CC1EE07F030091B690 /* UITableView+Rx.swift */; };
 		9CACB0841F02E4AF00C95167 /* MarkdownBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CACB0831F02E4AF00C95167 /* MarkdownBar.swift */; };
@@ -113,6 +119,12 @@
 		9C81C1491EEA04230046883D /* TaskEditViewReactorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskEditViewReactorTests.swift; path = Sources/Tests/TaskEditViewReactorTests.swift; sourceTree = "<group>"; };
 		9C81C14B1EEA05380046883D /* TaskListViewReactorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewReactorTests.swift; path = Sources/Tests/TaskListViewReactorTests.swift; sourceTree = "<group>"; };
 		9C948C761F86EDEB005EBB9A /* SafeArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SafeArea.swift; path = Sources/Utils/SafeArea.swift; sourceTree = "<group>"; };
+		9C948C791F86F7BC005EBB9A /* ReorderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderController.swift; sourceTree = "<group>"; };
+		9C948C7A1F86F7BC005EBB9A /* ReorderController+DestinationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReorderController+DestinationRow.swift"; sourceTree = "<group>"; };
+		9C948C7B1F86F7BC005EBB9A /* ReorderController+GestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReorderController+GestureRecognizer.swift"; sourceTree = "<group>"; };
+		9C948C7C1F86F7BD005EBB9A /* ReorderController+AutoScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReorderController+AutoScroll.swift"; sourceTree = "<group>"; };
+		9C948C7D1F86F7BD005EBB9A /* ReorderController+SnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReorderController+SnapshotView.swift"; sourceTree = "<group>"; };
+		9C948C7E1F86F7BD005EBB9A /* UITableView+Reorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reorder.swift"; sourceTree = "<group>"; };
 		9CA4C7AE1F7F1411006040D3 /* UITableView+ScrollToBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableView+ScrollToBottom.swift"; path = "Sources/Utils/UITableView+ScrollToBottom.swift"; sourceTree = "<group>"; };
 		9CAC53CC1EE07F030091B690 /* UITableView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITableView+Rx.swift"; path = "Sources/Rx/UITableView+Rx.swift"; sourceTree = "<group>"; };
 		9CACB0831F02E4AF00C95167 /* MarkdownBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarkdownBar.swift; path = Sources/Views/MarkdownBar.swift; sourceTree = "<group>"; };
@@ -265,6 +277,19 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		9C948C781F86F7AD005EBB9A /* Reorder */ = {
+			isa = PBXGroup;
+			children = (
+				9C948C791F86F7BC005EBB9A /* ReorderController.swift */,
+				9C948C7C1F86F7BD005EBB9A /* ReorderController+AutoScroll.swift */,
+				9C948C7A1F86F7BC005EBB9A /* ReorderController+DestinationRow.swift */,
+				9C948C7B1F86F7BC005EBB9A /* ReorderController+GestureRecognizer.swift */,
+				9C948C7D1F86F7BD005EBB9A /* ReorderController+SnapshotView.swift */,
+				9C948C7E1F86F7BD005EBB9A /* UITableView+Reorder.swift */,
+			);
+			name = Reorder;
+			sourceTree = "<group>";
+		};
 		9CEA33821EC0BBDA00816DAA = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				9CEA338E1EC0BBDA00816DAA /* AppDelegate.swift */,
+				9C948C781F86F7AD005EBB9A /* Reorder */,
 				9CEA33BA1EC0C47100816DAA /* Models */,
 				9C0A6F3B1F0B2A70000491C9 /* Networking */,
 				9CEA33B21EC0C19900816DAA /* Services */,
@@ -737,12 +763,14 @@
 				9CEA33CD1EC0D79E00816DAA /* HabitCellReactor.swift in Sources */,
 				9C78F73F1EEF3324005434D0 /* CharacterLimit.swift in Sources */,
 				9C3E2D771EC60C6C00EE5276 /* Color.swift in Sources */,
+				9C97093F1F86F9800065BE4D /* UITableView+Reorder.swift in Sources */,
 				9C3A10531EEC4EB100DA1B1F /* SettingItemCell.swift in Sources */,
 				9C3A10561EEC539700DA1B1F /* SettingsViewSection.swift in Sources */,
 				9C66AF0E1F0C022200EA72F6 /* AppStoreAPI.swift in Sources */,
 				9CAC53CD1EE07F030091B690 /* UITableView+Rx.swift in Sources */,
 				9CEA33CF1EC0D81800816DAA /* HabitCell.swift in Sources */,
 				9C72EED91EE04C090069ED6C /* DateExtension.swift in Sources */,
+				9C97093A1F86F9740065BE4D /* ReorderController.swift in Sources */,
 				9CF0F6F81ECBB63900E40437 /* BaseTableViewCell.swift in Sources */,
 				9C2945A11EC9238B00A04CE9 /* MessageInputBar.swift in Sources */,
 				9C0A6F471F0B3DDE000491C9 /* VersionViewReactor.swift in Sources */,
@@ -751,10 +779,12 @@
 				9C15AD7E1EDFDF2F0092373A /* UIFont.swift in Sources */,
 				9CEA33B61EC0C1C900816DAA /* ServiceProvider.swift in Sources */,
 				9CDF098E1EC21EAB00A2A25C /* HabitListViewReactor.swift in Sources */,
+				9C97093D1F86F97B0065BE4D /* ReorderController+GestureRecognizer.swift in Sources */,
 				9CEA33BE1EC0C6C100816DAA /* Habit.swift in Sources */,
 				9CEA33C01EC0C89500816DAA /* HabitService.swift in Sources */,
 				9C16585C1F104A05003271D1 /* DeallocationChecker.swift in Sources */,
 				9CEA33C91EC0D70A00816DAA /* BaseViewController.swift in Sources */,
+				9C97093B1F86F9760065BE4D /* ReorderController+AutoScroll.swift in Sources */,
 				9C4835B51ED7926500AE67D7 /* SectionHeaderView.swift in Sources */,
 				9C3A105A1EEC566D00DA1B1F /* SettingsViewController.swift in Sources */,
 				9CEA33A81EC0C07200816DAA /* UIViewController+Rx.swift in Sources */,
@@ -763,6 +793,7 @@
 				9CA4C7AF1F7F1411006040D3 /* UITableView+ScrollToBottom.swift in Sources */,
 				9CDF09901EC2283C00A2A25C /* HabitListViewController.swift in Sources */,
 				9C3A10511EEC4E5D00DA1B1F /* SettingItemCellReactor.swift in Sources */,
+				9C97093C1F86F9790065BE4D /* ReorderController+DestinationRow.swift in Sources */,
 				9CACB0841F02E4AF00C95167 /* MarkdownBar.swift in Sources */,
 				9C0A6F451F0B3D60000491C9 /* Bundle.swift in Sources */,
 				9C3E2D7C1EC61B8000EE5276 /* HabitEditViewReactor.swift in Sources */,
@@ -780,6 +811,7 @@
 				9C0A6F491F0B3FAE000491C9 /* VersionViewController.swift in Sources */,
 				9C948C771F86EDEB005EBB9A /* SafeArea.swift in Sources */,
 				9C395C251ED11EE300DCFB8F /* BaseReactor.swift in Sources */,
+				9C97093E1F86F97E0065BE4D /* ReorderController+SnapshotView.swift in Sources */,
 				9C0A6F431F0B3CAB000491C9 /* AppStoreService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
