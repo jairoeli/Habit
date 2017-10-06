@@ -16,13 +16,13 @@ final class HabitCell: BaseTableViewCell, View {
   // MARK: - Constants
 
   struct Constant {
-    static let titleLabelNumberOfLines = 2
+    static let titleLabelNumberOfLines = 0
   }
 
   struct Metric {
-    static let paddingTop = 10.f
-    static let padding = 15.f
-    static let valueSize = 100.f
+    static let paddingTop = 24.f
+    static let padding = 16.f
+    static let valueSize = 85.f
   }
 
   struct Font {
@@ -68,11 +68,11 @@ final class HabitCell: BaseTableViewCell, View {
   // MARK: - Cell Height
 
   class func height(fits width: CGFloat, reactor: Reactor) -> CGFloat {
-    let height = reactor.currentState.title.height(fits: width - Metric.padding,
+    let height = reactor.currentState.title.height(fits: width - Metric.paddingTop * 3,
                                                    font: Font.titleLabel,
                                                    maximumNumberOfLines: Constant.titleLabelNumberOfLines)
 
-    return height + Metric.padding * 4
+    return height + Metric.padding * 3
   }
 
   // MARK: - Layout
@@ -82,12 +82,11 @@ final class HabitCell: BaseTableViewCell, View {
     self.titleLabel.sizeToFit()
     self.titleLabel.top = Metric.paddingTop
     self.titleLabel.left = Metric.padding
-    self.titleLabel.width = self.contentView.width - 130
-    self.titleLabel.height = self.contentView.height - 20
+    self.titleLabel.width = self.contentView.width - 100
 
     self.valueLabel.sizeToFit()
-    self.valueLabel.top = Metric.padding * 2
-    self.valueLabel.left = self.titleLabel.right + Metric.padding - Metric.padding
+    self.valueLabel.centerY = self.contentView.centerY
+    self.valueLabel.left = self.titleLabel.right - 16
     self.valueLabel.width = Metric.valueSize
   }
 
