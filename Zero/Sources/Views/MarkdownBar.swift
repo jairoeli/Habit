@@ -26,7 +26,7 @@ final class MarkdownBar: UIView {
     $0.setTitle("Save", for: .normal)
     $0.titleLabel?.font = .black(size: 16)
     $0.setTitleColor(.snow, for: .normal)
-    $0.backgroundColor = .redGraphite
+    $0.backgroundColor = .azure
     $0.layer.cornerRadius = 4
   }
 

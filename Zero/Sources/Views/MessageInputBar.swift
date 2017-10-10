@@ -110,8 +110,8 @@ extension Reactive where Base: MessageInputBar {
   var isEnabled: Binder<Bool> {
     return Binder(self.base) { view, enabled in
       view.doneButton.isEnabled = enabled ? true : false
-      view.doneButton.backgroundColor = enabled ? .redGraphite : .snow
-      view.doneButton.layer.borderColor = enabled ? UIColor.redGraphite.cgColor : UIColor.platinumBorder.cgColor
+      view.doneButton.backgroundColor = enabled ? .azure : .snow
+      view.doneButton.layer.borderColor = enabled ? UIColor.azure.cgColor : UIColor.platinumBorder.cgColor
       view.doneButton.setTitleColor(enabled ? .snow : .midGray, for: .normal)
     }
   }
