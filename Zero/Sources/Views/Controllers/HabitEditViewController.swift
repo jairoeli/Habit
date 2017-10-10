@@ -29,14 +29,14 @@ final class HabitEditViewController: BaseViewController, View {
   }
 
   lazy var headerline = UIView() <== {
-    $0.backgroundColor = .redGraphite
+    $0.backgroundColor = .azure
   }
 
   lazy var noteInput = UITextView() <== {
     $0.font = .body()
     $0.placeholder = "Add notes..."
     $0.textColor = .charcoal
-    $0.tintColor = .redGraphite
+    $0.tintColor = .azure
     $0.backgroundColor = .snow
   }
 

@@ -16,6 +16,10 @@ extension UIFont {
   static func regular(size: CGFloat) -> UIFont {
     return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.medium)
   }
+  static func bold(size: CGFloat) -> UIFont {
+    return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.semibold)
+  }
+
 }
 
 // swiftlint:disable valid_docs

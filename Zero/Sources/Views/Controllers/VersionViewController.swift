@@ -26,7 +26,7 @@ class VersionViewController: BaseViewController, View {
   // MARK: UI
   fileprivate let iconView = UIView() <== {
     $0.layer <== {
-      $0.backgroundColor = UIColor.redGraphite.cgColor
+      $0.backgroundColor = UIColor.azure.cgColor
       $0.borderColor = 0xE5E5E5.color.cgColor
       $0.borderWidth = 1
       $0.cornerRadius = Metric.iconViewSize * 13.5 / 60

@@ -29,7 +29,8 @@
 		9C4835B51ED7926500AE67D7 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */; };
 		9C66AF0E1F0C022200EA72F6 /* AppStoreAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C66AF0D1F0C022200EA72F6 /* AppStoreAPI.swift */; };
 		9C66AF101F0C04FA00EA72F6 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C66AF0F1F0C04FA00EA72F6 /* VersionCell.swift */; };
-		9C72EED91EE04C090069ED6C /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C72EED81EE04C090069ED6C /* DateExtension.swift */; };
+		9C6CF3821F8C5DF8000997D3 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6CF3811F8C5DF8000997D3 /* DeviceSize.swift */; };
+		9C6CF3841F8C750E000997D3 /* YearProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6CF3831F8C750E000997D3 /* YearProgress.swift */; };
 		9C78F73F1EEF3324005434D0 /* CharacterLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C78F73E1EEF3324005434D0 /* CharacterLimit.swift */; };
 		9C81C1311EEA003A0046883D /* ZeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C1301EEA003A0046883D /* ZeroTests.swift */; };
 		9C81C1421EEA02750046883D /* MockUserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C81C1411EEA02750046883D /* MockUserDefaultsService.swift */; };
@@ -108,7 +109,8 @@
 		9C4835B41ED7926500AE67D7 /* SectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionHeaderView.swift; path = Sources/Views/SectionHeaderView.swift; sourceTree = "<group>"; };
 		9C66AF0D1F0C022200EA72F6 /* AppStoreAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppStoreAPI.swift; path = Sources/Networking/AppStoreAPI.swift; sourceTree = "<group>"; };
 		9C66AF0F1F0C04FA00EA72F6 /* VersionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionCell.swift; path = Sources/Views/Cells/VersionCell.swift; sourceTree = "<group>"; };
-		9C72EED81EE04C090069ED6C /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtension.swift; path = Sources/Utils/DateExtension.swift; sourceTree = "<group>"; };
+		9C6CF3811F8C5DF8000997D3 /* DeviceSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeviceSize.swift; path = Sources/Utils/DeviceSize.swift; sourceTree = "<group>"; };
+		9C6CF3831F8C750E000997D3 /* YearProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YearProgress.swift; path = Sources/Utils/YearProgress.swift; sourceTree = "<group>"; };
 		9C78F73E1EEF3324005434D0 /* CharacterLimit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CharacterLimit.swift; path = Sources/Utils/CharacterLimit.swift; sourceTree = "<group>"; };
 		9C81C12E1EEA003A0046883D /* ZeroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZeroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C81C1301EEA003A0046883D /* ZeroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroTests.swift; sourceTree = "<group>"; };
@@ -381,7 +383,8 @@
 				9CDCC9A41EC399C100F6DD96 /* Animation.swift */,
 				9C3E2D761EC60C6C00EE5276 /* Color.swift */,
 				9C15AD7D1EDFDF2F0092373A /* UIFont.swift */,
-				9C72EED81EE04C090069ED6C /* DateExtension.swift */,
+				9C6CF3811F8C5DF8000997D3 /* DeviceSize.swift */,
+				9C6CF3831F8C750E000997D3 /* YearProgress.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -769,7 +772,6 @@
 				9C66AF0E1F0C022200EA72F6 /* AppStoreAPI.swift in Sources */,
 				9CAC53CD1EE07F030091B690 /* UITableView+Rx.swift in Sources */,
 				9CEA33CF1EC0D81800816DAA /* HabitCell.swift in Sources */,
-				9C72EED91EE04C090069ED6C /* DateExtension.swift in Sources */,
 				9C97093A1F86F9740065BE4D /* ReorderController.swift in Sources */,
 				9CF0F6F81ECBB63900E40437 /* BaseTableViewCell.swift in Sources */,
 				9C2945A11EC9238B00A04CE9 /* MessageInputBar.swift in Sources */,
@@ -777,9 +779,11 @@
 				9CDCC9A51EC399C100F6DD96 /* Animation.swift in Sources */,
 				9CEA33AD1EC0C0ED00816DAA /* Snap.swift in Sources */,
 				9C15AD7E1EDFDF2F0092373A /* UIFont.swift in Sources */,
+				9C6CF3841F8C750E000997D3 /* YearProgress.swift in Sources */,
 				9CEA33B61EC0C1C900816DAA /* ServiceProvider.swift in Sources */,
 				9CDF098E1EC21EAB00A2A25C /* HabitListViewReactor.swift in Sources */,
 				9C97093D1F86F97B0065BE4D /* ReorderController+GestureRecognizer.swift in Sources */,
+				9C6CF3821F8C5DF8000997D3 /* DeviceSize.swift in Sources */,
 				9CEA33BE1EC0C6C100816DAA /* Habit.swift in Sources */,
 				9CEA33C01EC0C89500816DAA /* HabitService.swift in Sources */,
 				9C16585C1F104A05003271D1 /* DeallocationChecker.swift in Sources */,
