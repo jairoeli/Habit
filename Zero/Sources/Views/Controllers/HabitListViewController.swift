@@ -24,6 +24,9 @@ final class HabitListViewController: BaseViewController, View {
 
   fileprivate struct Metric {
     static let padding = 15.f
+    static let iconViewTop = 0.f
+    static let iconViewSize = 130.f
+    static let iconViewBottom = 0.f
   }
 
   // MARK: - Properties
@@ -32,15 +35,18 @@ final class HabitListViewController: BaseViewController, View {
   var buttonStyle: ButtonStyle = .backgroundColor
 
   let dataSource = RxTableViewSectionedReloadDataSource<HabitListSection>()
-//  fileprivate let headerView = SectionHeaderView()
   fileprivate let messageInputBar = MessageInputBar()
+  fileprivate let headerView = SectionHeaderView()
+
   fileprivate lazy var tableView = UITableView() <== {
     $0.register(Reusable.habitCell)
-    $0.alwaysBounceVertical = true
+    $0.alwaysBounceVertical = false
     $0.backgroundColor = .snow
     $0.separatorStyle = .none
     $0.keyboardDismissMode = .interactive
     $0.allowsSelectionDuringEditing = false
+    $0.estimatedRowHeight = 75.0
+    $0.rowHeight = UITableViewAutomaticDimension
     $0.reorder.delegate = self
   }
 
@@ -48,7 +54,7 @@ final class HabitListViewController: BaseViewController, View {
     $0.font = .title3()
     $0.textColor = .charcoal
     $0.placeholder = "Add a new goal..."
-    $0.tintColor = .redGraphite
+    $0.tintColor = .azure
   }
 
   let settingButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: nil, action: nil)
@@ -71,17 +77,23 @@ final class HabitListViewController: BaseViewController, View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.tableView.contentInset.top = Metric.iconViewSize
+    self.tableView.addSubview(self.headerView)
     let subviews: [UIView] = [tableView, messageInputBar, titleInput]
     self.view.add(subviews)
     titleInput.delegate = self
-    self.tableView.estimatedRowHeight = 75.0
-    self.tableView.rowHeight = UITableViewAutomaticDimension
   }
 
   override func setupConstraints() {
     self.tableView.snp.makeConstraints { make in
       make.top.left.right.equalToSuperview()
       make.bottom.equalTo(self.safeAreaBottom)
+    }
+
+    self.headerView.snp.makeConstraints { (make) in
+      make.top.equalToSuperview().offset(-115)
+      make.centerX.equalToSuperview()
+      make.leading.equalTo(15)
     }
 
     self.messageInputBar.snp.makeConstraints { make in

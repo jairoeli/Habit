@@ -44,10 +44,14 @@ final class HabitCell: BaseTableViewCell, View {
     $0.textAlignment = .right
   }
 
+  lazy var separatorView = UIView() <== {
+    $0.backgroundColor = .platinumBorder
+  }
+
   // MARK: - Initializing
 
   override func initialize() {
-    let subviews: [UIView] = [titleLabel, valueLabel]
+    let subviews: [UIView] = [titleLabel, valueLabel, separatorView]
     self.contentView.add(subviews)
     self.backgroundColor = .snow
   }
@@ -88,6 +92,11 @@ final class HabitCell: BaseTableViewCell, View {
     self.valueLabel.centerY = self.contentView.centerY
     self.valueLabel.left = self.titleLabel.right - 16
     self.valueLabel.width = Metric.valueSize
+
+    self.separatorView.bottom = self.contentView.bottom
+    self.separatorView.left = Metric.padding
+    self.separatorView.width = self.contentView.width - Metric.padding * 2
+    self.separatorView.height = 0.5 / UIScreen.main.scale
   }
 
 }
