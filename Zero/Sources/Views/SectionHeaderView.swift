@@ -45,7 +45,7 @@ final class SectionHeaderView: UIView {
 
   lazy var progessResult = UILabel() <== {
     $0.text = CalculateProgress.result()
-    $0.font = .bold(size: 14)
+    $0.font = .bold(size: DeviceSize.adjust(16, for: [.small: 13, .plus: 18]))
   }
 
   // MARK: - Initializing
@@ -87,7 +87,7 @@ final class SectionHeaderView: UIView {
 
     self.progessResult.snp.makeConstraints { (make) in
       make.top.equalTo(self.progressLabel.snp.bottom).offset(12)
-      make.leading.equalTo(14)
+      make.centerX.equalToSuperview()
     }
   }
 

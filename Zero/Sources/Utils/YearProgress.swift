@@ -27,7 +27,7 @@ class CalculateProgress: NSObject {
     let progress = Float(passedDays) / Float(daysInYear) * 100
     var string = ""
 
-    for i in 0 ..< DeviceSize.adjust(23, for: [.small: 19, .plus: 26]) {
+    for i in 0 ..< 20 {
       if i < Int(progress / 5) {
         string += "▓"
       } else {
