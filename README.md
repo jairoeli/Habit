@@ -3,7 +3,7 @@
 
 An iOS app that keeps things simple. Add the habit you want to count, and check-in every time you do it. Coming to the App Store in January 2018.
 
-![habit](https://user-images.githubusercontent.com/16951799/27207106-ba03c1a8-5201-11e7-950c-0f71516358fa.png)
+![habitapp](https://user-images.githubusercontent.com/16951799/31412948-b6692844-addc-11e7-898b-b7431cefdfca.png)
 
 ## Features
 * Using [ReactorKit](https://github.com/ReactorKit/ReactorKit)
@@ -18,7 +18,7 @@ An iOS app that keeps things simple. Add the habit you want to count, and check-
 Visit [ReactorKit](https://github.com/ReactorKit/ReactorKit) for detail.
 
 ## Requirements
-* iOS 11+
+* iOS 10+
 * Swift 4
 * CocoaPods
 

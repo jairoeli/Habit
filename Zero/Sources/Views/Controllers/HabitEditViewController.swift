@@ -72,7 +72,7 @@ final class HabitEditViewController: BaseViewController, View {
 
   override func setupConstraints() {
     self.titleInput.snp.makeConstraints { make in
-      make.top.equalTo(self.safeAreaTop).offset(Metric.padding)
+      make.top.equalToSuperview()
       make.leading.equalTo(Metric.padding)
       make.trailing.equalTo(-Metric.padding)
     }
