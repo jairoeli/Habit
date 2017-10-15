@@ -8,17 +8,17 @@ target 'Zero' do
   pod 'ReactorKit'
 
   # Networking
-  pod 'Moya/RxSwift', :git => 'https://github.com/Moya/Moya.git', :branch => '10.0.0-dev'
-  pod 'MoyaSugar/RxSwift', :git => 'https://github.com/devxoul/MoyaSugar.git', :branch => 'master'
+  pod 'Moya/RxSwift', '10.0.0-beta.1'
+  pod 'MoyaSugar/RxSwift', '10.0.0-beta.1'
 
   # Rx
-  pod 'RxSwift', '4.0.0-beta.0'
-  pod 'RxCocoa', '4.0.0-beta.0'
-  pod 'RxDataSources', :git => 'https://github.com/RxSwiftCommunity/RxDataSources.git', :branch => 'swift4.0'
-  pod 'Differentiator', :git => 'https://github.com/RxSwiftCommunity/RxDataSources.git', :branch => 'swift4.0'
+  pod 'RxSwift', '4.0.0-rc.0'
+  pod 'RxCocoa', '4.0.0-rc.0'
+  pod 'RxDataSources', '3.0.0-rc.0'
+  pod 'Differentiator', '3.0.0-rc.0'
   pod 'RxOptional'
   pod 'RxKeyboard'
-  pod 'RxGesture', :git => 'https://github.com/sidmani/RxGesture.git', :branch => 'swift-4'
+  pod 'RxGesture', :git => 'https://github.com/RxSwiftCommunity/RxGesture.git', :branch => 'swift-4'
 
   # UI
   pod 'SnapKit', '~> 4.0.0'
@@ -29,13 +29,13 @@ target 'Zero' do
 
   # Misc.
   pod 'ReusableKit'
-  pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'swift4'
+  pod 'SwipeCellKit'
   pod 'UITextView+Placeholder'
 
   # Testing
   target 'ZeroTests' do
-    pod 'RxTest', '4.0.0-beta.0'
-    pod 'RxExpect'
+    pod 'RxTest', '4.0.0-rc.0'
+    pod 'RxExpect', :git => 'https://github.com/devxoul/RxExpect.git', :branch => 'swift-4.0'
     pod 'RxOptional'
   end
 
