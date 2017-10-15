@@ -9,6 +9,8 @@
 @testable import Zero
 
 final class MockServiceProvider: ServiceProviderType {
+  lazy var appStoreService: AppStoreServiceType = AppStoreService(provider: self)
+  
   lazy var userDefaultsService: UserDefaultsServiceType = MockUserDefaultsService()
-  lazy var taskService: TaskServiceType = TaskService(provider: self)
+  lazy var habitService: HabitServiceType = HabitService(provider: self)
 }
