@@ -24,14 +24,19 @@ public enum DeviceSize: Hashable {
     switch size {
     case DeviceSize.small.dimensions:
       self = .small
+      print("DEVICE NAME: iPhone SE")
     case DeviceSize.large.dimensions:
       self = .large
+      print("DEVICE NAME: iPhone")
     case DeviceSize.plus.dimensions:
       self = .plus
+      print("DEVICE NAME: iPhone Plus")
     case DeviceSize.iphoneX.dimensions:
       self = .iphoneX
+      print("DEVICE NAME: iPhone X")
     default:
       self = .other(size)
+      print("UNKNOWN")
     }
   }
 
