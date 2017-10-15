@@ -74,7 +74,7 @@ class BaseViewController: UIViewController {
       self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"),
                                                                style: .plain,
                                                                target: self,
-                                                               action:  #selector(cancelButtonDidTap))
+                                                               action: #selector(cancelButtonDidTap))
     }
   }
 
