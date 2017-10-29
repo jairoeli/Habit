@@ -1,7 +1,7 @@
 # Habit iOS App
 ![Swift](https://img.shields.io/badge/Swift-4.0-orange.svg)
 
-An iOS app that keeps things simple. Add the habit you want to count, and check-in every time you do it. Coming to the App Store in January 2018.
+An iOS app that keeps things simple. Add the habit you want to count, and check-in every time you do it.
 
 ![habitapp](https://user-images.githubusercontent.com/16951799/31412948-b6692844-addc-11e7-898b-b7431cefdfca.png)
 
